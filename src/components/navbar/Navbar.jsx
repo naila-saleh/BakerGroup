@@ -12,12 +12,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
 import BGYLogo from '../../assets/images/BakerGroup-yelloLogo.svg'
-import style from './navbar.module.css';
 
 export default function Navbar() {
     return (
         <Box sx={{ flexGrow: 1}}>
-            <AppBar position="static" sx={{backgroundColor: 'transparent'}}>
+            <AppBar position="static" sx={{backgroundColor: '#2D5356'}}>
                 <Toolbar sx={{justifyContent: {xs: 'space-between' ,lg: 'space-around'}}}>
                     <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
                         <img src={BGYLogo} width={27}/>
@@ -35,7 +34,7 @@ export default function Navbar() {
                         <Link component={RouterLink} to={'#'} color="inherit" underline={"none"} sx={{}}><SearchIcon /></Link>
                         <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}><FavoriteBorderIcon /></Link>
                         <Link component={RouterLink} to={'/cart'} color="inherit" underline={"none"}><ShoppingBagOutlinedIcon /></Link>
-                        <Link component={RouterLink} to={'/login'} color="inherit" underline={"none"}><PersonOutlineRoundedIcon /></Link>
+                        <Link component={RouterLink} to={'/auth/register'} color="inherit" underline={"none"}><PersonOutlineRoundedIcon /></Link>
                     </Box>
                     <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2, display: {xs: 'flex' ,sm: 'flex',md: 'none'} }}>
                         <MenuIcon />

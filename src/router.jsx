@@ -4,6 +4,7 @@ import Home from "./pages/home/Home.jsx";
 import Cart from "./pages/cart/Cart.jsx";
 import Login from "./pages/auth/login/Login.jsx";
 import Register from "./pages/auth/register/Register.jsx";
+import AuthLayout from "./layout/AuthLayout.jsx";
 
 const router = createBrowserRouter([
     {
@@ -16,7 +17,13 @@ const router = createBrowserRouter([
             },{
                 path: 'cart',
                 element: <Cart />
-            },{
+            }
+        ]
+    },{
+        path: '/auth',
+        element: <AuthLayout />,
+        children: [
+            {
                 path: 'login',
                 element: <Login />
             },{
