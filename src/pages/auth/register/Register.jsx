@@ -5,7 +5,6 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useForm} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
 import axios from "axios";
 import {registerSchema} from "../../../validation/RegisterSchema.js";
 
