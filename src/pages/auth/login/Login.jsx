@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -9,9 +9,11 @@ import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {loginSchema} from "../../../validation/LoginSchema.js";
+import {CircularProgress} from "@mui/material";
 
 export default function Login() {
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const [serverErrors, setServerErrors] = useState([]);
+    const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm({
         resolver: yupResolver(loginSchema)
     });
     const loginForm = async (values) => {
@@ -20,12 +22,16 @@ export default function Login() {
             console.log(response.data);
             alert(response.data.message)
         }catch (e){
-            console.log(e.message);
+            setServerErrors(e.response.data.message);
+            console.log(e.response.data.message);
         }
     }
     return (
         <Box component={'section'} className={'login-form'} sx={{textAlign: 'center'}}>
             <Typography component={'h1'} sx={{fontSize: '40px'}}>Login</Typography>
+            {serverErrors.length > 0 && (<Box my={2}>
+                <Typography component={'span'} sx={{color: '#f33', fontSize: '15px'}}>{serverErrors}</Typography>
+            </Box>)}
             <Box component={'form'}
                  onSubmit={handleSubmit(loginForm)}
                  sx={{px: {md: 4, sm: 1}, py: 2, display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center'}}>
@@ -33,7 +39,7 @@ export default function Login() {
                 error={errors.email} helperText={errors.email?.message}/>
                 <TextField {...register('password')} label="Password" variant="standard" fullWidth type={'password'}
                 error={errors.password} helperText={errors.password?.message}/>
-                <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: '#D09523', px: 10}}>Login</Button>
+                <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: '#D09523', px: 10}} disabled={isSubmitting}>{isSubmitting?<CircularProgress/>:'Login'}</Button>
                 <Typography component={"span"} sx={{fontSize: '15px', color: '#2D5356', mt: 2}}>don&#39;t have an account?</Typography>
                 <Link component={RouterLink} variant={"button"} to={'/auth/register'} sx={{backgroundColor: '#2D5356', padding: '5px 68px', mb: 3, color: 'white', borderRadius: '5px'}} boxShadow={'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'} underline={"none"}>Register</Link>
             </Box>
