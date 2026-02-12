@@ -9,10 +9,11 @@ import axios from "axios";
 import {registerSchema} from "../../../validation/RegisterSchema.js";
 import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router-dom";
+import {CircularProgress} from "@mui/material";
 
 export default function Register() {
     const [serverErrors, setServerErrors] = useState([]);
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm({
         resolver: yupResolver(registerSchema), mode: "onBlur"
     });
     const registerForm = async (values) => {
@@ -43,7 +44,7 @@ export default function Register() {
                 error={errors.email} helperText={errors.email?.message}/>
                 <TextField {...register('password')} label="Password" variant="standard" fullWidth
                 type={'password'} error={errors.password} helperText={errors.password?.message}/>
-                <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: '#D09523', px: 10}}>Register</Button>
+                <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: '#D09523', px: 10}} disabled={isSubmitting}>{isSubmitting?<CircularProgress/>:'Register'}</Button>
                 <Typography component={"span"} sx={{fontSize: '15px', color: '#2D5356', mt: 2}}>already have an account?</Typography>
                 <Link component={RouterLink} variant={"button"} to={'/auth/login'} sx={{backgroundColor: '#2D5356', padding: '5px 93px', mb: 3, color: 'white', borderRadius: '5px'}} boxShadow={'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'} underline={"none"}>Login</Link>
             </Box>
