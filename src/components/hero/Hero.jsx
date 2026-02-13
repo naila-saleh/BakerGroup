@@ -14,7 +14,7 @@ import WestIcon from '@mui/icons-material/West';
 import style from './hero.module.css'
 export default function Hero() {
     return (
-        <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100vh'}}>
+        <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {md: 10, xs: 5}}}>
             <Grid container spacing={1} sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%'}}>
                 <Grid size={{xl: 5, lg: 5, md: 12, sm: 12, xs: 12}} sx={{display: 'flex', flexDirection: 'column', alignItems: {xl:'flex-start', lg: 'flex-start', md: 'center', sm: 'center', xs: 'center'}, gap: 2, textAlign: {xl: 'start', lg: 'start', xs: 'center'}, paddingX: {md: 10, sm: 5, xs: 2}, color: 'white'}}>
                     <Typography component={'span'} sx={{textTransform: 'uppercase', color: 'inherit', letterSpacing: 2, fontSize: {md: '12px', xs: '10px'}, backgroundColor: '#426466', border: 'solid #537476 1px', padding: '8px 20px', borderRadius: '30px'}}>Furniture Design Ideas</Typography>
