@@ -11,7 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
-import BGYLogo from '../../assets/images/BakerGroup-yelloLogo.svg'
+import BGYLogo from '../../assets/images/logo/BakerGroup-yelloLogo.svg'
 
 export default function Navbar() {
     return (

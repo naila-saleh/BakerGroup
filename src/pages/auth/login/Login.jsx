@@ -14,7 +14,7 @@ import {CircularProgress} from "@mui/material";
 export default function Login() {
     const [serverErrors, setServerErrors] = useState([]);
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm({
-        resolver: yupResolver(loginSchema)
+        resolver: yupResolver(loginSchema), mode: "onBlur"
     });
     const loginForm = async (values) => {
         try {
