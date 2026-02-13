@@ -22,7 +22,7 @@ export default function Hero() {
                     <Typography component={'p'} sx={{color: '#A6BCBE', fontSize: {xl: '18px', lg: '18px', md: '15px'}}}>Choosing the right furniture for your home online will add elegance and functionality to your interior while also being cost effective and long lasting.</Typography>
                     <Box sx={{display: 'flex', gap: 1, marginTop: {md: 3, xs: 1}, flexDirection: {xl: 'row', lg: 'row', md: 'row', sm: 'column', xs: 'column'}}}>
                         <Link component={RouterLink} to={'#'} sx={{display: 'flex', gap: 1, alignItems: 'center', color: 'inherit', fontSize: {xl: '18px', md: '15px', xs: '13px'}, backgroundColor: '#D09523', padding: '10px 30px', borderRadius: '30px'}} underline={'none'}>Shop Now <EastIcon /></Link>
-                        <Link component={RouterLink} to={'#'} sx={{color: 'inherit', fontSize: {xl: '18px', md: '15px', xs: '13px'}, padding: '10px'}}>Follow Instagram</Link>
+                        <Link component={RouterLink} to={'https://www.instagram.com/sohyb.bakergroup/'} sx={{color: 'inherit', fontSize: {xl: '18px', md: '15px', xs: '13px'}, padding: '10px'}}>Follow Instagram</Link>
                     </Box>
                     <Box sx={{display: 'flex', flexDirection: {sm: 'row', xs: 'column'}, gap: {xl: 8, md: 4, xs: 2}, marginTop: {md: 5, xs: 1}, marginBottom: {md: 0, xs: 2}}}>
                         <Box sx={{display: 'flex', flexDirection: 'column'}}>
