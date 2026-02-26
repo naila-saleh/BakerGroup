@@ -8,6 +8,6 @@ export default function Categories() {
     if(isLoading) return <CircularProgress />
     if(isError) return <Box>{error.message}</Box>
     return (
-        <Box component={'section'} py={5}>{data.response.map(category=><Box>{category.name}</Box>)}</Box>
+        <Box component={'section'} py={5}>{data.response.data.map(category=><Box>{category.name}</Box>)}</Box>
     )
 }
