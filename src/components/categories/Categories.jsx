@@ -7,6 +7,7 @@ export default function Categories() {
     const {data, isLoading, isError, error} = useCategories();
     if(isLoading) return <CircularProgress />
     if(isError) return <Box>{error.message}</Box>
+    console.log(data.response.data);
     return (
         <Box component={'section'} py={5}>{data.response.data.map(category=><Box>{category.name}</Box>)}</Box>
     )
