@@ -3,10 +3,8 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import SupportOutlinedIcon from '@mui/icons-material/SupportOutlined';
 import SyncOutlinedIcon from '@mui/icons-material/SyncOutlined';
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {Grid} from "@mui/material";
-import { shadows } from '@mui/system';
 
 export default function Features() {
     return (

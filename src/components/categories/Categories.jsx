@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react'
-import axios from "axios";
+import React from 'react'
 import Box from "@mui/material/Box";
-import {CircularProgress} from "@mui/material";
 import useCategories from "../../hooks/useCategories";
+import Loader from "../../ui/loader/Loader.jsx";
 export default function Categories() {
     const {data, isLoading, isError, error} = useCategories();
-    if(isLoading) return <CircularProgress />
+    if(isLoading) return <Loader />
     if(isError) return <Box>{error.message}</Box>
-    console.log(data.response.data);
     return (
-        <Box component={'section'} py={5}>{data.response.data.map(category=><Box>{category.name}</Box>)}</Box>
+        <>
+            <Box component={'section'} py={5}>{data.response.data.map(category=><Box>{category.name}</Box>)}</Box>
+        </>
     )
 }

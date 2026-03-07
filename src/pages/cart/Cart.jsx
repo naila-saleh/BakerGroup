@@ -1,10 +1,14 @@
 import React from 'react'
 import useCart from "../../hooks/useCart";
+import Categories from "../../components/categories/Categories.jsx";
 
 export default function Cart() {
     const {data, isLoading, isError, error} = useCart();
-    console.log(data);
     return (
-        <div>Cart</div>
+        <>
+            <div>Cart</div>
+            <hr />
+            <Categories />
+        </>
     )
 }
