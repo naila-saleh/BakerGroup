@@ -5,28 +5,30 @@ import Loader from "../../ui/loader/Loader.jsx";
 import Typography from "@mui/material/Typography";
 import {Card, CardContent, CardMedia, Container, Grid} from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {Link} from "react-router-dom";
 
 export default function Products() {
     const {data, isLoading, isError, error} = useProducts();
     if(isLoading) return <Loader />
     if(isError) return <Box>{error.message}</Box>
-    console.log(data);
     return (
         <Container maxWidth={'xl'} className={'products'} component={'section'} sx={{py: {md: 10, xs: 5}, px: {lg: 10, md: 5, sm: 5, xs: 2}}}>
             <Typography component={'h2'} sx={{fontSize: {md: '40px', sm: '35px', xs: '32px'}, fontWeight: '500', pb: {md: 3,sm: 2, xs: 1}}}>Trending Products</Typography>
             <Grid container spacing={{lg: 3, xs: 2}}>
                 {data.response.data.map(product=>
                     <Grid item size={{lg: 3, md: 4, sm: 6, xs: 12}}>
-                        <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
-                            <CardMedia component={'img'} image={product.image} sx={{width: {md: '100%', sm: '90%', xs: '70%'}, display: 'flex', alignSelf: 'center'}}></CardMedia>
-                            <CardContent sx={{backgroundColor: '#2D5356', color: '#fff', borderRadius: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 2, ":last-child": {paddingBottom: 2}}}>
-                                <Box>
-                                    <Typography component={'h3'}>{product.name}</Typography>
-                                    <Typography component={'span'} variant={'body1'}>${product.price}</Typography>
-                                </Box>
-                                <ShoppingCartIcon sx={{color: '#D09523', backgroundColor: '#fff', fontSize: '45px', padding: '10px', borderRadius: '50%', cursor: 'pointer'}} />
-                            </CardContent>
-                        </Card>
+                        <Link to={`/products/${product.id}`} style={{textDecoration: 'none'}}>
+                            <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
+                                <CardMedia component={'img'} image={product.image} sx={{width: {md: '100%', sm: '90%', xs: '70%'}, display: 'flex', alignSelf: 'center'}}></CardMedia>
+                                <CardContent sx={{backgroundColor: '#2D5356', color: '#fff', borderRadius: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 2, ":last-child": {paddingBottom: 2}}}>
+                                    <Box>
+                                        <Typography component={'h3'}>{product.name}</Typography>
+                                        <Typography component={'span'} variant={'body1'}>${product.price}</Typography>
+                                    </Box>
+                                    <ShoppingCartIcon sx={{color: '#D09523', backgroundColor: '#fff', fontSize: '45px', padding: '10px', borderRadius: '50%', cursor: 'pointer'}} />
+                                </CardContent>
+                            </Card>
+                        </Link>
                     </Grid>
                 )}
             </Grid>

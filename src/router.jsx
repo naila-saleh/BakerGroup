@@ -5,6 +5,7 @@ import Cart from "./pages/cart/Cart.jsx";
 import Login from "./pages/auth/login/Login.jsx";
 import Register from "./pages/auth/register/Register.jsx";
 import AuthLayout from "./layout/AuthLayout.jsx";
+import ProductDetails from "./pages/products/ProductDetails.jsx";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,9 @@ const router = createBrowserRouter([
             },{
                 path: 'cart',
                 element: <Cart />
+            },{
+                path: 'products/:id',
+                element: <ProductDetails />
             }
         ]
     },{
