@@ -24,7 +24,7 @@ import {Link as RouterLink} from "react-router";
 const pages = [
     <Link component={RouterLink} to={'/'} color="inherit" underline={"none"}>Home</Link>,
     <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>Products</Link>,
-    <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>Categories</Link>,
+    <Link component={RouterLink} to={'/categories'} color="inherit" underline={"none"}>Categories</Link>,
     <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>About Us</Link>,
     <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>Contact Us</Link>,
     <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>Blog</Link>
