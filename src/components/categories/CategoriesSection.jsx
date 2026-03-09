@@ -13,6 +13,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import Category from "../../ui/category/Category.jsx";
 
 export default function CategoriesSection() {
     const {data, isLoading, isError, error} = useCategories();
@@ -91,16 +92,7 @@ export default function CategoriesSection() {
                     {categories.map((category, index) => (
                         <SwiperSlide key={category._id || category.name || index}>
                             <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2.5, cursor: 'pointer', textAlign: 'center'}}>
-                                <Box sx={{width: '100%', aspectRatio: '1 / 1', borderRadius: '50%', backgroundColor: 'rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'}}>
-                                    <Box component="img" alt={category.name} src={chair} sx={{width: '70%', height: '70%', objectFit: 'contain'}}/></Box>
-                                <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.5}}>
-                                    <Typography component={'h3'} sx={{fontWeight: 500, fontSize: '22px'}}>
-                                        {category.name}
-                                    </Typography>
-                                    <Typography component={'span'} sx={{color: 'rgba(0,0,0,0.55)', fontSize: '13px', fontWeight: 400}}>
-                                        Discover 45 Products
-                                    </Typography>
-                                </Box>
+                                <Category {...category} />
                             </Box>
                         </SwiperSlide>
                     ))}
