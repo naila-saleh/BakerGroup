@@ -6,6 +6,7 @@ import Login from "./pages/auth/login/Login.jsx";
 import Register from "./pages/auth/register/Register.jsx";
 import AuthLayout from "./layout/AuthLayout.jsx";
 import ProductDetails from "./pages/products/ProductDetails.jsx";
+import CategoriesPage from "./pages/categories/CategoriesPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,9 @@ const router = createBrowserRouter([
             },{
                 path: 'products/:id',
                 element: <ProductDetails />
+            },{
+                path: 'categories',
+                element: <CategoriesPage />
             }
         ]
     },{
