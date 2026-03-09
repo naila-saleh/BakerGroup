@@ -4,7 +4,7 @@ import axiosInstance from "../api/axiosInstance.js";
 
 export default function UseCategories() {
     const getCategories = async () => {
-        const response = await axiosInstance.get(`/categories?limit=5`);
+        const response = await axiosInstance.get(`/categories?limit=1000`);
         return response.data;
     }
     const query = useQuery({
