@@ -7,11 +7,8 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
@@ -19,24 +16,34 @@ import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import logo from '../../assets/images/logo/BakerGroup-yelloLogo.svg'
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 import Link from "@mui/material/Link";
-import {Link as RouterLink} from "react-router";
+import {Link as RouterLink} from "react-router-dom";
+import useAuthStore from "../../store/useAuthStore.js";
+import LogoutIcon from '@mui/icons-material/Logout';
+import {useNavigate} from "react-router-dom";
 
 const pages = [
-    <Link component={RouterLink} to={'/'} color="inherit" underline={"none"}>Home</Link>,
-    <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>Products</Link>,
-    <Link component={RouterLink} to={'/categories'} color="inherit" underline={"none"}>Categories</Link>,
-    <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>About Us</Link>,
-    <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>Contact Us</Link>,
-    <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>Blog</Link>
-];
-const icons = [
-    <Link component={RouterLink} to={'#'} underline={"none"} sx={{color: {md: '#fff', xs: '#D09523'}}}><SearchIcon /></Link>,
-    <Link component={RouterLink} to={'#'} underline={"none"} sx={{color: {md: '#fff', xs: '#D09523'}}}><FavoriteBorderIcon /></Link>,
-    <Link component={RouterLink} to={'/cart'} underline={"none"} sx={{color: {md: '#fff', xs: '#D09523'}}}><ShoppingBagOutlinedIcon /></Link>,
-    <Link component={RouterLink} to={'/auth/register'} underline={"none"} sx={{color: {md: '#fff', xs: '#D09523'}}}><PersonOutlineRoundedIcon /></Link>
+    { id: 'home', to: '/', label: 'Home' },
+    { id: 'products', to: '#', label: 'Products' },
+    { id: 'categories', to: '/categories', label: 'Categories' },
+    { id: 'about', to: '#', label: 'About Us' },
+    { id: 'contact', to: '#', label: 'Contact Us' },
+    { id: 'blog', to: '#', label: 'Blog' }
 ];
 
 export default function NavbarResponsiveMenu() {
+    const token = useAuthStore((state) => state.token);
+    const logout = useAuthStore((state) => state.logout);
+    const navigate = useNavigate();
+    const iconLinkSx = { color: { md: '#fff', xs: '#D09523' } };
+    const icons = token
+        ? [
+            { id: 'search', to: '#', icon: <SearchIcon /> },
+            { id: 'favorites', to: '#', icon: <FavoriteBorderIcon /> },
+            { id: 'cart', to: '/cart', icon: <ShoppingBagOutlinedIcon /> },
+            { id: 'logout', icon: <LogoutIcon /> }
+        ]
+        : [{ id: 'register', to: '/auth/register', icon: <PersonOutlineRoundedIcon /> }];
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -53,6 +60,13 @@ export default function NavbarResponsiveMenu() {
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+
+    const handleLogout = () => {
+        logout();
+        handleCloseUserMenu();
+        handleCloseNavMenu();
+        navigate('/auth/login');
     };
 
     return (
@@ -109,8 +123,10 @@ export default function NavbarResponsiveMenu() {
                                 sx={{ display: { xs: 'block', md: 'none' } }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography sx={{ textAlign: 'center',color: '#D09523' }}>{page}</Typography>
+                                    <MenuItem key={page.id} onClick={handleCloseNavMenu}>
+                                        <Typography sx={{ textAlign: 'center',color: '#D09523' }}>
+                                            <Link component={RouterLink} to={page.to} color="inherit" underline={"none"}>{page.label}</Link>
+                                        </Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -139,11 +155,11 @@ export default function NavbarResponsiveMenu() {
                         <Box sx={{display: { xs: 'none', md: 'flex' } }}>
                             {pages.map((page) => (
                                 <Button
-                                    key={page}
+                                    key={page.id}
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
-                                    {page}
+                                    <Link component={RouterLink} to={page.to} color="inherit" underline={"none"}>{page.label}</Link>
                                 </Button>
                             ))}
                         </Box>
@@ -175,8 +191,16 @@ export default function NavbarResponsiveMenu() {
                                 sx={{ display: { xs: 'block', md: 'none' } }}
                             >
                                 {icons.map((icon) => (
-                                    <MenuItem key={icon} onClick={handleCloseUserMenu}>
-                                        <Typography sx={{ textAlign: 'center'}}>{icon}</Typography>
+                                    <MenuItem key={icon.id} onClick={icon.id === 'logout' ? handleLogout : handleCloseUserMenu}>
+                                        <Typography sx={{ textAlign: 'center'}}>
+                                            {icon.id === 'logout' ? (
+                                                <Button onClick={handleLogout} sx={{ minWidth: 8, p: 0, color: { md: '#fff', xs: '#D09523' } }}>
+                                                    {icon.icon}
+                                                </Button>
+                                            ) : (
+                                                <Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link>
+                                            )}
+                                        </Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -184,11 +208,15 @@ export default function NavbarResponsiveMenu() {
                         <Box sx={{display: { xs: 'none', md: 'flex' } }}>
                             {icons.map((icon) => (
                                 <Button
-                                    key={icon}
-                                    onClick={handleCloseNavMenu}
+                                    key={icon.id}
+                                    onClick={icon.id === 'logout' ? handleLogout : handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block', minWidth: 8 }}
                                 >
-                                    {icon}
+                                    {icon.id === 'logout' ? (
+                                        icon.icon
+                                    ) : (
+                                        <Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link>
+                                    )}
                                 </Button>
                             ))}
                         </Box>

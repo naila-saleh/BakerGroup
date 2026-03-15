@@ -27,7 +27,7 @@ export default function CategoriesSection() {
 
     return (
         <Container maxWidth={'xl'} sx={{px: {lg: 15, md: 10, sm: 5, xs: 2}, py: {md: 5, sm: 3, xs: 2}}}>
-            <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4}}>
+            <Box sx={{display: 'flex', flexWrap: 'wrap', flexDirection: {sm: 'row', xs: 'column'}, justifyContent: 'space-between', alignItems: 'center', mb: 4, gap: {md: 0, xs: 2}}}>
                 <Typography component={'h2'} sx={{fontSize: {md: '40px', sm: '35px', xs: '31px'}, fontWeight: 500}}>Featured Categories</Typography>
                 <Box sx={{display: 'flex', gap: 1.5}}>
                     <Button ref={prevRef} sx={{minWidth: 'unset', p: 0, borderRadius: '14px'}}>

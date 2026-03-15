@@ -78,7 +78,7 @@ export default function Hero() {
                             </Box>
                         </Box>
                     </Box>
-                    <Box sx={{display: 'flex', gap: 2, alignItems: 'center', justifyContent: 'flex-start', color: 'white', marginTop: {md: 3, xs: 1}, alignSelf: {xl: 'flex-start', md: 'center'}}}>
+                    <Box sx={{display: {md:'flex', xs:'none'}, gap: 2, alignItems: 'center', justifyContent: 'flex-start', color: 'white', marginTop: {md: 3, xs: 1}, alignSelf: {xl: 'flex-start', md: 'center'}}}>
                         <Button sx={{backgroundColor: '#426466', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><WestIcon /></Button>
                         <Button sx={{backgroundColor: '#D09523', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><EastIcon /></Button>
                     </Box>

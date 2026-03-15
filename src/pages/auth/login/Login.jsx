@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import Link from "@mui/material/Link";
-import {Link as RouterLink} from "react-router";
+import {Link as RouterLink} from "react-router-dom";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {loginSchema} from "../../../validation/LoginSchema.js";
 import {CircularProgress} from "@mui/material";
