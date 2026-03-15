@@ -10,8 +10,12 @@ import {Link as RouterLink} from "react-router";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {loginSchema} from "../../../validation/LoginSchema.js";
 import {CircularProgress} from "@mui/material";
+import useAuthStore from "../../../store/useAuthStore.js";
+import {useNavigate} from "react-router-dom";
 
 export default function Login() {
+    const setToken = useAuthStore((state) => state.setToken);
+    const navigate = useNavigate()
     const [serverErrors, setServerErrors] = useState([]);
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm({
         resolver: yupResolver(loginSchema), mode: "onBlur"
@@ -19,12 +23,12 @@ export default function Login() {
     const loginForm = async (values) => {
         try {
             const response = await axios.post(`${import.meta.env.VITE_BURL}/auth/Account/Login`, values);
-            if(response.status === 200) localStorage.setItem('accessToken', response.data.accessToken);
-            console.log(response.data);
-            alert(response.data.message)
+            if(response.status === 200) {
+                setToken(response.data.accessToken);
+                navigate('/');
+            }
         }catch (e){
             setServerErrors(e.response.data.message);
-            console.log(e.response.data.message);
         }
     }
     return (

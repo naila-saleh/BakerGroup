@@ -8,10 +8,11 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import axios from "axios";
 import {registerSchema} from "../../../validation/RegisterSchema.js";
 import Link from "@mui/material/Link";
-import {Link as RouterLink} from "react-router-dom";
+import {Link as RouterLink, useNavigate} from "react-router-dom";
 import {CircularProgress} from "@mui/material";
 
 export default function Register() {
+    const navigate = useNavigate();
     const [serverErrors, setServerErrors] = useState([]);
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm({
         resolver: yupResolver(registerSchema), mode: "onBlur"
@@ -19,8 +20,9 @@ export default function Register() {
     const registerForm = async (values) => {
         try {
             const response = await axios.post(`${import.meta.env.VITE_BURL}/auth/Account/Register`, values);
-            console.log(response.data);
-            alert(response.data.message)
+            if(response.status === 200) {
+                navigate('/auth/login');
+            }
         }catch (e){
             setServerErrors(e.response.data.errors);
         }
