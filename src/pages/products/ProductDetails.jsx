@@ -9,10 +9,12 @@ import Button from "@mui/material/Button";
 import WestIcon from '@mui/icons-material/West';
 import {Container, Grid, Rating} from "@mui/material";
 import coupon from '../../assets/images/coupon.png'
+import useAddToCart from "../../hooks/useAddToCart.jsx";
 
 export default function ProductDetails() {
     const {id} = useParams();
     const {data, isLoading, isError, error} = useProduct(id);
+    const {mutate, isPending} = useAddToCart();
     if(isLoading) return <Loader />
     if(isError) return <div>{error.message}</div>
     const product = data.response;
@@ -30,11 +32,11 @@ export default function ProductDetails() {
                 </Button>
                 <Grid container spacing={{md: 8, sm: 5, xs: 3}} sx={{display: 'flex', marginTop: {sm: 2, xs: 1}}}>
                     <Grid size={{lg: 6, md: 12, sm: 12, xs: 12}} sx={{textAlign: 'center'}}>
-                        <img src={product.image} alt="" style={{width: '100%', borderRadius: '10px'}}/>
+                        <Box component={'img'} src={product.image} alt="" sx={{width: '100%', borderRadius: '10px'}}/>
                         <Box display={product.subImages.length?'flex':'none'} sx={{marginTop: 2, justifyContent: 'space-between'}}>
-                            <img src={product.image} alt="" style={{width: sizeOfSubImage, height: sizeOfSubImage, borderRadius: '10px', cursor: 'pointer', border: '2px solid #D09523'}}/>
+                            <Box component={'img'} src={product.image} alt="" sx={{width: sizeOfSubImage, height: sizeOfSubImage, borderRadius: '10px', cursor: 'pointer', border: '2px solid #D09523'}}/>
                             {product.subImages.map(subImage=>(
-                                <img src={subImage} alt="" style={{width: sizeOfSubImage, height: sizeOfSubImage, borderRadius: '10px', cursor: 'pointer'}}/>
+                                <Box component={'img'} src={subImage} alt="" sx={{width: sizeOfSubImage, height: sizeOfSubImage, borderRadius: '10px', cursor: 'pointer'}}/>
                             ))}
                         </Box>
                     </Grid>
@@ -51,11 +53,17 @@ export default function ProductDetails() {
                                 <Typography sx={{color: '#5C5C5C'}}>{product.reviews.length} Reviews</Typography>
                             </Box>
                             <Button variant="contained" sx={{textTransform: 'none', color: '#fff', backgroundColor: '#D09523', fontWeight: 300, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5, mr: 2}}>Buy Now</Button>
-                            <Button variant="contained" sx={{textTransform: 'none', color: '#fff', backgroundColor: '#2D5356', fontWeight: 300, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>Add To Cart</Button>
+                            <Button variant="contained" sx={{textTransform: 'none', color: '#fff', backgroundColor: '#2D5356', fontWeight: 300, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}
+                                    onClick={()=>mutate({
+                                        ProductId: product.id,
+                                        Count: 1,
+                                    })}
+                                    disabled={isPending}
+                            >Add To Cart</Button>
                         </Box>
                         <Box sx={{display: 'flex', flexDirection: 'column' , gap: 2, alignItems: 'flex-start', pt: 5}}>
                             <Typography sx={{color: '#5C5C5C', fontSize: '18px'}}>Coupon & Discount</Typography>
-                            <img src={coupon} alt="" style={{width: '100%'}}/>
+                            <Box component={'img'} src={coupon} alt="" sx={{width: '100%'}}/>
                         </Box>
                     </Grid>
                 </Grid>
