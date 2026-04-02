@@ -10,6 +10,7 @@ import {registerSchema} from "../../../validation/RegisterSchema.js";
 import Link from "@mui/material/Link";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import {CircularProgress} from "@mui/material";
+import axiosInstance from "../../../api/axiosInstance.js";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function Register() {
     });
     const registerForm = async (values) => {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BURL}/auth/Account/Register`, values);
+            const response = await axiosInstance.post(`/auth/Account/Register`, values);
             if(response.status === 200) {
                 navigate('/auth/login');
             }

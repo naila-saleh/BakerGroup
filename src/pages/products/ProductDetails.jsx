@@ -19,7 +19,7 @@ export default function ProductDetails() {
     if(isError) return <div>{error.message}</div>
     const product = data.response;
     const sizeOfSubImage = `calc((100% - ${(product.subImages.length)}%) / (${product.subImages.length} + 1))`;
-    console.log(data.response);
+    //console.log(data.response);
     return (
         <Box className={'product-details'}>
             <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {md: 10, xs: 5}}}>

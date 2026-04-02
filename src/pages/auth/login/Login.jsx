@@ -12,6 +12,7 @@ import {loginSchema} from "../../../validation/LoginSchema.js";
 import {CircularProgress} from "@mui/material";
 import useAuthStore from "../../../store/useAuthStore.js";
 import {useNavigate} from "react-router-dom";
+import axiosInstance from "../../../api/axiosInstance.js";
 
 export default function Login() {
     const setToken = useAuthStore((state) => state.setToken);
@@ -22,7 +23,7 @@ export default function Login() {
     });
     const loginForm = async (values) => {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BURL}/auth/Account/Login`, values);
+            const response = await axiosInstance.post(`/auth/Account/Login`, values);
             if(response.status === 200) {
                 setToken(response.data.accessToken);
                 navigate('/');
