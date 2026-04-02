@@ -10,7 +10,7 @@ export default function UseCart() {
     const query = useQuery({
         queryKey: ['cart','en'],
         queryFn: getItems,
-        staleTime: 1000*60*60*24*7
+        staleTime: 1000*60*5
     });
     return query;
 }
