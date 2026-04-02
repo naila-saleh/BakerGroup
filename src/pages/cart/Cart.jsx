@@ -5,16 +5,17 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import {Container, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow} from "@mui/material";
 import Button from "@mui/material/Button";
+import useRemoveFromCart from "../../hooks/useRemoveFromCart.jsx";
 
 export default function Cart() {
     const {data, isLoading, isError, error} = useCart();
-    console.log(data);
+    const {mutate, isPending} = useRemoveFromCart();
     if(isLoading) return <Loader />
     if(isError) return <Box color={'red'}>{error.message}</Box>
     return (
         <Box className={'cart'}>
             <Container maxWidth={'xl'} sx={{px: {md: 10,sm: 5, xs: 2}, py: {md: 5,sm: 3, xs: 2}}}>
-                <Typography component={'h1'} sx={{fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center', pb: 3}}>My Cart</Typography>
+                <Typography component={'h1'} sx={{fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center', pb: 3}}>Shopping Cart</Typography>
                 <TableContainer>
                     <Table>
                         <TableHead>
@@ -34,7 +35,7 @@ export default function Cart() {
                                     <TableCell>{item.count}</TableCell>
                                     <TableCell>$ {item.price * item.count}</TableCell>
                                     <TableCell>
-                                        <Button variant={'contained'} color={'error'}>Remove</Button>
+                                        <Button variant={'contained'} color={'error'} onClick={()=>mutate(item.productId)} disabled={isPending}>Remove</Button>
                                     </TableCell>
                                 </TableRow>
                             ))}
