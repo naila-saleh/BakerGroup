@@ -9,6 +9,7 @@ import ProductDetails from "./pages/products/ProductDetails.jsx";
 import CategoriesPage from "./pages/categories/CategoriesPage.jsx";
 import ProtectedRouter from "./ProtectedRouter.jsx";
 import Products from "./components/products/Products.jsx";
+import Checkout from "./pages/checkout/Checkout.jsx";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,12 @@ const router = createBrowserRouter([
                 element:
                     <ProtectedRouter>
                         <Cart />
+                    </ProtectedRouter>
+            },{
+                path: 'checkout',
+                element:
+                    <ProtectedRouter>
+                        <Checkout />
                     </ProtectedRouter>
             },{
                 path: 'products',

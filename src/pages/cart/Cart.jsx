@@ -13,9 +13,11 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import bg from '../../assets/images/hero/bg-hero.png'
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import Features from "../../components/features/Features.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function Cart() {
     const {data, isLoading, isError, error} = useCart();
+    const navigate = useNavigate();
     const {mutate: removeItem, isPending: removeItemIsPending} = useRemoveFromCart();
     const {mutate: updateQuantity, isPending: updateItemIsPending} = useUpdateCartItem();
     const handeUpdateQuantity = (productId, action) => {
@@ -33,7 +35,7 @@ export default function Cart() {
             </Box>
             <Container maxWidth={'xl'} sx={{px: {md: 10,sm: 5, xs: 2}, py: {md: 5,sm: 3, xs: 2}, display: 'flex', flexDirection: {lg: 'row', xs: 'column'}, gap: {md: 5, sm: 3, xs: 2}}}>
                 <TableContainer sx={{borderRadius: '10px'}}>
-                    <Table sx={{backgroundColor: '#F6F6F6'}}>
+                    <Table sx={{backgroundColor: '#F6F6F6', borderCollapse: 'separate', borderRadius: '10px'}}>
                         <TableHead sx={{backgroundColor: '#2D5356'}}>
                             <TableRow>
                                 <TableCell sx={{color: '#fff', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}>Product Name</TableCell>
@@ -64,7 +66,12 @@ export default function Cart() {
                         </TableBody>
                         <TableFooter>
                             <TableRow>
-                                <TableCell sx={{fontWeight: 500}} colSpan={5} align={'left'}></TableCell>
+                                <TableCell sx={{fontWeight: 500, borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px'}} colSpan={5} align={'center'}>
+                                    <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', justifyContent: {sm: 'center', xs: 'flex-start'}}}>
+                                        <Button onClick={()=>navigate('/')} variant="contained" sx={{textTransform: 'none', color: '#fff', backgroundColor: '#2D5356', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>Continue Shopping</Button>
+                                        <Button variant="contained" color={'error'} sx={{textTransform: 'none', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>Clear Cart</Button>
+                                    </Box>
+                                </TableCell>
                             </TableRow>
                         </TableFooter>
                     </Table>
@@ -93,7 +100,7 @@ export default function Cart() {
                         <TableFooter>
                             <TableRow>
                                 <TableCell sx={{fontWeight: 500, borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px'}} colSpan={2} align={'center'}>
-                                    <Button variant="contained" sx={{textTransform: 'none', color: '#fff', backgroundColor: '#D09523', fontSize:  {md: '14px', sm: '12px', xs: '11px'}, fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>Proceed to Checkout</Button>
+                                    <Button onClick={()=>navigate('/checkout')} variant="contained" sx={{textTransform: 'none', color: '#fff', backgroundColor: '#D09523', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>Proceed to Checkout</Button>
                                 </TableCell>
                             </TableRow>
                         </TableFooter>
