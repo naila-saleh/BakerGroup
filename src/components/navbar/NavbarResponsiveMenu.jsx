@@ -20,10 +20,12 @@ import {Link as RouterLink} from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore.js";
 import LogoutIcon from '@mui/icons-material/Logout';
 import {useNavigate} from "react-router-dom";
+import useCart from "../../hooks/useCart";
+import {Badge} from "@mui/material";
 
 const pages = [
     { id: 'home', to: '/', label: 'Home' },
-    { id: 'products', to: '#', label: 'Products' },
+    { id: 'products', to: '/products', label: 'Products' },
     { id: 'categories', to: '/categories', label: 'Categories' },
     { id: 'about', to: '#', label: 'About Us' },
     { id: 'contact', to: '#', label: 'Contact Us' },
@@ -33,13 +35,15 @@ const pages = [
 export default function NavbarResponsiveMenu() {
     const token = useAuthStore((state) => state.token);
     const logout = useAuthStore((state) => state.logout);
+    const {data} = useCart();
+    const cartCount = data?.items?.length || 0;
     const navigate = useNavigate();
     const iconLinkSx = { color: { md: '#fff', xs: '#D09523' } };
     const icons = token
         ? [
             { id: 'search', to: '#', icon: <SearchIcon /> },
             { id: 'favorites', to: '#', icon: <FavoriteBorderIcon /> },
-            { id: 'cart', to: '/cart', icon: <ShoppingBagOutlinedIcon /> },
+            { id: 'cart', to: '/cart', icon: <ShoppingBagOutlinedIcon />},
             { id: 'logout', icon: <LogoutIcon /> }
         ]
         : [{ id: 'register', to: '/auth/register', icon: <PersonOutlineRoundedIcon /> }];
@@ -198,7 +202,23 @@ export default function NavbarResponsiveMenu() {
                                                     {icon.icon}
                                                 </Button>
                                             ) : (
-                                                <Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link>
+                                                icon.id === 'cart' ? (
+                                                    <Badge badgeContent={cartCount}
+                                                        sx ={{
+                                                            color: "#D09523 !important",
+                                                            '& .MuiBadge-badge': {
+                                                                bgcolor: '#2D5356',
+                                                                color: '#fff',
+                                                                borderRadius: '50%',
+                                                                minWidth: '16px',
+                                                                height: '16px',
+                                                                padding: '0 4px',
+                                                                fontSize: '0.65rem'
+                                                            }
+                                                    }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link></Badge>
+                                                ):(
+                                                    <Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link>
+                                                )
                                             )}
                                         </Typography>
                                     </MenuItem>
@@ -215,7 +235,21 @@ export default function NavbarResponsiveMenu() {
                                     {icon.id === 'logout' ? (
                                         icon.icon
                                     ) : (
-                                        <Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link>
+                                        icon.id === 'cart' ? (
+                                            <Badge badgeContent={cartCount} sx={{
+                                                '& .MuiBadge-badge': {
+                                                    bgcolor: '#D09523',
+                                                    color: '#fff',
+                                                    borderRadius: '50%',
+                                                    minWidth: '16px',
+                                                    height: '16px',
+                                                    padding: '0 4px',
+                                                    fontSize: '0.65rem'
+                                                }
+                                            }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link></Badge>
+                                        ):(
+                                            <Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link>
+                                        )
                                     )}
                                 </Button>
                             ))}

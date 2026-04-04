@@ -8,6 +8,7 @@ import AuthLayout from "./layout/AuthLayout.jsx";
 import ProductDetails from "./pages/products/ProductDetails.jsx";
 import CategoriesPage from "./pages/categories/CategoriesPage.jsx";
 import ProtectedRouter from "./ProtectedRouter.jsx";
+import Products from "./components/products/Products.jsx";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,9 @@ const router = createBrowserRouter([
                     <ProtectedRouter>
                         <Cart />
                     </ProtectedRouter>
+            },{
+                path: 'products',
+                element: <Products />
             },{
                 path: 'products/:id',
                 element: <ProductDetails />
