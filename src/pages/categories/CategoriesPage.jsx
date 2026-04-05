@@ -2,8 +2,6 @@ import React from 'react'
 import useCategories from "../../hooks/useCategories";
 import Loader from "../../ui/loader/Loader.jsx";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import chair from '../../assets/images/chair.png'
 import {Grid} from "@mui/material";
 import Category from "../../ui/category/Category.jsx";
 

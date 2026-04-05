@@ -16,10 +16,13 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Button from "@mui/material/Button";
 import useCart from "../../hooks/useCart.jsx";
 import {Badge} from "@mui/material";
+import {useTranslation} from "react-i18next";
+import LanguageIcon from '@mui/icons-material/Language';
 
 export default function Navbar() {
     const token = useAuthStore((state) => state.token);
     const logout = useAuthStore((state) => state.logout);
+    const {t} = useTranslation();
     const {data} = useCart();
     const cartCount = data?.items?.length || 0;
     const navigate = useNavigate();
@@ -33,20 +36,21 @@ export default function Navbar() {
                 <Toolbar sx={{justifyContent: {xs: 'space-between' ,lg: 'space-around'}}}>
                     <Link component={RouterLink} to={'/'} color={"inherit"} sx={{display: 'flex', gap: 1, alignItems: 'center', textDecoration: 'none'}}>
                         <img src={BGYLogo} width={27}/>
-                        <Typography variant="h6" component="div">BakerGroup</Typography>
+                        <Typography variant="h6" component="div">{t('BakerGroup')}</Typography>
                     </Link>
                     <Box sx={{display: {xs: 'none' ,sm: 'none',md: 'flex'}, gap: 4}}>
-                        <Link component={RouterLink} to={'/'} color="inherit" underline={"none"}>Home</Link>
-                        <Link component={RouterLink} to={'/products'} color="inherit" underline={"none"}>Products</Link>
-                        <Link component={RouterLink} to={'/categories'} color="inherit" underline={"none"}>Categories</Link>
-                        <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>About Us</Link>
-                        <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>Contact Us</Link>
-                        <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>Blog</Link>
+                        <Link component={RouterLink} to={'/'} color="inherit" underline={"none"}>{t('Home')}</Link>
+                        <Link component={RouterLink} to={'/products'} color="inherit" underline={"none"}>{t('Products')}</Link>
+                        <Link component={RouterLink} to={'/categories'} color="inherit" underline={"none"}>{t('Categories')}</Link>
+                        <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>{t('About Us')}</Link>
+                        <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>{t('Contact Us')}</Link>
+                        <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}>{t('Blog')}</Link>
                     </Box>
                     <Box sx={{display: {xs: 'none',sm: 'flex'}, gap: 2, alignItems: 'center'}}>
                         {token?
                             (
                                 <>
+                                    <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}><LanguageIcon /></Link>
                                     <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}><SearchIcon /></Link>
                                     <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}><FavoriteBorderIcon /></Link>
                                     <Link component={RouterLink} to={'/cart'} color="inherit" underline={"none"}><Badge badgeContent={cartCount} color={"#FFB934"}><ShoppingBagOutlinedIcon /></Badge></Link>

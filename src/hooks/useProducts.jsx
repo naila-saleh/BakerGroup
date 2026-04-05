@@ -1,6 +1,7 @@
 import React from 'react'
 import axiosInstance from "../api/axiosInstance.js";
 import {useQuery} from "@tanstack/react-query";
+import i18n from "i18next";
 
 export default function UseProducts() {
     const getProducts = async () => {
@@ -8,9 +9,9 @@ export default function UseProducts() {
         return response.data;
     }
     const query = useQuery({
-        queryKey: ['products','en'],
+        queryKey: ['products', i18n.language],
         queryFn: getProducts,
-        staleTime: 1000*60*60*24*7
+        staleTime: 1000*60*5, // 5 minutes
     })
     return query;
 }

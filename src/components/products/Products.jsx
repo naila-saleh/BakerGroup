@@ -6,14 +6,16 @@ import Typography from "@mui/material/Typography";
 import {Card, CardContent, CardMedia, Container, Grid} from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 export default function Products() {
     const {data, isLoading, isError, error} = useProducts();
+    const {t} = useTranslation();
     if(isLoading) return <Loader />
     if(isError) return <Box>{error.message}</Box>
     return (
         <Container maxWidth={'xl'} className={'products'} component={'section'} sx={{py: {md: 10, xs: 5}, px: {lg: 10, md: 5, sm: 5, xs: 2}}}>
-            <Typography component={'h2'} sx={{fontSize: {md: '40px', sm: '35px', xs: '32px'}, fontWeight: '500', pb: {md: 3,sm: 2, xs: 1}}}>Trending Products</Typography>
+            <Typography component={'h2'} sx={{fontSize: {md: '40px', sm: '35px', xs: '32px'}, fontWeight: '500', pb: {md: 3,sm: 2, xs: 1}}}>{t('Trending Products')}</Typography>
             <Grid container spacing={{lg: 3, xs: 2}}>
                 {data.response.data.map(product=>
                     <Grid item size={{lg: 3, md: 4, sm: 6, xs: 12}}>

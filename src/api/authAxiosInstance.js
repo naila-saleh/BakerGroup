@@ -1,6 +1,7 @@
 import axios from "axios";
 import useAuthStore from "../store/useAuthStore.js";
 import axiosInstance from "./axiosInstance.js";
+import i18n from "i18next";
 
 const authAxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_BURL,
@@ -9,13 +10,12 @@ const authAxiosInstance = axios.create({
 
 authAxiosInstance.interceptors.request.use((config) => {
     const {token} = useAuthStore.getState();
-    config.headers['Accept-Language'] = 'en';
+    config.headers['Accept-Language'] = i18n.language;
     config.headers.Authorization = `Bearer ${token}`;
     return config;
 })
 authAxiosInstance.interceptors.response.use((response) => response, async (error) => {
     const originalRequest = error.config;
-    const {token} = useAuthStore.getState();
     if(error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         try{

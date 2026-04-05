@@ -13,10 +13,12 @@ import {CircularProgress} from "@mui/material";
 import useAuthStore from "../../../store/useAuthStore.js";
 import {useNavigate} from "react-router-dom";
 import axiosInstance from "../../../api/axiosInstance.js";
+import {useTranslation} from "react-i18next";
 
 export default function Login() {
     const setToken = useAuthStore((state) => state.setToken);
     const navigate = useNavigate()
+    const {t} = useTranslation();
     const [serverErrors, setServerErrors] = useState([]);
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm({
         resolver: yupResolver(loginSchema), mode: "onBlur"
@@ -34,20 +36,20 @@ export default function Login() {
     }
     return (
         <Box component={'section'} className={'login-form'} sx={{textAlign: 'center'}}>
-            <Typography component={'h1'} sx={{fontSize: '40px'}}>Login</Typography>
+            <Typography component={'h1'} sx={{fontSize: '40px'}}>{t('Login')}</Typography>
             {serverErrors.length > 0 && (<Box my={2}>
                 <Typography component={'span'} sx={{color: '#f33', fontSize: '15px'}}>{serverErrors}</Typography>
             </Box>)}
             <Box component={'form'}
                  onSubmit={handleSubmit(loginForm)}
                  sx={{px: {md: 4, sm: 1}, py: 2, display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center'}}>
-                <TextField {...register('email')} label="Email" variant="standard" fullWidth
+                <TextField {...register('email')} label={t('Email')} variant="standard" fullWidth
                 error={errors.email} helperText={errors.email?.message}/>
-                <TextField {...register('password')} label="Password" variant="standard" fullWidth type={'password'}
+                <TextField {...register('password')} label={t('Password')} variant="standard" fullWidth type={'password'}
                 error={errors.password} helperText={errors.password?.message}/>
-                <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: '#D09523', px: 10}} disabled={isSubmitting}>{isSubmitting?<CircularProgress/>:'Login'}</Button>
-                <Typography component={"span"} sx={{fontSize: '15px', color: '#2D5356', mt: 2}}>don&#39;t have an account?</Typography>
-                <Link component={RouterLink} variant={"button"} to={'/auth/register'} sx={{backgroundColor: '#2D5356', padding: '5px 68px', mb: 3, color: 'white', borderRadius: '5px'}} boxShadow={'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'} underline={"none"}>Register</Link>
+                <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: '#D09523', px: 10}} disabled={isSubmitting}>{isSubmitting?<CircularProgress/>:t('Login')}</Button>
+                <Typography component={"span"} sx={{fontSize: '15px', color: '#2D5356', mt: 2}}>{t(`don't have an account?`)}</Typography>
+                <Link component={RouterLink} variant={"button"} to={'/auth/register'} sx={{backgroundColor: '#2D5356', padding: '5px 68px', mb: 3, color: 'white', borderRadius: '5px'}} boxShadow={'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'} underline={"none"}>{t('Register')}</Link>
             </Box>
         </Box>
     )

@@ -22,6 +22,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import {useNavigate} from "react-router-dom";
 import useCart from "../../hooks/useCart";
 import {Badge} from "@mui/material";
+import {useTranslation} from "react-i18next";
+import LanguageIcon from '@mui/icons-material/Language';
+import i18n from "i18next";
 
 const pages = [
     { id: 'home', to: '/', label: 'Home' },
@@ -35,12 +38,18 @@ const pages = [
 export default function NavbarResponsiveMenu() {
     const token = useAuthStore((state) => state.token);
     const logout = useAuthStore((state) => state.logout);
+    const {t} = useTranslation();
+    const changeLanguage = ()=>{
+        const newLng = i18n.language === 'en' ? 'ar' : 'en';
+        i18n.changeLanguage(newLng);
+    }
     const {data} = useCart();
     const cartCount = data?.items?.length || 0;
     const navigate = useNavigate();
     const iconLinkSx = { color: { md: '#fff', xs: '#D09523' } };
     const icons = token
         ? [
+            { id: 'language', to: '#', icon: <LanguageIcon /> },
             { id: 'search', to: '#', icon: <SearchIcon /> },
             { id: 'favorites', to: '#', icon: <FavoriteBorderIcon /> },
             { id: 'cart', to: '/cart', icon: <ShoppingBagOutlinedIcon />},
@@ -129,7 +138,7 @@ export default function NavbarResponsiveMenu() {
                                 {pages.map((page) => (
                                     <MenuItem key={page.id} onClick={handleCloseNavMenu}>
                                         <Typography sx={{ textAlign: 'center',color: '#D09523' }}>
-                                            <Link component={RouterLink} to={page.to} color="inherit" underline={"none"}>{page.label}</Link>
+                                            <Link component={RouterLink} to={page.to} color="inherit" underline={"none"}>{t(`${page.label}`)}</Link>
                                         </Typography>
                                     </MenuItem>
                                 ))}
@@ -163,7 +172,7 @@ export default function NavbarResponsiveMenu() {
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
-                                    <Link component={RouterLink} to={page.to} color="inherit" underline={"none"}>{page.label}</Link>
+                                    <Link component={RouterLink} to={page.to} color="inherit" underline={"none"}>{t(`${page.label}`)}</Link>
                                 </Button>
                             ))}
                         </Box>
@@ -197,7 +206,11 @@ export default function NavbarResponsiveMenu() {
                                 {icons.map((icon) => (
                                     <MenuItem key={icon.id} onClick={icon.id === 'logout' ? handleLogout : handleCloseUserMenu}>
                                         <Typography sx={{ textAlign: 'center'}}>
-                                            {icon.id === 'logout' ? (
+                                            {icon.id === 'language'?(
+                                                <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, color: { md: '#fff', xs: '#D09523' } }}>
+                                                    {icon.icon}
+                                                </Button>
+                                            ):(icon.id === 'logout' ? (
                                                 <Button onClick={handleLogout} sx={{ minWidth: 8, p: 0, color: { md: '#fff', xs: '#D09523' } }}>
                                                     {icon.icon}
                                                 </Button>
@@ -218,7 +231,7 @@ export default function NavbarResponsiveMenu() {
                                                     }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link></Badge>
                                                 ):(
                                                     <Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link>
-                                                )
+                                                ))
                                             )}
                                         </Typography>
                                     </MenuItem>
@@ -232,7 +245,11 @@ export default function NavbarResponsiveMenu() {
                                     onClick={icon.id === 'logout' ? handleLogout : handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block', minWidth: 8 }}
                                 >
-                                    {icon.id === 'logout' ? (
+                                    {icon.id === 'language'?(
+                                        <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, color: { md: '#fff', xs: '#D09523' } }}>
+                                            {icon.icon}
+                                        </Button>
+                                    ):(icon.id === 'logout' ? (
                                         icon.icon
                                     ) : (
                                         icon.id === 'cart' ? (
@@ -249,7 +266,7 @@ export default function NavbarResponsiveMenu() {
                                             }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link></Badge>
                                         ):(
                                             <Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link>
-                                        )
+                                        ))
                                     )}
                                 </Button>
                             ))}

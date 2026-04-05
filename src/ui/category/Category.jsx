@@ -2,8 +2,10 @@ import React from 'react'
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import chair from '../../assets/images/chair.png'
+import {useTranslation} from "react-i18next";
 
 export default function Category(category) {
+    const {t} = useTranslation();
     return (
         <>
             <Box sx={{width: '100%', aspectRatio: '1 / 1', borderRadius: '50%', backgroundColor: 'rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'}}>
@@ -14,7 +16,7 @@ export default function Category(category) {
                     {category.name}
                 </Typography>
                 <Typography component={'span'} sx={{color: 'rgba(0,0,0,0.55)', fontSize: '13px', fontWeight: 400}}>
-                    Discover 45 Products
+                    {t('Discover 45 Products')}
                 </Typography>
             </Box>
         </>

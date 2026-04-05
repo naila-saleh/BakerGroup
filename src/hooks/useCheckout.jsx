@@ -6,10 +6,8 @@ export default function UseCheckout() {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (paymentMethod) => {
-            console.log(paymentMethod);
             return await authAxiosInstance.post('/Checkouts', {PaymentMethod: paymentMethod});
         },onSuccess: (response) => {
-            console.log(response);
             if(response.data.url) window.open(response.data.url, '_blank')
             queryClient.invalidateQueries({queryKey: ['cart']});
         }
