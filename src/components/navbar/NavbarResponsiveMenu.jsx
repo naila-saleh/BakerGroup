@@ -25,6 +25,7 @@ import {Badge} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import LanguageIcon from '@mui/icons-material/Language';
 import i18n from "i18next";
+import LoginIcon from '@mui/icons-material/Login';
 
 const pages = [
     { id: 'home', to: '/', label: 'Home' },
@@ -46,16 +47,19 @@ export default function NavbarResponsiveMenu() {
     const {data} = useCart();
     const cartCount = data?.items?.length || 0;
     const navigate = useNavigate();
-    const iconLinkSx = { color: { md: '#fff', xs: '#D09523' } };
     const icons = token
         ? [
             { id: 'language', to: '#', icon: <LanguageIcon /> },
             { id: 'search', to: '#', icon: <SearchIcon /> },
+            { id: 'profile', to: '/profile', icon: <PersonOutlineRoundedIcon /> },
             { id: 'favorites', to: '#', icon: <FavoriteBorderIcon /> },
             { id: 'cart', to: '/cart', icon: <ShoppingBagOutlinedIcon />},
             { id: 'logout', icon: <LogoutIcon /> }
-        ]
-        : [{ id: 'register', to: '/auth/register', icon: <PersonOutlineRoundedIcon /> }];
+        ] : [
+            { id: 'language', to: '#', icon: <LanguageIcon /> },
+            { id: 'search', to: '#', icon: <SearchIcon /> },
+            { id: 'register', to: '/auth/register', icon: <LoginIcon /> }
+        ];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -83,7 +87,7 @@ export default function NavbarResponsiveMenu() {
     };
 
     return (
-        <Box sx={{ flexGrow: 1, mb: {md: 9, sm: 8, xs: 6}}}>
+        <Box sx={{ flexGrow: 1, mb: {lg: 9, sm: 8, xs: 6}}}>
             <AppBar position="fixed" sx={{backgroundColor: '#2D5356'}}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: '#fff', backgroundColor: '#2D5356'}}>
@@ -152,7 +156,7 @@ export default function NavbarResponsiveMenu() {
                                 component="a"
                                 href="#app-bar-with-responsive-menu"
                                 sx={{
-                                    ml: 1,
+                                    mx: 1,
                                     display: { xs: 'flex', md: 'none' },
                                     flexGrow: 1,
                                     fontFamily: 'monospace',
@@ -176,7 +180,7 @@ export default function NavbarResponsiveMenu() {
                                 </Button>
                             ))}
                         </Box>
-                        <Box sx={{display: { xs: 'flex', md: 'none' } }}>
+                        <Box sx={{display: { xs: 'flex', lg: 'none' } }}>
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -201,21 +205,20 @@ export default function NavbarResponsiveMenu() {
                                 }}
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
-                                sx={{ display: { xs: 'block', md: 'none' } }}
+                                sx={{ display: { xs: 'block', lg: 'none' } }}
                             >
                                 {icons.map((icon) => (
                                     <MenuItem key={icon.id} onClick={icon.id === 'logout' ? handleLogout : handleCloseUserMenu}>
                                         <Typography sx={{ textAlign: 'center'}}>
-                                            {icon.id === 'language'?(
-                                                <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, color: { md: '#fff', xs: '#D09523' } }}>
+                                            { icon.id === 'language'?(
+                                                <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, my: 1, color: '#D09523'  }}>
                                                     {icon.icon}
                                                 </Button>
-                                            ):(icon.id === 'logout' ? (
-                                                <Button onClick={handleLogout} sx={{ minWidth: 8, p: 0, color: { md: '#fff', xs: '#D09523' } }}>
+                                            ) : (icon.id === 'logout' ? (
+                                                <Button onClick={handleLogout} sx={{ minWidth: 8, p: 0, color: '#D09523' }}>
                                                     {icon.icon}
                                                 </Button>
-                                            ) : (
-                                                icon.id === 'cart' ? (
+                                            ) : (icon.id === 'cart' ? (
                                                     <Badge badgeContent={cartCount}
                                                         sx ={{
                                                             color: "#D09523 !important",
@@ -228,9 +231,9 @@ export default function NavbarResponsiveMenu() {
                                                                 padding: '0 4px',
                                                                 fontSize: '0.65rem'
                                                             }
-                                                    }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link></Badge>
+                                                    }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: '#D09523' }}>{icon.icon}</Link></Badge>
                                                 ):(
-                                                    <Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link>
+                                                    <Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: '#D09523' }}>{icon.icon}</Link>
                                                 ))
                                             )}
                                         </Typography>
@@ -238,37 +241,38 @@ export default function NavbarResponsiveMenu() {
                                 ))}
                             </Menu>
                         </Box>
-                        <Box sx={{display: { xs: 'none', md: 'flex' } }}>
+                        <Box sx={{display: { xs: 'none', lg: 'flex' } }}>
                             {icons.map((icon) => (
-                                <Button
-                                    key={icon.id}
-                                    onClick={icon.id === 'logout' ? handleLogout : handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block', minWidth: 8 }}
-                                >
-                                    {icon.id === 'language'?(
-                                        <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, color: { md: '#fff', xs: '#D09523' } }}>
-                                            {icon.icon}
-                                        </Button>
-                                    ):(icon.id === 'logout' ? (
-                                        icon.icon
-                                    ) : (
-                                        icon.id === 'cart' ? (
-                                            <Badge badgeContent={cartCount} sx={{
-                                                '& .MuiBadge-badge': {
-                                                    bgcolor: '#D09523',
-                                                    color: '#fff',
-                                                    borderRadius: '50%',
-                                                    minWidth: '16px',
-                                                    height: '16px',
-                                                    padding: '0 4px',
-                                                    fontSize: '0.65rem'
-                                                }
-                                            }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link></Badge>
-                                        ):(
-                                            <Link component={RouterLink} to={icon.to} underline={"none"} sx={iconLinkSx}>{icon.icon}</Link>
-                                        ))
-                                    )}
-                                </Button>
+                                icon.id === 'language' ? (
+                                    <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, color: '#fff', display: 'block', my: 2, mr: 1 }}>
+                                        {icon.icon}
+                                    </Button>
+                                ):(
+                                    <Button
+                                        key={icon.id}
+                                        onClick={icon.id === 'logout' ? handleLogout : handleCloseNavMenu}
+                                        sx={{ my: 2, color: 'white', display: 'block', minWidth: 8 }}
+                                    >{ icon.id === 'logout' ? (
+                                            icon.icon
+                                        ) : (
+                                            icon.id === 'cart' ? (
+                                                <Badge badgeContent={cartCount} sx={{
+                                                    '& .MuiBadge-badge': {
+                                                        bgcolor: '#D09523',
+                                                        color: '#fff',
+                                                        borderRadius: '50%',
+                                                        minWidth: '16px',
+                                                        height: '16px',
+                                                        padding: '0 4px',
+                                                        fontSize: '0.65rem'
+                                                    }
+                                                }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: '#fff'}}>{icon.icon}</Link></Badge>
+                                            ):(
+                                                <Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: '#fff'}}>{icon.icon}</Link>
+                                            )
+                                        )}
+                                    </Button>
+                                )
                             ))}
                         </Box>
                     </Toolbar>

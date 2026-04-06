@@ -10,6 +10,9 @@ import CategoriesPage from "./pages/categories/CategoriesPage.jsx";
 import ProtectedRouter from "./ProtectedRouter.jsx";
 import Products from "./components/products/Products.jsx";
 import Checkout from "./pages/checkout/Checkout.jsx";
+import Profile from "./pages/profile/Profile.jsx";
+import ProfileInfo from "./pages/profile/ProfileInfo.jsx";
+import ProfileOrders from "./pages/profile/ProfileOrders.jsx";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +34,21 @@ const router = createBrowserRouter([
                     <ProtectedRouter>
                         <Checkout />
                     </ProtectedRouter>
+            },{
+                path: 'profile',
+                element:
+                    <ProtectedRouter>
+                        <Profile />
+                    </ProtectedRouter>,
+                children: [
+                    {
+                        index: true,
+                        element: <ProfileInfo />
+                    },{
+                        path: 'orders',
+                        element: <ProfileOrders />
+                    }
+                ]
             },{
                 path: 'products',
                 element: <Products />
