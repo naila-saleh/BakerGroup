@@ -32,8 +32,8 @@ export default function ProfileOrders() {
                     <TableBody>
                         {data.orders.map(order=>
                             <TableRow>
-                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>{order.id}</TableCell>
-                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>{order.amountPaid}</TableCell>
+                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}># {order.id}</TableCell>
+                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>$ {order.amountPaid}</TableCell>
                                 <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>{order.paymentStatus}</TableCell>
                                 <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>{order.status}</TableCell>
                                 <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>{order.orderDate}</TableCell>
