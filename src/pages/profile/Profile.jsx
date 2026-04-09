@@ -14,7 +14,6 @@ import Loader from "../../ui/loader/Loader.jsx";
 export default function Profile() {
     const {t} = useTranslation();
     const {data, isLoading, isError, error} = useProfile();
-    console.log(data);
     if(isLoading) return <Loader />
     if(isError) return <Box color={'red'}>{error.message}</Box>
     return (

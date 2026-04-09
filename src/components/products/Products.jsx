@@ -18,7 +18,7 @@ export default function Products() {
             <Typography component={'h2'} sx={{fontSize: {md: '40px', sm: '35px', xs: '32px'}, fontWeight: '500', pb: {md: 3,sm: 2, xs: 1}}}>{t('Trending Products')}</Typography>
             <Grid container spacing={{lg: 3, xs: 2}}>
                 {data.response.data.map(product=>
-                    <Grid item size={{lg: 3, md: 4, sm: 6, xs: 12}}>
+                    <Grid key={product.id} item size={{lg: 3, md: 4, sm: 6, xs: 12}}>
                         <Link to={`/products/${product.id}`} style={{textDecoration: 'none'}}>
                             <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
                                 <CardMedia component={'img'} image={product.image} sx={{width: {md: '100%', sm: '90%', xs: '70%'}, display: 'flex', alignSelf: 'center'}}></CardMedia>

@@ -91,8 +91,8 @@ export default function CategoriesSection() {
                         }
                     }}
                 >
-                    {categories.map((category, index) => (
-                        <SwiperSlide key={category._id || category.name || index}>
+                    {categories.map((category) => (
+                        <SwiperSlide key={category.id}>
                             <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2.5, cursor: 'pointer', textAlign: 'center'}}>
                                 <Category {...category} />
                             </Box>

@@ -103,8 +103,7 @@ export default function NavbarResponsiveMenu() {
                             <Typography
                                 variant="h6"
                                 noWrap
-                                component="a"
-                                href="#app-bar-with-responsive-menu"
+                                component="span"
                                 sx={{
                                     ml: 1,
                                     mr: 2,
@@ -160,8 +159,7 @@ export default function NavbarResponsiveMenu() {
                             <Typography
                                 variant="h5"
                                 noWrap
-                                component="a"
-                                href="#app-bar-with-responsive-menu"
+                                component="span"
                                 sx={{
                                     mx: 1,
                                     display: { xs: 'flex', md: 'none' },
@@ -222,15 +220,15 @@ export default function NavbarResponsiveMenu() {
                                                     {icon.icon}
                                                 </Button>
                                             ):(icon.id === 'language'?(
-                                                <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, my: 1, color: 'secondary.main'  }}>
+                                                <Button key={icon.id} onClick={changeLanguage} sx={{ minWidth: 8, p: 0, my: 1, color: 'secondary.main'  }}>
                                                     {icon.icon}
                                                 </Button>
                                             ) : (icon.id === 'logout' ? (
-                                                <Button onClick={handleLogout} sx={{ minWidth: 8, p: 0, color: 'secondary.main' }}>
+                                                <Button key={icon.id} onClick={handleLogout} sx={{ minWidth: 8, p: 0, color: 'secondary.main' }}>
                                                     {icon.icon}
                                                 </Button>
                                             ) : (icon.id === 'cart' ? (
-                                                    <Badge badgeContent={cartCount}
+                                                    <Badge key={icon.id} badgeContent={cartCount}
                                                         sx ={{
                                                             color: "secondary.main !important",
                                                             '& .MuiBadge-badge': {
@@ -244,7 +242,7 @@ export default function NavbarResponsiveMenu() {
                                                             }
                                                     }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'secondary.main' }}>{icon.icon}</Link></Badge>
                                                 ):(
-                                                    <Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'secondary.main' }}>{icon.icon}</Link>
+                                                    <Link key={icon.id} component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'secondary.main' }}>{icon.icon}</Link>
                                                 ))
                                                 )
                                             )}
@@ -256,12 +254,12 @@ export default function NavbarResponsiveMenu() {
                         <Box sx={{display: { xs: 'none', lg: 'flex' } }}>
                             {icons.map((icon) => (
                                 icon.id === 'mode'? (
-                                    <Button onClick={toggleMode} sx={{ minWidth: 8, p: 0, color: 'info.light', display: 'block', my: 2, mx: 1 }}>
+                                    <Button key={icon.id} onClick={toggleMode} sx={{ minWidth: 8, p: 0, color: 'info.light', display: 'block', my: 2, mx: 1 }}>
                                         {icon.icon}
                                     </Button>
                                 ):(
                                     icon.id === 'language' ? (
-                                        <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, color: 'info.light', display: 'block', my: 2, mx: 1 }}>
+                                        <Button key={icon.id} onClick={changeLanguage} sx={{ minWidth: 8, p: 0, color: 'info.light', display: 'block', my: 2, mx: 1 }}>
                                             {icon.icon}
                                         </Button>
                                     ):(
@@ -273,7 +271,7 @@ export default function NavbarResponsiveMenu() {
                                             icon.icon
                                         ) : (
                                             icon.id === 'cart' ? (
-                                                <Badge badgeContent={cartCount} sx={{
+                                                <Badge key={icon.id} badgeContent={cartCount} sx={{
                                                     '& .MuiBadge-badge': {
                                                         bgcolor: 'secondary.main',
                                                         color: 'info.light',
@@ -285,7 +283,7 @@ export default function NavbarResponsiveMenu() {
                                                     }
                                                 }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'info.light'}}>{icon.icon}</Link></Badge>
                                             ):(
-                                                <Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'info.light'}}>{icon.icon}</Link>
+                                                <Link key={icon.id} component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'info.light'}}>{icon.icon}</Link>
                                             )
                                         )}
                                         </Button>
@@ -299,32 +297,3 @@ export default function NavbarResponsiveMenu() {
         </Box>
     );
 }
-/* <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                sx={{ mt: '45px'}}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}
-                            >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Box> */

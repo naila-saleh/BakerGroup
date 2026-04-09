@@ -18,7 +18,7 @@ export default function Hero() {
     return (
         <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {md: 10, xs: 5}}}>
             <Grid container spacing={1} sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%'}}>
-                <Grid item size={{xl: 5, lg: 5, md: 12, sm: 12, xs: 12}} sx={{display: 'flex', flexDirection: 'column', alignItems: {xl:'flex-start', lg: 'flex-start', md: 'center', sm: 'center', xs: 'center'}, gap: 2, textAlign: {xl: 'start', lg: 'start', xs: 'center'}, paddingX: {md: 10, sm: 5, xs: 2}, color: 'white'}}>
+                <Grid size={{xl: 5, lg: 5, md: 12, sm: 12, xs: 12}} sx={{display: 'flex', flexDirection: 'column', alignItems: {xl:'flex-start', lg: 'flex-start', md: 'center', sm: 'center', xs: 'center'}, gap: 2, textAlign: {xl: 'start', lg: 'start', xs: 'center'}, paddingX: {md: 10, sm: 5, xs: 2}, color: 'white'}}>
                     <Typography component={'span'} sx={{textTransform: 'uppercase', color: 'inherit', letterSpacing: 2, fontSize: {md: '12px', xs: '10px'}, backgroundColor: '#426466', border: 'solid 1px', borderColor: 'info.main', padding: '8px 20px', borderRadius: '30px'}}>{t('Furniture Design Ideas')}</Typography>
                     <Typography component={'h1'} sx={{color: 'inherit', fontSize: {xl: '55px', lg: '45px', md: '40px', xs: '30px'}, fontWeight: '500'}}>{t('Modern Interior Design Studio')}</Typography>
                     <Typography component={'p'} sx={{color: '#A6BCBE', fontSize: {xl: '18px', lg: '18px', md: '15px'}}}>{t('Choosing the right furniture for your home online will add elegance and functionality to your interior while also being cost effective and long lasting.')}</Typography>
@@ -41,7 +41,7 @@ export default function Hero() {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item size={{xl: 7, lg: 7, md: 12, sm: 12, xs: 12}} sx={{paddingLeft: {xl: 4, lg: 2}, display: 'flex', flexDirection: 'column', alignItems: {xl:'flex-start', lg: 'center', md: 'center', sm: 'center', xs: 'center'}}}>
+                <Grid size={{xl: 7, lg: 7, md: 12, sm: 12, xs: 12}} sx={{paddingLeft: {xl: 4, lg: 2}, display: 'flex', flexDirection: 'column', alignItems: {xl:'flex-start', lg: 'center', md: 'center', sm: 'center', xs: 'center'}}}>
                     <Box sx={{display: 'flex', flexDirection: {md: 'row', xs: 'column'}, gap: {xl: 3, lg: 2, md: 3, sm: 3}, justifyContent: 'flex-start', alignItems: 'center', height: '100%', color: 'white'}}>
                         <Box sx={{position: 'relative'}}>
                             <Box sx={{width: { xl: 380, lg: 320, md: 380, sm: 400, xs: 300 }}}>
