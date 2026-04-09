@@ -26,6 +26,9 @@ import {useTranslation} from "react-i18next";
 import LanguageIcon from '@mui/icons-material/Language';
 import i18n from "i18next";
 import LoginIcon from '@mui/icons-material/Login';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import useThemeStore from "../../store/useThemeStore.js";
 
 const pages = [
     { id: 'home', to: '/', label: 'Home' },
@@ -47,8 +50,11 @@ export default function NavbarResponsiveMenu() {
     const {data} = useCart();
     const cartCount = data?.items?.length || 0;
     const navigate = useNavigate();
+    const mode = useThemeStore((state) => state.mode);
+    const toggleMode = useThemeStore((state) => state.toggleMode);
     const icons = token
         ? [
+            { id: 'mode', to: '#', icon: mode === 'light' ? <DarkModeIcon /> : <LightModeIcon /> },
             { id: 'language', to: '#', icon: <LanguageIcon /> },
             { id: 'search', to: '#', icon: <SearchIcon /> },
             { id: 'profile', to: '/profile', icon: <PersonOutlineRoundedIcon /> },
@@ -56,6 +62,7 @@ export default function NavbarResponsiveMenu() {
             { id: 'cart', to: '/cart', icon: <ShoppingBagOutlinedIcon />},
             { id: 'logout', icon: <LogoutIcon /> }
         ] : [
+            { id: 'mode', to: '#', icon: mode === 'light' ? <DarkModeIcon /> : <LightModeIcon /> },
             { id: 'language', to: '#', icon: <LanguageIcon /> },
             { id: 'search', to: '#', icon: <SearchIcon /> },
             { id: 'register', to: '/auth/register', icon: <LoginIcon /> }
@@ -90,7 +97,7 @@ export default function NavbarResponsiveMenu() {
         <Box sx={{ flexGrow: 1, mb: {lg: 9, sm: 8, xs: 6}}}>
             <AppBar position="fixed" sx={{backgroundColor: '#2D5356'}}>
                 <Container maxWidth="xl">
-                    <Toolbar disableGutters sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: '#fff', backgroundColor: '#2D5356'}}>
+                    <Toolbar disableGutters sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'info.light'}}>
                         <Link component={RouterLink} to={'/'} color="inherit" underline={"none"} sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
                             <img alt={''} src={logo} width={27}/>
                             <Typography
@@ -141,7 +148,7 @@ export default function NavbarResponsiveMenu() {
                             >
                                 {pages.map((page) => (
                                     <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                                        <Typography sx={{ textAlign: 'center',color: '#D09523' }}>
+                                        <Typography sx={{ textAlign: 'center',color: 'secondary.main' }}>
                                             <Link component={RouterLink} to={page.to} color="inherit" underline={"none"}>{t(`${page.label}`)}</Link>
                                         </Typography>
                                     </MenuItem>
@@ -210,31 +217,36 @@ export default function NavbarResponsiveMenu() {
                                 {icons.map((icon) => (
                                     <MenuItem key={icon.id} onClick={icon.id === 'logout' ? handleLogout : handleCloseUserMenu}>
                                         <Typography sx={{ textAlign: 'center'}}>
-                                            { icon.id === 'language'?(
-                                                <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, my: 1, color: '#D09523'  }}>
+                                            { icon.id === 'mode'?(
+                                                <Button onClick={toggleMode} sx={{ minWidth: 8, p: 0, my: 1, color: 'secondary.main' }}>
+                                                    {icon.icon}
+                                                </Button>
+                                            ):(icon.id === 'language'?(
+                                                <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, my: 1, color: 'secondary.main'  }}>
                                                     {icon.icon}
                                                 </Button>
                                             ) : (icon.id === 'logout' ? (
-                                                <Button onClick={handleLogout} sx={{ minWidth: 8, p: 0, color: '#D09523' }}>
+                                                <Button onClick={handleLogout} sx={{ minWidth: 8, p: 0, color: 'secondary.main' }}>
                                                     {icon.icon}
                                                 </Button>
                                             ) : (icon.id === 'cart' ? (
                                                     <Badge badgeContent={cartCount}
                                                         sx ={{
-                                                            color: "#D09523 !important",
+                                                            color: "secondary.main !important",
                                                             '& .MuiBadge-badge': {
                                                                 bgcolor: '#2D5356',
-                                                                color: '#fff',
+                                                                color: 'info.light',
                                                                 borderRadius: '50%',
                                                                 minWidth: '16px',
                                                                 height: '16px',
                                                                 padding: '0 4px',
                                                                 fontSize: '0.65rem'
                                                             }
-                                                    }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: '#D09523' }}>{icon.icon}</Link></Badge>
+                                                    }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'secondary.main' }}>{icon.icon}</Link></Badge>
                                                 ):(
-                                                    <Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: '#D09523' }}>{icon.icon}</Link>
+                                                    <Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'secondary.main' }}>{icon.icon}</Link>
                                                 ))
+                                                )
                                             )}
                                         </Typography>
                                     </MenuItem>
@@ -243,35 +255,41 @@ export default function NavbarResponsiveMenu() {
                         </Box>
                         <Box sx={{display: { xs: 'none', lg: 'flex' } }}>
                             {icons.map((icon) => (
-                                icon.id === 'language' ? (
-                                    <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, color: '#fff', display: 'block', my: 2, mr: 1 }}>
+                                icon.id === 'mode'? (
+                                    <Button onClick={toggleMode} sx={{ minWidth: 8, p: 0, color: 'info.light', display: 'block', my: 2, mx: 1 }}>
                                         {icon.icon}
                                     </Button>
                                 ):(
-                                    <Button
-                                        key={icon.id}
-                                        onClick={icon.id === 'logout' ? handleLogout : handleCloseNavMenu}
-                                        sx={{ my: 2, color: 'white', display: 'block', minWidth: 8 }}
-                                    >{ icon.id === 'logout' ? (
+                                    icon.id === 'language' ? (
+                                        <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, color: 'info.light', display: 'block', my: 2, mx: 1 }}>
+                                            {icon.icon}
+                                        </Button>
+                                    ):(
+                                        <Button
+                                            key={icon.id}
+                                            onClick={icon.id === 'logout' ? handleLogout : handleCloseNavMenu}
+                                            sx={{ my: 2, color: 'white', display: 'block', minWidth: 8 }}
+                                        >{ icon.id === 'logout' ? (
                                             icon.icon
                                         ) : (
                                             icon.id === 'cart' ? (
                                                 <Badge badgeContent={cartCount} sx={{
                                                     '& .MuiBadge-badge': {
-                                                        bgcolor: '#D09523',
-                                                        color: '#fff',
+                                                        bgcolor: 'secondary.main',
+                                                        color: 'info.light',
                                                         borderRadius: '50%',
                                                         minWidth: '16px',
                                                         height: '16px',
                                                         padding: '0 4px',
                                                         fontSize: '0.65rem'
                                                     }
-                                                }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: '#fff'}}>{icon.icon}</Link></Badge>
+                                                }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'info.light'}}>{icon.icon}</Link></Badge>
                                             ):(
-                                                <Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: '#fff'}}>{icon.icon}</Link>
+                                                <Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'info.light'}}>{icon.icon}</Link>
                                             )
                                         )}
-                                    </Button>
+                                        </Button>
+                                    )
                                 )
                             ))}
                         </Box>

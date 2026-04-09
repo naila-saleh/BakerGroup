@@ -33,20 +33,20 @@ export default function CategoriesSection() {
                 <Typography component={'h2'} sx={{fontSize: {md: '40px', sm: '35px', xs: '31px'}, fontWeight: 500}}>{t('Featured Categories')}</Typography>
                 <Box sx={{display: 'flex', gap: 1.5}}>
                     <Button ref={prevRef} sx={{minWidth: 'unset', p: 0, borderRadius: '14px'}}>
-                        <Box sx={{width: 56, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.08)', backgroundColor: '#fff'}}>
-                            <WestIcon sx={{color: '#D09523', fontSize: 18}} />
+                        <Box sx={{width: 56, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.08)', backgroundColor: 'info.light'}}>
+                            <WestIcon sx={{color: 'secondary.main', fontSize: 18}} />
                         </Box>
                     </Button>
                     <Button ref={nextRef} sx={{minWidth: 'unset', p: 0, borderRadius: '14px'}}>
-                        <Box sx={{width: 56, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', backgroundColor: '#D09523'}}>
-                            <EastIcon sx={{color: '#fff', fontSize: 18}} />
+                        <Box sx={{width: 56, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', backgroundColor: 'secondary.main'}}>
+                            <EastIcon sx={{color: 'info.light', fontSize: 18}} />
                         </Box>
                     </Button>
                 </Box>
             </Box>
             <Box sx={{'& .swiper': {pb: 6},
-                    '& .swiper-pagination-bullet': {width: 10, height: 10, backgroundColor: '#D9D9D9', opacity: 1},
-                    '& .swiper-pagination-bullet-active': {width: 30, borderRadius: '10px', backgroundColor: '#2F6B68'}}}>
+                    '& .swiper-pagination-bullet': {width: 10, height: 10, backgroundColor: 'info.main', opacity: 1},
+                    '& .swiper-pagination-bullet-active': {width: 30, borderRadius: '10px', backgroundColor: '#2D5356'}}}>
                 <Swiper
                     modules={[Autoplay, Pagination, Navigation, A11y]}
                     loop={true}

@@ -33,33 +33,33 @@ export default function Cart() {
     return (
         <Box className={'cart'}>
             <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {lg: 15,md: 12, sm: 10, xs: 8}}}>
-                <Typography component={'h1'} sx={{color: '#fff',fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center'}}>{t('Shopping Cart')}</Typography>
+                <Typography component={'h1'} sx={{color: 'info.light',fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center'}}>{t('Shopping Cart')}</Typography>
             </Box>
             <Container maxWidth={'xl'} sx={{px: {md: 10,sm: 5, xs: 2}, py: {md: 5,sm: 3, xs: 2}, display: 'flex', flexDirection: {lg: 'row', xs: 'column'}, gap: {md: 5, sm: 3, xs: 2}}}>
                 <TableContainer sx={{borderRadius: '10px'}}>
-                    <Table sx={{backgroundColor: '#F6F6F6', borderCollapse: 'separate', borderRadius: '10px'}}>
+                    <Table sx={{backgroundColor: 'info.light', borderCollapse: 'separate', borderRadius: '10px'}}>
                         <TableHead sx={{backgroundColor: '#2D5356'}}>
                             <TableRow>
-                                <TableCell sx={{color: '#fff', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}>{t('Product Name')}</TableCell>
-                                <TableCell sx={{color: '#fff', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}>{t('Price')}</TableCell>
-                                <TableCell sx={{color: '#fff', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}>{t('Quantity')}</TableCell>
-                                <TableCell sx={{color: '#fff', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}>{t('Subtotal')}</TableCell>
-                                <TableCell sx={{color: '#fff', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}></TableCell>
+                                <TableCell sx={{color: 'info.light', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}>{t('Product Name')}</TableCell>
+                                <TableCell sx={{color: 'info.light', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}>{t('Price')}</TableCell>
+                                <TableCell sx={{color: 'info.light', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}>{t('Quantity')}</TableCell>
+                                <TableCell sx={{color: 'info.light', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}>{t('Subtotal')}</TableCell>
+                                <TableCell sx={{color: 'info.light', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap'}}></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {data.items.map(item=>(
                                 <TableRow key={item.productId}>
-                                    <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C'}}>{item.productName}</TableCell>
-                                    <TableCell sx={{fontSize: {md: '16px', sm: '13px', xs: '14px'}, color: '#4C4C4C', width: '1%', whiteSpace: 'no-wrap'}}>$ {item.price}</TableCell>
+                                    <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark'}}>{item.productName}</TableCell>
+                                    <TableCell sx={{fontSize: {md: '16px', sm: '13px', xs: '14px'}, color: 'primary.dark', width: '1%', whiteSpace: 'no-wrap'}}>$ {item.price}</TableCell>
                                     <TableCell>
                                         <Box sx={{display: 'flex', alignItems: 'center'}}>
                                             <IconButton disabled={updateItemIsPending} onClick={()=>handeUpdateQuantity(item.productId, '-')} sx={{width: {md: '40px', sm: '30px', xs: '20px'}}}><RemoveCircleOutlineIcon /></IconButton>
-                                            <Typography component={'span'} sx={{mx:1, fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C'}}>{item.count}</Typography>
+                                            <Typography component={'span'} sx={{mx:1, fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark'}}>{item.count}</Typography>
                                             <IconButton disabled={updateItemIsPending} onClick={()=>handeUpdateQuantity(item.productId, '+')} sx={{width: {md: '40px', sm: '30px', xs: '20px'}}}><AddCircleOutlineIcon /></IconButton>
                                         </Box>
                                     </TableCell>
-                                    <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C'}}>$ {item.price * item.count}</TableCell>
+                                    <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark'}}>$ {item.price * item.count}</TableCell>
                                     <TableCell>
                                         <Button color={'error'} onClick={()=>removeItem(item.productId)} disabled={removeItemIsPending} sx={{fontSize: {md: '14px', sm: '12px', xs: '11px'}}}><CancelOutlinedIcon /></Button>
                                     </TableCell>
@@ -70,7 +70,7 @@ export default function Cart() {
                             <TableRow>
                                 <TableCell sx={{fontWeight: 500, borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px'}} colSpan={5} align={'center'}>
                                     <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', justifyContent: {sm: 'center', xs: 'flex-start'}}}>
-                                        <Button onClick={()=>navigate('/')} variant="contained" sx={{textTransform: 'none', color: '#fff', backgroundColor: '#2D5356', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>{t('Continue Shopping')}</Button>
+                                        <Button onClick={()=>navigate('/')} variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: '#2D5356', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>{t('Continue Shopping')}</Button>
                                         <Button variant="contained" color={'error'} sx={{textTransform: 'none', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>{t('Clear Cart')}</Button>
                                     </Box>
                                 </TableCell>
@@ -79,22 +79,22 @@ export default function Cart() {
                     </Table>
                 </TableContainer>
                 <TableContainer sx={{borderRadius: '10px'}}>
-                    <Table sx={{backgroundColor: '#F6F6F6', borderCollapse: 'separate', borderRadius: '10px'}}>
+                    <Table sx={{backgroundColor: 'info.light', borderCollapse: 'separate', borderRadius: '10px'}}>
                         <TableHead sx={{backgroundColor: '#2D5356'}}>
                             <TableRow>
-                                <TableCell colSpan={2} sx={{color: '#fff', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap', textAlign: 'start'}}>{t('Order Summary')}</TableCell>
+                                <TableCell colSpan={2} sx={{color: 'info.light', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap', textAlign: 'start'}}>{t('Order Summary')}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             <TableRow>
-                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>{t('Subtotal')}</TableCell>
-                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>$ {data.cartTotal}</TableCell>
+                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>{t('Subtotal')}</TableCell>
+                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>$ {data.cartTotal}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>{t('Shipping')}</TableCell>
-                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>{t('Free')}</TableCell>
+                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>{t('Shipping')}</TableCell>
+                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>{t('Free')}</TableCell>
                             </TableRow>
-                            <TableRow sx={{backgroundColor: '#fff'}}>
+                            <TableRow sx={{backgroundColor: 'info.light'}}>
                                 <TableCell sx={{fontSize: {md: '17px', xs: '15px'}, fontWeight: 'bold', textAlign: 'start'}}>{t('Total')}</TableCell>
                                 <TableCell sx={{fontSize: {md: '17px', xs: '15px'}, fontWeight: 'bold', textAlign: 'start'}}>$ {data.cartTotal}</TableCell>
                             </TableRow>
@@ -102,7 +102,7 @@ export default function Cart() {
                         <TableFooter>
                             <TableRow>
                                 <TableCell sx={{fontWeight: 500, borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px'}} colSpan={2} align={'center'}>
-                                    <Button onClick={()=>navigate('/checkout')} variant="contained" sx={{textTransform: 'none', color: '#fff', backgroundColor: '#D09523', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>{t('Proceed to Checkout')}</Button>
+                                    <Button onClick={()=>navigate('/checkout')} variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: 'secondary.main', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>{t('Proceed to Checkout')}</Button>
                                 </TableCell>
                             </TableRow>
                         </TableFooter>

@@ -19,11 +19,11 @@ export default function Hero() {
         <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {md: 10, xs: 5}}}>
             <Grid container spacing={1} sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%'}}>
                 <Grid item size={{xl: 5, lg: 5, md: 12, sm: 12, xs: 12}} sx={{display: 'flex', flexDirection: 'column', alignItems: {xl:'flex-start', lg: 'flex-start', md: 'center', sm: 'center', xs: 'center'}, gap: 2, textAlign: {xl: 'start', lg: 'start', xs: 'center'}, paddingX: {md: 10, sm: 5, xs: 2}, color: 'white'}}>
-                    <Typography component={'span'} sx={{textTransform: 'uppercase', color: 'inherit', letterSpacing: 2, fontSize: {md: '12px', xs: '10px'}, backgroundColor: '#426466', border: 'solid #537476 1px', padding: '8px 20px', borderRadius: '30px'}}>{t('Furniture Design Ideas')}</Typography>
+                    <Typography component={'span'} sx={{textTransform: 'uppercase', color: 'inherit', letterSpacing: 2, fontSize: {md: '12px', xs: '10px'}, backgroundColor: '#426466', border: 'solid 1px', borderColor: 'info.main', padding: '8px 20px', borderRadius: '30px'}}>{t('Furniture Design Ideas')}</Typography>
                     <Typography component={'h1'} sx={{color: 'inherit', fontSize: {xl: '55px', lg: '45px', md: '40px', xs: '30px'}, fontWeight: '500'}}>{t('Modern Interior Design Studio')}</Typography>
                     <Typography component={'p'} sx={{color: '#A6BCBE', fontSize: {xl: '18px', lg: '18px', md: '15px'}}}>{t('Choosing the right furniture for your home online will add elegance and functionality to your interior while also being cost effective and long lasting.')}</Typography>
                     <Box sx={{display: 'flex', gap: 1, marginTop: {md: 3, xs: 1}, flexDirection: {xl: 'row', lg: 'row', md: 'row', sm: 'column', xs: 'column'}}}>
-                        <Link component={RouterLink} to={'#'} sx={{display: 'flex', gap: 1, alignItems: 'center', color: 'inherit', fontSize: {xl: '18px', md: '15px', xs: '13px'}, backgroundColor: '#D09523', padding: '10px 30px', borderRadius: '30px'}} underline={'none'}>{t('Shop Now')} <EastIcon /></Link>
+                        <Link component={RouterLink} to={'#'} sx={{display: 'flex', gap: 1, alignItems: 'center', color: 'inherit', fontSize: {xl: '18px', md: '15px', xs: '13px'}, backgroundColor: 'secondary.main', padding: '10px 30px', borderRadius: '30px'}} underline={'none'}>{t('Shop Now')} <EastIcon /></Link>
                         <Link component={RouterLink} to={'https://www.instagram.com/sohyb.bakergroup/'} sx={{color: 'inherit', fontSize: {xl: '18px', md: '15px', xs: '13px'}, padding: '10px'}}>{t('Follow Instagram')}</Link>
                     </Box>
                     <Box sx={{display: 'flex', flexDirection: {sm: 'row', xs: 'column'}, gap: {xl: 8, md: 4, xs: 2}, marginTop: {md: 5, xs: 1}, marginBottom: {md: 0, xs: 2}}}>
@@ -82,7 +82,7 @@ export default function Hero() {
                     </Box>
                     <Box sx={{display: {md:'flex', xs:'none'}, gap: 2, alignItems: 'center', justifyContent: 'flex-start', color: 'white', marginTop: {md: 3, xs: 1}, alignSelf: {xl: 'flex-start', md: 'center'}}}>
                         <Button sx={{backgroundColor: '#426466', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><WestIcon /></Button>
-                        <Button sx={{backgroundColor: '#D09523', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><EastIcon /></Button>
+                        <Button sx={{backgroundColor: 'secondary.main', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><EastIcon /></Button>
                     </Box>
                 </Grid>
             </Grid>

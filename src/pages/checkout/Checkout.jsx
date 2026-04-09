@@ -34,7 +34,7 @@ export default function Checkout() {
     return (
         <Box className={'checkout'}>
             <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {lg: 15,md: 12, sm: 10, xs: 8}}}>
-                <Typography component={'h1'} sx={{color: '#fff',fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center'}}>{t('Shopping Cart')}/ {t('Checkout')}</Typography>
+                <Typography component={'h1'} sx={{color: 'info.light',fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center'}}>{t('Shopping Cart')}/ {t('Checkout')}</Typography>
             </Box>
             <Container maxWidth={'xl'} sx={{px: {md: 10,sm: 5, xs: 2}, py: {md: 5,sm: 3, xs: 2}}}>
                 <Typography component={'h2'} sx={{fontSize: {lg: '35px', md: '30px', sm: '28px', xs: '25px'}, fontWeight: '500'}}>{t('Billing Details')}</Typography>
@@ -103,22 +103,22 @@ export default function Checkout() {
                                 </Box>
                             </Box>
                             <TableContainer sx={{borderRadius: '10px'}}>
-                                <Table sx={{backgroundColor: '#F6F6F6', borderCollapse: 'separate', borderRadius: '10px'}}>
+                                <Table sx={{backgroundColor: 'info.light', borderCollapse: 'separate', borderRadius: '10px'}}>
                                     <TableHead sx={{backgroundColor: '#2D5356'}}>
                                         <TableRow>
-                                            <TableCell colSpan={2} sx={{color: '#fff', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap', textAlign: 'start'}}>{t('Order Summary')}</TableCell>
+                                            <TableCell colSpan={2} sx={{color: 'info.light', fontSize: {md: '16px', xs: '14px'}, width: '1%', whiteSpace: 'nowrap', textAlign: 'start'}}>{t('Order Summary')}</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         <TableRow>
-                                            <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>{t('Subtotal')}</TableCell>
-                                            <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>$ {data.cartTotal}</TableCell>
+                                            <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>{t('Subtotal')}</TableCell>
+                                            <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>$ {data.cartTotal}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>{t('Shipping')}</TableCell>
-                                            <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: '#4C4C4C', textAlign: 'start'}}>Free</TableCell>
+                                            <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>{t('Shipping')}</TableCell>
+                                            <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>Free</TableCell>
                                         </TableRow>
-                                        <TableRow sx={{backgroundColor: '#fff'}}>
+                                        <TableRow sx={{backgroundColor: 'info.light'}}>
                                             <TableCell sx={{fontSize: {md: '17px', xs: '15px'}, fontWeight: 'bold', textAlign: 'start'}}>{t('Total')}</TableCell>
                                             <TableCell sx={{fontSize: {md: '17px', xs: '15px'}, fontWeight: 'bold', textAlign: 'start'}}>$ {data.cartTotal}</TableCell>
                                         </TableRow>
@@ -127,8 +127,8 @@ export default function Checkout() {
                                         <TableRow>
                                             <TableCell sx={{fontWeight: 500, borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px'}} colSpan={2} align={'center'}>
                                                 <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', justifyContent: {sm: 'center', xs: 'flex-start'}}}>
-                                                    <Button onClick={()=>checkoutMutate(paymentMethod)} variant="contained" sx={{textTransform: 'none', color: '#fff', backgroundColor: '#D09523', fontSize: '14px', fontWeight: 400, px: {xl: 5, md: 3, sm: 4, xs: 1.5}, py: 1.1, borderRadius: 5}}>{t('Confirm Payment')}</Button>
-                                                    <Button onClick={()=>navigate('/cart')} variant="contained" sx={{textTransform: 'none', color: '#fff', backgroundColor: '#616161', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>{t('Cancel')}</Button>
+                                                    <Button onClick={()=>checkoutMutate(paymentMethod)} variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: 'secondary.main', fontSize: '14px', fontWeight: 400, px: {xl: 5, md: 3, sm: 4, xs: 1.5}, py: 1.1, borderRadius: 5}}>{t('Confirm Payment')}</Button>
+                                                    <Button onClick={()=>navigate('/cart')} variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: '', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>{t('Cancel')}</Button>
                                                 </Box>
                                             </TableCell>
                                         </TableRow>
@@ -140,8 +140,8 @@ export default function Checkout() {
                             <Typography component={'h3'} sx={{fontSize: {lg: '30px', md: '25px', sm: '22px', xs: '20px'}, fontWeight: '500', mt: 5}}>{t('How would you like to pay?')}</Typography>
                             <FormControl>
                                 <RadioGroup name="paymentMethod" value={paymentMethod} onChange={(e)=>setPaymentMethod(e.target.value)}>
-                                    <FormControlLabel  value="Cash" control={<Radio sx={{'&.Mui-checked': {color: '#D09523'}}} />} label={t("Pay Cash on Delivery")} />
-                                    <FormControlLabel value="Visa" control={<Radio sx={{'&.Mui-checked': {color: '#D09523'}}} />} label={t("Pay with Credit Card")} />
+                                    <FormControlLabel  value="Cash" control={<Radio sx={{'&.Mui-checked': {color: 'secondary.main'}}} />} label={t("Pay Cash on Delivery")} />
+                                    <FormControlLabel value="Visa" control={<Radio sx={{'&.Mui-checked': {color: 'secondary.main'}}} />} label={t("Pay with Credit Card")} />
                                 </RadioGroup>
                             </FormControl>
                         </Box>

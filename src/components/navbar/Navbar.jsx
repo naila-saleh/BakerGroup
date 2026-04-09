@@ -32,7 +32,7 @@ export default function Navbar() {
     }
     return (
         <Box sx={{ flexGrow: 1, mb: {sm: 8, xs: 6}}}>
-            <AppBar position="fixed" sx={{backgroundColor: '#2D5356'}}>
+            <AppBar position="fixed" sx={{backgroundColor: 'primay.main'}}>
                 <Toolbar sx={{justifyContent: {xs: 'space-between' ,lg: 'space-around'}}}>
                     <Link component={RouterLink} to={'/'} color={"inherit"} sx={{display: 'flex', gap: 1, alignItems: 'center', textDecoration: 'none'}}>
                         <img src={BGYLogo} width={27}/>
@@ -53,7 +53,7 @@ export default function Navbar() {
                                     <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}><LanguageIcon /></Link>
                                     <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}><SearchIcon /></Link>
                                     <Link component={RouterLink} to={'#'} color="inherit" underline={"none"}><FavoriteBorderIcon /></Link>
-                                    <Link component={RouterLink} to={'/cart'} color="inherit" underline={"none"}><Badge badgeContent={cartCount} color={"#FFB934"}><ShoppingBagOutlinedIcon /></Badge></Link>
+                                    <Link component={RouterLink} to={'/cart'} color="inherit" underline={"none"}><Badge badgeContent={cartCount} color={"info.light"}><ShoppingBagOutlinedIcon /></Badge></Link>
                                     <Button color="inherit" underline={"none"} onClick={handleLogout}><LogoutIcon /></Button>
                                 </>
                             ):(
