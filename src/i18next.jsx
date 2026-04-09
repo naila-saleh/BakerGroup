@@ -128,6 +128,7 @@ i18n
                     "Reset code is required": "Reset code is required",
                     "New password is required": "New password is required",
                     "Password must be at least 8 characters long": "Password must be at least 8 characters long",
+                    "No Products Found": "No Products Found",
                 }
             },
             ar: {
@@ -247,6 +248,7 @@ i18n
                     "Reset code is required": "رمز إعادة التعيين مطلوب",
                     "New password is required": "كلمة المرور الجديدة مطلوبة",
                     "Password must be at least 8 characters long": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+                    "No Products Found": "لم يتم العثور على منتجات",
                 }
             }
         },

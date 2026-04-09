@@ -3,11 +3,12 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import chair from '../../assets/images/chair.png'
 import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
 
 export default function Category(category) {
     const {t} = useTranslation();
     return (
-        <>
+        <Link to={`/products/category/${category.id}`}>
             <Box sx={{width: '100%', aspectRatio: '1 / 1', borderRadius: '50%', backgroundColor: 'rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'}}>
                 <Box component="img" alt={category.name} src={chair} sx={{width: '70%', height: '70%', objectFit: 'contain'}}/>
             </Box>
@@ -19,6 +20,6 @@ export default function Category(category) {
                     {t('Discover 45 Products')}
                 </Typography>
             </Box>
-        </>
+        </Link>
     )
 }

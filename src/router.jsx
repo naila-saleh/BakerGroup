@@ -15,6 +15,7 @@ import ProfileInfo from "./pages/profile/ProfileInfo.jsx";
 import ProfileOrders from "./pages/profile/ProfileOrders.jsx";
 import ForgotPassword from "./pages/auth/login/ForgotPassword.jsx";
 import ResetPassword from "./pages/auth/login/ResetPassword.jsx";
+import ProductsByCategory from "./components/products/ProductsByCategory.jsx";
 
 const router = createBrowserRouter([
     {
@@ -60,6 +61,9 @@ const router = createBrowserRouter([
             },{
                 path: 'categories',
                 element: <CategoriesPage />
+            },{
+                path: 'products/category/:id',
+                element: <ProductsByCategory />
             }
         ]
     },{
