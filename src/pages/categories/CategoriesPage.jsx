@@ -21,7 +21,7 @@ export default function CategoriesPage() {
             {!isHome?<Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {lg: 15,md: 12, sm: 10, xs: 8}}}>
                 <Typography component={'h1'} sx={{color: 'info.light',fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center'}}>{t('Categories')}</Typography>
             </Box>:null}
-            <Grid container component={'section'} py={5} spacing={3} sx={{display: 'flex', justifyContent: 'center'}}>
+            <Grid container component={'section'} py={5} spacing={3} sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', flexDirection: {sm: 'row', xs: 'column'}, alignItems: 'center', px: {lg: 10, md: 5, sm: 2, xs: 0}, textAlign: 'center' }}>
                 {data.response.data.map((category) => (
                     <Grid key={category.id} size={{lg: 2.3, md: 3, sm: 4, xs: 6}} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, cursor: 'pointer'}}>
                         <Category {...category} />
