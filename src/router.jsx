@@ -13,6 +13,8 @@ import Checkout from "./pages/checkout/Checkout.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import ProfileInfo from "./pages/profile/ProfileInfo.jsx";
 import ProfileOrders from "./pages/profile/ProfileOrders.jsx";
+import ForgotPassword from "./pages/auth/login/ForgotPassword.jsx";
+import ResetPassword from "./pages/auth/login/ResetPassword.jsx";
 
 const router = createBrowserRouter([
     {
@@ -70,6 +72,12 @@ const router = createBrowserRouter([
             },{
                 path: 'register',
                 element: <Register />
+            },{
+                path: 'forgot-password',
+                element: <ForgotPassword />
+            },{
+                path: 'reset-password/:email',
+                element: <ResetPassword />
             }
         ]
     }

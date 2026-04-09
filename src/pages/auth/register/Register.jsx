@@ -35,7 +35,7 @@ export default function Register() {
         <Box component={'section'} className={'register-form'} sx={{textAlign: 'center'}}>
             <Typography component={'h1'} sx={{fontSize: '40px',pt: 4}}>{t('Register')}</Typography>
             {serverErrors.length > 0 && (<Box my={2}>
-                {serverErrors.map((error)=><Typography component={'span'} sx={{color: red, fontSize: '15px'}}>{error}</Typography>)}
+                {serverErrors.map((error)=><Typography key={error.id} component={'span'} sx={{color: red, fontSize: '15px'}}>{error}</Typography>)}
             </Box>)}
             <Box component={'form'}
                  onSubmit={handleSubmit(registerForm)}
@@ -50,9 +50,9 @@ export default function Register() {
                 error={errors.email} helperText={errors.email?.message}/>
                 <TextField {...register('password')} label={t("Password")} variant="standard" fullWidth
                 type={'password'} error={errors.password} helperText={errors.password?.message}/>
-                <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: 'secondary.main', px: 10}} disabled={isSubmitting}>{isSubmitting?<CircularProgress/>:t('Register')}</Button>
+                <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: 'secondary.main', width: {sm: '50%',  xs: '60%'}}} disabled={isSubmitting}>{isSubmitting?<CircularProgress/>:t('Register')}</Button>
                 <Typography component={"span"} sx={{fontSize: '15px', color: '#2D5356', mt: 2}}>{t('already have an account?')}</Typography>
-                <Link component={RouterLink} variant={"button"} to={'/auth/login'} sx={{backgroundColor: '#2D5356', padding: '5px 93px', mb: 3, color: 'white', borderRadius: '5px'}} boxShadow={'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'} underline={"none"}>{t('Login')}</Link>
+                <Link component={RouterLink} variant={"button"} to={'/auth/login'} sx={{backgroundColor: '#2D5356', padding: '5px 0', width: {sm: '50%',  xs: '60%'}, mb: 3, color: 'white', borderRadius: '5px'}} boxShadow={'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'} underline={"none"}>{t('Login')}</Link>
             </Box>
         </Box>
     )

@@ -39,7 +39,7 @@ export default function ProductDetails() {
                         <Box display={product.subImages.length?'flex':'none'} sx={{marginTop: 2, justifyContent: 'space-between'}}>
                             <Box component={'img'} src={product.image} alt="" sx={{width: sizeOfSubImage, height: sizeOfSubImage, borderRadius: '10px', cursor: 'pointer', border: '2px solid secondary.main'}}/>
                             {product.subImages.map(subImage=>(
-                                <Box component={'img'} src={subImage} alt="" sx={{width: sizeOfSubImage, height: sizeOfSubImage, borderRadius: '10px', cursor: 'pointer'}}/>
+                                <Box key={subImage} component={'img'} src={subImage} alt="" sx={{width: sizeOfSubImage, height: sizeOfSubImage, borderRadius: '10px', cursor: 'pointer'}}/>
                             ))}
                         </Box>
                     </Grid>

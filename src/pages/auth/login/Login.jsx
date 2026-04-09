@@ -19,6 +19,9 @@ import {red} from "@mui/material/colors";
 export default function Login() {
     const setToken = useAuthStore((state) => state.setToken);
     const navigate = useNavigate()
+    const handleForgotPassword = () => {
+        navigate('/auth/forgot-password');
+    }
     const {t} = useTranslation();
     const [serverErrors, setServerErrors] = useState([]);
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm({
@@ -48,9 +51,10 @@ export default function Login() {
                 error={errors.email} helperText={errors.email?.message}/>
                 <TextField {...register('password')} label={t('Password')} variant="standard" fullWidth type={'password'}
                 error={errors.password} helperText={errors.password?.message}/>
-                <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: 'secondary.main', px: 10}} disabled={isSubmitting}>{isSubmitting?<CircularProgress/>:t('Login')}</Button>
+                <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: 'secondary.main', width: {sm: '50%',  xs: '60%'}}} disabled={isSubmitting}>{isSubmitting?<CircularProgress/>:t('Login')}</Button>
                 <Typography component={"span"} sx={{fontSize: '15px', color: '#2D5356', mt: 2}}>{t(`don't have an account?`)}</Typography>
-                <Link component={RouterLink} variant={"button"} to={'/auth/register'} sx={{backgroundColor: '#2D5356', padding: '5px 68px', mb: 3, color: 'white', borderRadius: '5px'}} boxShadow={'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'} underline={"none"}>{t('Register')}</Link>
+                <Link component={RouterLink} variant={"button"} to={'/auth/register'} sx={{backgroundColor: '#2D5356', padding: '5px 0', width: {sm: '50%',  xs: '60%'}, color: 'white', borderRadius: '5px'}} boxShadow={'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'} underline={"none"}>{t('Register')}</Link>
+                <Button onClick={handleForgotPassword} variant="contained" sx={{mt: 1, mb: 4, backgroundColor: 'secondary.dark', width: {sm: '50%',  xs: '60%'} }} >{t('Forgot Password?')}</Button>
             </Box>
         </Box>
     )
