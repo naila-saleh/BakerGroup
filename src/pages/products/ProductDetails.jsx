@@ -1,4 +1,3 @@
-import React from 'react'
 import {useNavigate, useParams} from "react-router-dom";
 import useProduct from "../../hooks/useProduct";
 import Loader from "../../ui/loader/Loader.jsx";
@@ -11,6 +10,9 @@ import {Container, Grid, Rating} from "@mui/material";
 import coupon from '../../assets/images/coupon.png'
 import useAddToCart from "../../hooks/useAddToCart.jsx";
 import {useTranslation} from "react-i18next";
+import { styled } from '@mui/material/styles';
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import Features from "../../components/features/Features.jsx";
 
 export default function ProductDetails() {
     const {id} = useParams();
@@ -18,11 +20,44 @@ export default function ProductDetails() {
     const {mutate, isPending} = useAddToCart();
     const {t} = useTranslation();
     const navigate = useNavigate();
+
+    const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+        height: 10,
+        borderRadius: 5,
+        [`&.${linearProgressClasses.colorPrimary}`]: {
+            backgroundColor: theme.palette.grey[200],
+            ...theme.applyStyles('dark', {
+                backgroundColor: theme.palette.grey[800],
+            }),
+        },
+        [`& .${linearProgressClasses.bar}`]: {
+            borderRadius: 5,
+            backgroundColor: '#D09523',
+            ...theme.applyStyles('dark', {
+                backgroundColor: '#FFB934',
+            }),
+        },
+    }));
+    let fiveStarsCount = 0;
+    let fourStarsCount = 0;
+    let threeStarsCount = 0;
+    let twoStarsCount = 0;
+    let oneStarCount = 0;
+    function calculateRatingDistribution() {
+        data.response.reviews.map(review => {
+            if(review.rating === 5) fiveStarsCount++;
+            else if(review.rating === 4) fourStarsCount++;
+            else if(review.rating === 3) threeStarsCount++;
+            else if(review.rating === 2) twoStarsCount++;
+            else if(review.rating === 1) oneStarCount++;
+        })
+    }
+
     if(isLoading) return <Loader />
     if(isError) return <div>{error.message}</div>
     const product = data.response;
     const sizeOfSubImage = `calc((100% - ${(product.subImages.length)}%) / (${product.subImages.length} + 1))`;
-    //console.log(data.response);
+    console.log(data.response);
     return (
         <Box className={'product-details'}>
             <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {md: 10, xs: 5}}}>
@@ -71,6 +106,97 @@ export default function ProductDetails() {
                     </Grid>
                 </Grid>
             </Container>
+            <Container className={'reviews'} maxWidth={'xl'} sx={{mt: {md: 5, xs: 3}, borderTop: '2px solid rgba(0,0,0,0.1)', py: {md: 5, xs: 3}, px: {md: 10, sm: 5, xs: 2} }}>
+                <Box sx={{display: 'flex', flexDirection: {lg: 'row', xs: 'column'}, justifyContent: {lg: 'space-between', xs: 'center'}, alignItems: 'center' }}>
+                    <Box sx={{mb: {lg: 0, xs: 2}, px: {lg: 2, xs: 0} }}>
+                        <Typography component={'h2'} sx={{color: 'inherit', fontSize: {md: '32px', sm: '30px', xs: '25px'}, textAlign: {lg: 'start', xs: 'center'}, mb: 2, fontWeight: '500'}}>{t('Customer Reviews')}</Typography>
+                        <Box sx={{display: 'flex', gap: 1, alignItems: 'center', justifyContent: {lg: 'start', xs: 'center'}}}>
+                            <Rating readOnly value={product.rate}></Rating>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{product.rate} {t('out of 5')}</Typography>
+                        </Box>
+                    </Box>
+                    <Box sx={{width: {lg: '70%', xs: '100%'} }} >
+                        {calculateRatingDistribution()}
+                        <Box sx={{display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center', mt: 2}}>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>5 {t('Stars')}</Typography>
+                            <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
+                                <BorderLinearProgress
+                                    variant="determinate"
+                                    value={(fiveStarsCount/data.response.reviews.length)*100}
+                                    aria-label="Export data"
+                                />
+                            </Box>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{Math.round((fiveStarsCount/data.response.reviews.length)*100)}%</Typography>
+                        </Box>
+                        <Box sx={{display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center', mt: 2}}>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>4 {t('Stars')}</Typography>
+                            <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
+                                <BorderLinearProgress
+                                    variant="determinate"
+                                    value={(fourStarsCount/data.response.reviews.length)*100}
+                                    aria-label="Export data"
+                                />
+                            </Box>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{Math.round((fourStarsCount/data.response.reviews.length)*100)}%</Typography>
+                        </Box>
+                        <Box sx={{display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center', mt: 2}}>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>3 {t('Stars')}</Typography>
+                            <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
+                                <BorderLinearProgress
+                                    variant="determinate"
+                                    value={(threeStarsCount/data.response.reviews.length)*100}
+                                    aria-label="Export data"
+                                />
+                            </Box>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{Math.round((threeStarsCount/data.response.reviews.length)*100)}%</Typography>
+                        </Box>
+                        <Box sx={{display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center', mt: 2}}>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>2 {t('Stars')}</Typography>
+                            <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
+                                <BorderLinearProgress
+                                    variant="determinate"
+                                    value={(twoStarsCount/data.response.reviews.length)*100}
+                                    aria-label="Export data"
+                                />
+                            </Box>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{Math.round((twoStarsCount/data.response.reviews.length)*100)}%</Typography>
+                        </Box>
+                        <Box sx={{display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center', mt: 2}}>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>1 {t('Star')}</Typography>
+                            <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
+                                <BorderLinearProgress
+                                    variant="determinate"
+                                    value={(oneStarCount/data.response.reviews.length)*100}
+                                    aria-label="Export data"
+                                />
+                            </Box>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{Math.round((oneStarCount/data.response.reviews.length)*100)}%</Typography>
+                        </Box>
+                    </Box>
+                </Box>
+                <Box sx={{mt: 10, display: 'flex', flexDirection: 'column', gap: 5, borderTop: '1px solid rgba(0,0,0,0.1)', pt: 5}}>
+                    {data.response.reviews.map((review)=>
+                        <Box key={review.userName} sx={{borderBottom: '1px solid rgba(0,0,0,0.1)', pb: 3}}>
+                            <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                                <Typography sx={{fontWeight: '500'}}>{t(review.userName)}</Typography>
+                                <Box sx={{display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center'}}>
+                                    <Typography sx={{fontSize: '14px', color: 'info.dark'}}>{new Date(review.createdAt).toDateString()}</Typography>
+                                    <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
+                                        <Rating readOnly value={review.rating}></Rating>
+                                    </Box>
+                                </Box>
+                            </Box>
+                            <Typography sx={{color: 'info.dark', fontSize: '16px', pt: 2}}>{review.comment}</Typography>
+                        </Box>
+                    )}
+                </Box>
+                <Box sx={{mt: 5, display: 'flex', flexDirection: 'column', alignItems: {sm: 'start', xs: 'center'}, textAlign: {sm: 'start', xs: 'center'} }}>
+                    <Typography component={'h2'} sx={{color: 'inherit', fontSize: {md: '32px', sm: '30px', xs: '25px'}, textAlign: {lg: 'start', xs: 'center'}, mb: 2, fontWeight: '500'}}>{t('Review this Product')}</Typography>
+                    <Typography sx={{color: 'info.dark', fontSize: '16px', my: 1}}>{t('Share your thoughts with other customers')}</Typography>
+                    <Button variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: 'secondary.main', fontWeight: 400, px: 4, py: 1.1, borderRadius: 5, fontSize: '15px', mt: 1 }}>{t('Write a customer review')}</Button>
+                </Box>
+            </Container>
+            <Features />
         </Box>
     )
 }

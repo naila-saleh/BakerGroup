@@ -140,6 +140,13 @@ i18n
                     "Help": "Help",
                     "FAQ": "FAQ",
                     "2024 BakerGroup. All rights reserved.": "2024 BakerGroup. All rights reserved.",
+                    "Customer Reviews": "Customer Reviews",
+                    "out of 5": "out of 5",
+                    "Star" : "Star",
+                    "Stars" : "Stars",
+                    "Review this Product" : "Review this Product",
+                    "Share your thoughts with other customers" : "Share your thoughts with other customers",
+                    "Write a customer review" : "Write a customer review",
                 }
             },
             ar: {
@@ -271,6 +278,13 @@ i18n
                     "Help": "المساعدة",
                     "FAQ": "الأسئلة الشائعة",
                     "2024 BakerGroup. All rights reserved.": "2024 BakerGroup. جميع الحقوق محفوظة.",
+                    "Customer Reviews": "تقييمات العملاء",
+                    "out of 5": "من 5",
+                    "Star" : "نجمة",
+                    "Stars" : "نجوم",
+                    "Review this Product" : "قم بمراجعة هذا المنتج",
+                    "Share your thoughts with other customers" : "شارك أفكارك مع العملاء الآخرين",
+                    "Write a customer review" : "اكتب مراجعة للعميل",
                 }
             }
         },

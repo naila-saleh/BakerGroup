@@ -15,7 +15,6 @@ export default function ProductsByCategory() {
     const {data: categoriesData} = useCategories();
     const {t} = useTranslation();
     const category = categoriesData?.response?.data?.find((item) => item.id.toString() === categoryId.toString()).name;
-    console.log(category);
     if(isLoading) return <Loader />
     if(isError) return <Box>{error.message}</Box>
     return (
