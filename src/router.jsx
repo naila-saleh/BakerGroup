@@ -8,7 +8,6 @@ import AuthLayout from "./layout/AuthLayout.jsx";
 import ProductDetails from "./pages/products/ProductDetails.jsx";
 import CategoriesPage from "./pages/categories/CategoriesPage.jsx";
 import ProtectedRouter from "./ProtectedRouter.jsx";
-import Products from "./components/products/Products.jsx";
 import Checkout from "./pages/checkout/Checkout.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import ProfileInfo from "./pages/profile/ProfileInfo.jsx";
@@ -16,6 +15,7 @@ import ProfileOrders from "./pages/profile/ProfileOrders.jsx";
 import ForgotPassword from "./pages/auth/login/ForgotPassword.jsx";
 import ResetPassword from "./pages/auth/login/ResetPassword.jsx";
 import ProductsByCategory from "./components/products/ProductsByCategory.jsx";
+import ProductsPage from "./pages/products/ProductsPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
                 ]
             },{
                 path: 'products',
-                element: <Products />
+                element: <ProductsPage />
             },{
                 path: 'products/:id',
                 element: <ProductDetails />

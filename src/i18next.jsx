@@ -150,6 +150,13 @@ i18n
                     "Submit Review" : "Submit Review",
                     "Comment" : "Comment",
                     "Rating" : "Rating",
+
+                    "Filter Options" : "Filter Options",
+                    "Sort By Price:" : "Sort By Price:",
+                    "Low to High" : "Low to High",
+                    "High to Low" : "High ot Low",
+                    "Sort By Rate:" : "Sort By Rate:",
+                    "Sort By Name:" : "Sort By Name:",
                 }
             },
             ar: {
