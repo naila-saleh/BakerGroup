@@ -18,7 +18,6 @@ export default function ProductsPage() {
     const {data, isError, error, isLoading} = useProducts({sortBy: 'price',ascending: 'false'});
     const sliderMin = data?.response?.data[data?.response?.data?.length-1]?.price || 0;
     const sliderMax = data?.response?.data[0]?.price || 1000;
-    console.log(data?.response?.data)
     const [priceRange, setPriceRange] = useState([sliderMin, sliderMax]);
     const handleSortChange = ({sortBy, ascending}) => {
         setFilters(() => ({
