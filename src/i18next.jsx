@@ -150,7 +150,6 @@ i18n
                     "Submit Review" : "Submit Review",
                     "Comment" : "Comment",
                     "Rating" : "Rating",
-
                     "Filter Options" : "Filter Options",
                     "Sort By Price:" : "Sort By Price:",
                     "Low to High" : "Low to High",
@@ -298,6 +297,12 @@ i18n
                     "Submit Review" : "إرسال المراجعة",
                     "Comment" : "التعليق",
                     "Rating" : "التقييم",
+                    "Filter Options" : "خيارات التصفية",
+                    "Sort By Price:" : "فرز حسب السعر:",
+                    "Low to High" : "من الأقل إلى الأعلى",
+                    "High to Low" : "من الأعلى إلى الأقل",
+                    "Sort By Rate:" : "فرز حسب التقييم:",
+                    "Sort By Name:" : "فرز حسب الاسم:",
                 }
             }
         },
