@@ -1,10 +1,17 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {useTranslation} from "react-i18next";
-import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
+import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Slider} from "@mui/material";
+import {useState, useEffect} from "react";
 
-export default function ProductsFilter({sortBy = '', ascending = '', onSortChange}) {
+export default function ProductsFilter({sortBy = '', ascending = '', minPrice = 0, maxPrice= 0, sliderMin = 0, sliderMax = 0, onSortChange, onPriceRangeChange}) {
     const {t} = useTranslation();
+
+    const [value, setValue] = useState([minPrice, maxPrice]);
+
+    useEffect(() => {
+        setValue([minPrice, maxPrice]);
+    }, [minPrice, maxPrice]);
 
     const handleSortChange = (field) => (event) => {
         onSortChange?.({sortBy: field, ascending: event.target.value});
@@ -21,9 +28,25 @@ export default function ProductsFilter({sortBy = '', ascending = '', onSortChang
     const sortCardSx = {display: 'flex', gap: 2, alignItems: 'start', pb: 2, border: '1px solid rgba(0,0,0,0.1)', borderRadius: '20px', padding: {md: '20px 10px 20px 15px', sm: '10px 5px 10px 10px', xs: '20px 10px 20px 15px'}};
     const optionSx = {border: '1px solid rgba(0,0,0,0.1)', borderRadius: '25px', padding: {md: '0 20px 0 10px', sm: '0 10px 0 5px', xs: '0 20px 0 10px'}, mx: 1};
 
+    const handlePriceRangeChange = (event, newValue) => {
+        setValue(newValue);
+        onPriceRangeChange?.(newValue);
+    };
+
     return (
         <Box sx={{display: 'flex', gap: 2, flexDirection: 'column', alignItems: {md: 'start', xs:'center'}, paddingY: {lg: 10, md: 8, sm: 6, xs: 4}, width: '100%'}}>
             <Typography component={'h2'} sx={{fontSize: {md: '35px', sm: '30px', xs: '28px'}, pb: {md: 3,sm: 2, xs: 1}}}>{t('Filter Options')}</Typography>
+            <Box sx={{width: '80%', flex: 1, border: '1px solid rgba(0,0,0,0.1)', borderRadius: '20px', padding: {md: '20px 15px', sm: '10px 10px', xs: '20px 15px'}}}>
+                <Typography component={'h3'} sx={{fontSize: {md: '20px', sm: '18px', xs: '16px'}, color: 'info.dark' }}>{t('Price')}</Typography>
+                <Slider
+                    value={value}
+                    min={sliderMin}
+                    max={sliderMax}
+                    onChange={handlePriceRangeChange}
+                    valueLabelDisplay="auto"
+                    color={'secondary'}
+                />
+            </Box>
             <Box sx={{display: 'flex', gap: 2, flexDirection: {md: 'column', sm: 'row', xs: 'column'}, alignItems: {md: 'start', xs:'center'}, justifyContent: 'center', width: '100%'}}>
                 <FormControl sx={sortCardSx}>
                     <FormLabel id={'sort-by-price'} sx={{fontSize: {md: '20px', sm: '18px', xs: '16px'}}}>{t('Sort By Price:')}</FormLabel>
