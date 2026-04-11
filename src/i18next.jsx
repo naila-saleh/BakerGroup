@@ -147,6 +147,9 @@ i18n
                     "Review this Product" : "Review this Product",
                     "Share your thoughts with other customers" : "Share your thoughts with other customers",
                     "Write a customer review" : "Write a customer review",
+                    "Submit Review" : "Submit Review",
+                    "Comment" : "Comment",
+                    "Rating" : "Rating",
                 }
             },
             ar: {
@@ -285,6 +288,9 @@ i18n
                     "Review this Product" : "قم بمراجعة هذا المنتج",
                     "Share your thoughts with other customers" : "شارك أفكارك مع العملاء الآخرين",
                     "Write a customer review" : "اكتب مراجعة للعميل",
+                    "Submit Review" : "إرسال المراجعة",
+                    "Comment" : "التعليق",
+                    "Rating" : "التقييم",
                 }
             }
         },

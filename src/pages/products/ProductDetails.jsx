@@ -6,13 +6,17 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import WestIcon from '@mui/icons-material/West';
-import {Container, Grid, Rating} from "@mui/material";
+import {CircularProgress, Container, Grid, Rating} from "@mui/material";
 import coupon from '../../assets/images/coupon.png'
 import useAddToCart from "../../hooks/useAddToCart.jsx";
 import {useTranslation} from "react-i18next";
 import { styled } from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import Features from "../../components/features/Features.jsx";
+import useAddReview from "../../hooks/useAddReview.jsx";
+import {useForm} from "react-hook-form";
+import TextField from "@mui/material/TextField";
+import {useState} from "react";
 
 export default function ProductDetails() {
     const {id} = useParams();
@@ -20,6 +24,19 @@ export default function ProductDetails() {
     const {mutate, isPending} = useAddToCart();
     const {t} = useTranslation();
     const navigate = useNavigate();
+    const {mutate: addReview, isPending: isReviewPending} = useAddReview();
+    const [formReview, setFormReview] = useState(false);
+    const handleShowFormReview = () => {
+        formReview === true? setFormReview(false) : setFormReview(true);
+    }
+    const {register, handleSubmit, formState: {errors}} = useForm();
+    const onSubmit = (values) => {
+        addReview({
+            productId: product.id,
+            rating: Number(values.rating),
+            comment: values.comment
+        })
+    }
 
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
         height: 10,
@@ -57,7 +74,6 @@ export default function ProductDetails() {
     if(isError) return <div>{error.message}</div>
     const product = data.response;
     const sizeOfSubImage = `calc((100% - ${(product.subImages.length)}%) / (${product.subImages.length} + 1))`;
-    console.log(data.response);
     return (
         <Box className={'product-details'}>
             <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {md: 10, xs: 5}}}>
@@ -193,7 +209,16 @@ export default function ProductDetails() {
                 <Box sx={{mt: 5, display: 'flex', flexDirection: 'column', alignItems: {sm: 'start', xs: 'center'}, textAlign: {sm: 'start', xs: 'center'} }}>
                     <Typography component={'h2'} sx={{color: 'inherit', fontSize: {md: '32px', sm: '30px', xs: '25px'}, textAlign: {lg: 'start', xs: 'center'}, mb: 2, fontWeight: '500'}}>{t('Review this Product')}</Typography>
                     <Typography sx={{color: 'info.dark', fontSize: '16px', my: 1}}>{t('Share your thoughts with other customers')}</Typography>
-                    <Button variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: 'secondary.main', fontWeight: 400, px: 4, py: 1.1, borderRadius: 5, fontSize: '15px', mt: 1 }}>{t('Write a customer review')}</Button>
+                    <Button onClick={handleShowFormReview} variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: 'secondary.main', fontWeight: 400, px: 4, py: 1.1, borderRadius: 5, fontSize: '15px', mt: 1 }}>{t('Write a customer review')}</Button>
+                    <Box component={'form'}
+                         onSubmit={handleSubmit(onSubmit)}
+                         sx={{border: '2px solid rgba(45,83,86,0.4)', borderRadius: 3, my: 5, width: {md: '80%', xs: '100%'}, px: {sm: 4, xs: 2}, py: 5, display: formReview?'flex':'none', flexDirection: 'column', gap: 2, alignItems: {sm: 'start',xs: 'center'}, justifyContent: 'center'}}>
+                        <TextField {...register('rating')} label={t('Rating')} variant="standard" fullWidth
+                                   error={!!errors.rating} helperText={errors.rating?.message}/>
+                        <TextField {...register('comment')} label={t('Comment')} variant="standard" fullWidth multiline rows={4}
+                                   error={!!errors.comment} helperText={errors.comment?.message}/>
+                        <Button variant="contained" type={'submit'} sx={{textTransform: 'none', color: 'info.light', backgroundColor: '#2D5356', fontWeight: 400, px: 4, py: 1.1, borderRadius: 5, fontSize: '15px', mt: 1 }} disabled={isReviewPending}>{isReviewPending ? <CircularProgress/> : t('Submit Review')}</Button>
+                    </Box>
                 </Box>
             </Container>
             <Features />
