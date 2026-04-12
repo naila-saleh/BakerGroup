@@ -6,7 +6,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function Product(product) {
     return (
-        <Grid key={product.id} size={{lg: 4, md: 6, sm: 6, xs: 12}}>
+        <Grid key={product.id} size={{xl: 3, lg: 4, md: 6, sm: 6, xs: 12}}>
             <Link to={`/products/${product.id}`} style={{textDecoration: 'none'}}>
                 <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
                     <CardMedia component={'img'} image={product.image} sx={{width: {md: '100%', sm: '90%', xs: '70%'}, display: 'flex', alignSelf: 'center'}}></CardMedia>

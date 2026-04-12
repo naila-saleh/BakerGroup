@@ -156,6 +156,10 @@ i18n
                     "High to Low" : "High ot Low",
                     "Sort By Rate:" : "Sort By Rate:",
                     "Sort By Name:" : "Sort By Name:",
+
+                    "Rating is required" : "Rating is required",
+                    "Comment is required" : "Comment is required",
+                    "You should buy & receive the order to make a review." : "You should buy & receive the order to make a review."
                 }
             },
             ar: {

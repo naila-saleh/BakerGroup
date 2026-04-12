@@ -26,16 +26,32 @@ export default function ProductDetails() {
     const navigate = useNavigate();
     const {mutate: addReview, isPending: isReviewPending} = useAddReview();
     const [formReview, setFormReview] = useState(false);
+    const [reviewError, setReviewError] = useState('');
     const handleShowFormReview = () => {
+        setReviewError('');
         formReview === true? setFormReview(false) : setFormReview(true);
     }
     const {register, handleSubmit, formState: {errors}} = useForm();
     const onSubmit = (values) => {
-        addReview({
-            productId: product.id,
-            rating: Number(values.rating),
-            comment: values.comment
-        })
+        setReviewError('');
+        addReview(
+            {
+                productId: product.id,
+                rating: Number(values.rating),
+                comment: values.comment
+            }, {
+                onSuccess: () => {
+                    setFormReview(false);
+                },
+                onError: (error) => {
+                    if (error?.response?.status === 400) {
+                        setReviewError('You should buy & receive the order to make a review.');
+                        return;
+                    }
+                    setReviewError(error?.response?.data?.message || t('Something went wrong. Please try again.'));
+                }
+            }
+        )
     }
 
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -73,6 +89,7 @@ export default function ProductDetails() {
     if(isLoading) return <Loader />
     if(isError) return <div>{error.message}</div>
     const product = data.response;
+    calculateRatingDistribution();
     const sizeOfSubImage = `calc((100% - ${(product.subImages.length)}%) / (${product.subImages.length} + 1))`;
     return (
         <Box className={'product-details'}>
@@ -132,7 +149,6 @@ export default function ProductDetails() {
                         </Box>
                     </Box>
                     <Box sx={{width: {lg: '70%', xs: '100%'} }} >
-                        {calculateRatingDistribution()}
                         <Box sx={{display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center', mt: 2}}>
                             <Typography sx={{fontSize: '18px', color: 'primary.light' }}>5 {t('Stars')}</Typography>
                             <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
@@ -213,10 +229,11 @@ export default function ProductDetails() {
                     <Box component={'form'}
                          onSubmit={handleSubmit(onSubmit)}
                          sx={{border: '2px solid rgba(45,83,86,0.4)', borderRadius: 3, my: 5, width: {md: '80%', xs: '100%'}, px: {sm: 4, xs: 2}, py: 5, display: formReview?'flex':'none', flexDirection: 'column', gap: 2, alignItems: {sm: 'start',xs: 'center'}, justifyContent: 'center'}}>
-                        <TextField {...register('rating')} label={t('Rating')} variant="standard" fullWidth
-                                   error={!!errors.rating} helperText={errors.rating?.message}/>
-                        <TextField {...register('comment')} label={t('Comment')} variant="standard" fullWidth multiline rows={4}
+                        <Rating {...register('rating', {required: t('Rating is required')})} size="large" />
+                        {errors.rating && <span style={{color: 'red'}}>{errors.rating.message}</span>}
+                        <TextField {...register('comment', {required: t('Comment is required')})} label={t('Comment')} variant="standard" fullWidth multiline rows={4}
                                    error={!!errors.comment} helperText={errors.comment?.message}/>
+                        {reviewError && <span style={{color: 'red', width: '100%', fontSize: '14px'}}>{reviewError}</span>}
                         <Button variant="contained" type={'submit'} sx={{textTransform: 'none', color: 'info.light', backgroundColor: '#2D5356', fontWeight: 400, px: 4, py: 1.1, borderRadius: 5, fontSize: '15px', mt: 1 }} disabled={isReviewPending}>{isReviewPending ? <CircularProgress/> : t('Submit Review')}</Button>
                     </Box>
                 </Box>
