@@ -160,6 +160,8 @@ i18n
                     "Comment is required" : "Comment is required",
                     "You should buy & receive the order to make a review." : "You should buy & receive the order to make a review.",
                     "Search products" : "Search products",
+                    "View All Products" : "View All Products",
+                    "for you!" : "for you!",
                 }
             },
             ar: {
@@ -311,6 +313,8 @@ i18n
                     "Comment is required" : "التعليق مطلوب",
                     "You should buy & receive the order to make a review." : "يجب أن تشتري وتتلقى الطلب لتتمكن من كتابة مراجعة.",
                     "Search products" : "ابحث عن المنتجات",
+                    "View All Products" : "عرض جميع المنتجات",
+                    "for you!" : "من أجلك!",
                 }
             }
         },
