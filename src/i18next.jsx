@@ -158,7 +158,8 @@ i18n
                     "Sort By Name:" : "Sort By Name:",
                     "Rating is required" : "Rating is required",
                     "Comment is required" : "Comment is required",
-                    "You should buy & receive the order to make a review." : "You should buy & receive the order to make a review."
+                    "You should buy & receive the order to make a review." : "You should buy & receive the order to make a review.",
+                    "Search products" : "Search products",
                 }
             },
             ar: {
@@ -308,7 +309,8 @@ i18n
                     "Sort By Name:" : "فرز حسب الاسم:",
                     "Rating is required" : "التقييم مطلوب",
                     "Comment is required" : "التعليق مطلوب",
-                    "You should buy & receive the order to make a review." : "يجب أن تشتري وتتلقى الطلب لتتمكن من كتابة مراجعة."
+                    "You should buy & receive the order to make a review." : "يجب أن تشتري وتتلقى الطلب لتتمكن من كتابة مراجعة.",
+                    "Search products" : "ابحث عن المنتجات",
                 }
             }
         },

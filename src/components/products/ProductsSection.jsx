@@ -7,10 +7,10 @@ import {useLocation} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Product from "../../ui/product/Product.jsx";
 
-export default function ProductsSection({filters = {}, priceRange}) {
+export default function ProductsSection({filters = {}, priceRange, search}) {
     const minPrice = Array.isArray(priceRange) ? priceRange[0] : undefined;
     const maxPrice = Array.isArray(priceRange) ? priceRange[1] : undefined;
-    const {data, isLoading, isError, error} = useProducts({...filters, minPrice, maxPrice});
+    const {data, isLoading, isError, error} = useProducts({...filters, minPrice, maxPrice, search});
     const {t} = useTranslation();
     const { pathname } = useLocation();
     const isHome = pathname === '/';

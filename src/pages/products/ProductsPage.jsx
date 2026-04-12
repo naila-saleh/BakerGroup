@@ -8,6 +8,7 @@ import ProductsFilter from "../../ui/filter/ProductsFilter.jsx";
 import Features from "../../components/features/Features.jsx";
 import useProducts from "../../hooks/useProducts.jsx";
 import Loader from "../../ui/loader/Loader.jsx";
+import {useSearchParams} from "react-router-dom";
 
 export default function ProductsPage() {
     const {t} = useTranslation();
@@ -19,6 +20,8 @@ export default function ProductsPage() {
     const sliderMin = data?.response?.data[data?.response?.data?.length-1]?.price || 0;
     const sliderMax = data?.response?.data[0]?.price || 1000;
     const [priceRange, setPriceRange] = useState([sliderMin, sliderMax]);
+    const [searchParams] = useSearchParams()
+    const search = searchParams.get('search') || '';
     const handleSortChange = ({sortBy, ascending}) => {
         setFilters(() => ({
             sortBy,
@@ -42,7 +45,7 @@ export default function ProductsPage() {
                     <ProductsFilter sortBy={filters.sortBy} ascending={filters.ascending} minPrice={sliderMin} sliderMin={sliderMin} maxPrice={sliderMax} sliderMax={sliderMax} onSortChange={handleSortChange} onPriceRangeChange={handlePriceRangeChange} />
                 </Box>
                 <Box sx={{flex: 1, minWidth: 0, mt: {md: 5, xs: 0} }}>
-                    <ProductsSection filters={filters} priceRange={priceRange} />
+                    <ProductsSection filters={filters} priceRange={priceRange} search={search} />
                 </Box>
             </Box>
             <Features />
