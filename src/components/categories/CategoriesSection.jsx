@@ -24,6 +24,7 @@ export default function CategoriesSection() {
     const nextRef = useRef(null);
     const { pathname } = useLocation();
     const isHome = pathname === '/';
+    const language = localStorage.getItem('i18nextLng');
 
     if (isLoading) return <Loader />
     if (isError) return <Box>{error.message}</Box>
@@ -35,16 +36,31 @@ export default function CategoriesSection() {
             <Box sx={{display: 'flex', flexWrap: 'wrap', flexDirection: {sm: 'row', xs: 'column'}, justifyContent: 'space-between', alignItems: 'center', mb: 4, gap: {md: 0, xs: 2}}}>
                 {isHome?<Typography component={'h2'} sx={{fontSize: {md: '40px', sm: '35px', xs: '31px'}, fontWeight: 500}}>{t('Featured Categories')}</Typography>:null}
                 <Box sx={{display: 'flex', gap: 1.5}}>
-                    <Button ref={prevRef} sx={{minWidth: 'unset', p: 0, borderRadius: '14px'}}>
-                        <Box sx={{width: 56, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.08)', backgroundColor: 'info.light'}}>
-                            <WestIcon sx={{color: 'secondary.main', fontSize: 18}} />
-                        </Box>
-                    </Button>
-                    <Button ref={nextRef} sx={{minWidth: 'unset', p: 0, borderRadius: '14px'}}>
-                        <Box sx={{width: 56, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', backgroundColor: 'secondary.main'}}>
-                            <EastIcon sx={{color: 'info.light', fontSize: 18}} />
-                        </Box>
-                    </Button>
+                    {language === 'en' ?
+                        (<>
+                            <Button ref={prevRef} sx={{minWidth: 'unset', p: 0, borderRadius: '14px'}}>
+                                <Box sx={{width: 56, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.08)', backgroundColor: 'info.light'}}>
+                                    <WestIcon sx={{color: 'secondary.main', fontSize: 18}} />
+                                </Box>
+                            </Button>
+                            <Button ref={nextRef} sx={{minWidth: 'unset', p: 0, borderRadius: '14px'}}>
+                                <Box sx={{width: 56, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', backgroundColor: 'secondary.main'}}>
+                                    <EastIcon sx={{color: 'info.light', fontSize: 18}} />
+                                </Box>
+                            </Button>
+                        </>):(<>
+                            <Button ref={prevRef} sx={{minWidth: 'unset', p: 0, borderRadius: '14px'}}>
+                                <Box sx={{width: 56, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', backgroundColor: 'secondary.main'}}>
+                                    <EastIcon sx={{color: 'info.light', fontSize: 18}} />
+                                </Box>
+                            </Button>
+                            <Button ref={nextRef} sx={{minWidth: 'unset', p: 0, borderRadius: '14px'}}>
+                                <Box sx={{width: 56, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '14px', border: '1px solid rgba(0,0,0,0.08)', backgroundColor: 'info.light'}}>
+                                    <WestIcon sx={{color: 'secondary.main', fontSize: 18}} />
+                                </Box>
+                            </Button>
+                        </>)
+                    }
                 </Box>
             </Box>
             <Box sx={{'& .swiper': {pb: 6},

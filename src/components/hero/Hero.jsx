@@ -15,6 +15,7 @@ import style from './hero.module.css'
 import {useTranslation} from "react-i18next";
 export default function Hero() {
     const {t} = useTranslation();
+    const language = localStorage.getItem('i18nextLng');
     return (
         <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {md: 10, xs: 5}}}>
             <Grid container spacing={1} sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%'}}>
@@ -23,7 +24,7 @@ export default function Hero() {
                     <Typography component={'h1'} sx={{color: 'inherit', fontSize: {xl: '55px', lg: '45px', md: '40px', xs: '30px'}, fontWeight: '500'}}>{t('Modern Interior Design Studio')}</Typography>
                     <Typography component={'p'} sx={{color: '#A6BCBE', fontSize: {xl: '18px', lg: '18px', md: '15px'}}}>{t('Choosing the right furniture for your home online will add elegance and functionality to your interior while also being cost effective and long lasting.')}</Typography>
                     <Box sx={{display: 'flex', gap: 1, marginTop: {md: 3, xs: 1}, flexDirection: {xl: 'row', lg: 'row', md: 'row', sm: 'column', xs: 'column'}}}>
-                        <Link component={RouterLink} to={'#'} sx={{display: 'flex', gap: 1, alignItems: 'center', color: 'inherit', fontSize: {xl: '18px', md: '15px', xs: '13px'}, backgroundColor: 'secondary.main', padding: '10px 30px', borderRadius: '30px'}} underline={'none'}>{t('Shop Now')} <EastIcon /></Link>
+                        <Link component={RouterLink} to={'/products'} sx={{display: 'flex', gap: 1, alignItems: 'center', color: 'inherit', fontSize: {xl: '18px', md: '15px', xs: '13px'}, backgroundColor: 'secondary.main', padding: '10px 30px', borderRadius: '30px'}} underline={'none'}>{t('Shop Now')} {language === 'en'?<EastIcon />:<WestIcon />} </Link>
                         <Link component={RouterLink} to={'https://www.instagram.com/sohyb.bakergroup/'} sx={{color: 'inherit', fontSize: {xl: '18px', md: '15px', xs: '13px'}, padding: '10px'}}>{t('Follow Instagram')}</Link>
                     </Box>
                     <Box sx={{display: 'flex', flexDirection: {sm: 'row', xs: 'column'}, gap: {xl: 8, md: 4, xs: 2}, marginTop: {md: 5, xs: 1}, marginBottom: {md: 0, xs: 2}}}>
@@ -80,10 +81,16 @@ export default function Hero() {
                             </Box>
                         </Box>
                     </Box>
-                    <Box sx={{display: {md:'flex', xs:'none'}, gap: 2, alignItems: 'center', justifyContent: 'flex-start', color: 'white', marginTop: {md: 3, xs: 1}, alignSelf: {xl: 'flex-start', md: 'center'}}}>
-                        <Button sx={{backgroundColor: '#426466', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><WestIcon /></Button>
-                        <Button sx={{backgroundColor: 'secondary.main', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><EastIcon /></Button>
-                    </Box>
+                    {language === 'en'?
+                        <Box sx={{display: {md:'flex', xs:'none'}, gap: 2, alignItems: 'center', justifyContent: 'flex-start', color: 'white', marginTop: {md: 3, xs: 1}, alignSelf: {xl: 'flex-start', md: 'center'}}}>
+                            <Button sx={{backgroundColor: '#426466', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><WestIcon /></Button>
+                            <Button sx={{backgroundColor: 'secondary.main', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><EastIcon /></Button>
+                        </Box>:
+                        <Box sx={{display: {md:'flex', xs:'none'}, gap: 2, alignItems: 'center', justifyContent: 'flex-start', color: 'white', marginTop: {md: 3, xs: 1}, alignSelf: {xl: 'flex-start', md: 'center'}}}>
+                            <Button sx={{backgroundColor: 'secondary.main', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><EastIcon /></Button>
+                            <Button sx={{backgroundColor: '#426466', borderRadius: '35px', paddingY: '8px', color: 'inherit'}}><WestIcon /></Button>
+                        </Box>
+                    }
                 </Grid>
             </Grid>
         </Box>

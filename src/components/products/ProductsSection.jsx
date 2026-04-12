@@ -9,6 +9,7 @@ import Product from "../../ui/product/Product.jsx";
 import Button from "@mui/material/Button";
 import EastIcon from "@mui/icons-material/East";
 import React from "react";
+import WestIcon from "@mui/icons-material/West";
 
 export default function ProductsSection({filters = {}, priceRange, search}) {
     const minPrice = Array.isArray(priceRange) ? priceRange[0] : undefined;
@@ -19,6 +20,7 @@ export default function ProductsSection({filters = {}, priceRange, search}) {
     const isHome = pathname === '/';
     const products = Array.isArray(data?.response?.data) ? data.response.data : [];
     const navigate = useNavigate();
+    const language = localStorage.getItem('i18nextLng');
 
     if (isLoading) return <Loader />;
     if (isError) return <Box>{error.message}</Box>;
@@ -33,7 +35,7 @@ export default function ProductsSection({filters = {}, priceRange, search}) {
                     </Box>
                     <Button onClick={()=>navigate('/products')} sx={{color: 'info.light', display: 'flex', gap: 1, alignItems: 'center', justifyContent: 'center', borderRadius: 10, backgroundColor: 'secondary.main', padding: '10px 20px', textTransform: 'none', fontWeight: 400, fontSize: 16 }}>
                         {t('View All Products')}
-                        <EastIcon sx={{color: 'info.light', fontSize: 18}} />
+                        {language==='en'?<EastIcon sx={{color: 'info.light', fontSize: 18}} /> : <WestIcon sx={{color: 'info.light', fontSize: 18}} />}
                     </Button>
                 </Box>
             ) : null}
