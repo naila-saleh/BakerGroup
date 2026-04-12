@@ -16,6 +16,7 @@ import ForgotPassword from "./pages/auth/login/ForgotPassword.jsx";
 import ResetPassword from "./pages/auth/login/ResetPassword.jsx";
 import ProductsByCategory from "./components/products/ProductsByCategory.jsx";
 import ProductsPage from "./pages/products/ProductsPage.jsx";
+import ContactUs from "./pages/contactUs/ContactUs.jsx";
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,9 @@ const router = createBrowserRouter([
             },{
                 path: 'products/category/:id',
                 element: <ProductsByCategory />
+            },{
+                path: 'contactUs',
+                element: <ContactUs />
             }
         ]
     },{
