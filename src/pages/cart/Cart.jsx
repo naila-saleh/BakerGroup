@@ -15,6 +15,7 @@ import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import Features from "../../components/features/Features.jsx";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import useClearCart from "../../hooks/useClearCart.jsx";
 
 export default function Cart() {
     const {data, isLoading, isError, error} = useCart();
@@ -22,6 +23,7 @@ export default function Cart() {
     const {t} = useTranslation();
     const {mutate: removeItem, isPending: removeItemIsPending} = useRemoveFromCart();
     const {mutate: updateQuantity, isPending: updateItemIsPending} = useUpdateCartItem();
+    const {mutate: clearCart, isPending: clearCartIsPending} = useClearCart();
     const handeUpdateQuantity = (productId, action) => {
         const item = data.items.find(item => item.productId === productId);
         if(action === '-' && item.count === 1) return removeItem(productId);
@@ -71,7 +73,7 @@ export default function Cart() {
                                 <TableCell sx={{fontWeight: 500, borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px'}} colSpan={5} align={'center'}>
                                     <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', justifyContent: {sm: 'center', xs: 'flex-start'}}}>
                                         <Button onClick={()=>navigate('/')} variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: '#2D5356', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>{t('Continue Shopping')}</Button>
-                                        <Button variant="contained" color={'error'} sx={{textTransform: 'none', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}>{t('Clear Cart')}</Button>
+                                        <Button onClick={clearCart} variant="contained" color={'error'} sx={{textTransform: 'none', fontSize: '14px', fontWeight: 400, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}} disabled={clearCartIsPending}>{t('Clear Cart')}</Button>
                                     </Box>
                                 </TableCell>
                             </TableRow>
