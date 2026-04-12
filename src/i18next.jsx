@@ -156,7 +156,6 @@ i18n
                     "High to Low" : "High ot Low",
                     "Sort By Rate:" : "Sort By Rate:",
                     "Sort By Name:" : "Sort By Name:",
-
                     "Rating is required" : "Rating is required",
                     "Comment is required" : "Comment is required",
                     "You should buy & receive the order to make a review." : "You should buy & receive the order to make a review."
@@ -307,6 +306,9 @@ i18n
                     "High to Low" : "من الأعلى إلى الأقل",
                     "Sort By Rate:" : "فرز حسب التقييم:",
                     "Sort By Name:" : "فرز حسب الاسم:",
+                    "Rating is required" : "التقييم مطلوب",
+                    "Comment is required" : "التعليق مطلوب",
+                    "You should buy & receive the order to make a review." : "يجب أن تشتري وتتلقى الطلب لتتمكن من كتابة مراجعة."
                 }
             }
         },
