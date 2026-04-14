@@ -14,6 +14,7 @@ import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Features from "../../components/features/Features.jsx";
+import MyLocationMap from "../../components/contactUs/MyLocationMap.jsx";
 
 export default function ContactUs() {
     const {t} = useTranslation();
@@ -223,6 +224,7 @@ export default function ContactUs() {
                     </Box>
                 </Grid>
             </Grid>
+            <MyLocationMap />
             <Features />
         </Box>
     )
