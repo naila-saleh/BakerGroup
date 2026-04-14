@@ -32,14 +32,14 @@ export default function ContactUs() {
                             <MarkEmailUnreadOutlinedIcon sx={{ color: 'secondary.main', backgroundColor: 'rgba(255, 185, 52, 0.15)', fontSize: '45px', padding: '10px', borderRadius: 2 }} />
                             <Box>
                                 <Typography sx={{ color: 'info.dark', fontSize: 14 }}>{t('Mail')}</Typography>
-                                <Typography>nailasaleh2004@gmail.com</Typography>
+                                <Typography>sohyb@bakergroupco.com</Typography>
                             </Box>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2}} >
                             <PhoneInTalkOutlinedIcon sx={{ color: '#5067D6', backgroundColor: 'rgba(80, 103, 214, 0.15)', fontSize: '45px', padding: '10px', borderRadius: 2 }} />
                             <Box>
                                 <Typography sx={{ color: 'info.dark', fontSize: 14 }}>{t('Phone')}</Typography>
-                                <Typography>+972 58-430-0202</Typography>
+                                <Typography>+972 598524052</Typography>
                             </Box>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2}} >
