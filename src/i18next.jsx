@@ -1,6 +1,5 @@
-import { createRoot } from 'react-dom/client';
 import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
+import { initReactI18next } from "react-i18next";
 import detector from "i18next-browser-languagedetector";
 
 i18n
@@ -38,7 +37,8 @@ i18n
                     "Featured Categories": "Featured Categories",
                     "Trending Products": "Trending Products",
                     "24/7 Support": "24/7 Support",
-                    "Discover 45 Products": "Discover 45 Products",
+                    "discoverProducts": "Discover {{count}} Product",
+                    "discoverProducts_plural": "Discover {{count}} Products",
                     "Product Details": "Product Details",
                     "Back to Products": "Back to Products",
                     "Reviews": "Reviews",
@@ -215,7 +215,12 @@ i18n
                     "Featured Categories": "الأقسام المميزة",
                     "Trending Products": "المنتجات الرائجة",
                     "24/7 Support": "الدعم على مدار الساعة",
-                    "Discover 45 Products": "اكتشف 45 منتجًا",
+                    "discoverProducts_zero": "اكتشف {{count}} منتج",
+                    "discoverProducts_one": "اكتشف {{count}} منتجًا",
+                    "discoverProducts_two": "اكتشف {{count}} منتجان",
+                    "discoverProducts_few": "اكتشف {{count}} منتجات",
+                    "discoverProducts_many": "اكتشف {{count}} منتجًا",
+                    "discoverProducts_other": "اكتشف {{count}} منتج",
                     "Product Details": "تفاصيل المنتج",
                     "Back to Products": "العودة إلى المنتجات",
                     "Reviews": "تقييمات",

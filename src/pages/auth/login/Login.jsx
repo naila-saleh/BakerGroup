@@ -20,7 +20,7 @@ export default function Login() {
     const setToken = useAuthStore((state) => state.setToken);
     const navigate = useNavigate()
     const handleForgotPassword = () => {
-        navigate('/auth/forgot-password');
+        navigate('/Identity/auth/forgot-password');
     }
     const {t} = useTranslation();
     const [serverErrors, setServerErrors] = useState([]);
@@ -29,9 +29,10 @@ export default function Login() {
     });
     const loginForm = async (values) => {
         try {
-            const response = await axiosInstance.post(`/auth/Account/Login`, values);
-            if(response.status === 200) {
-                setToken(response.data.accessToken);
+            const response = await axiosInstance.post(`/Identity/auth/login`, values);
+            console.log(response);
+            if(response.status === 204 || response.status === 200) {
+                setToken(response.data.token);
                 navigate('/');
             }
         }catch (e){
@@ -41,7 +42,7 @@ export default function Login() {
     return (
         <Box component={'section'} className={'login-form'} sx={{textAlign: 'center'}}>
             <Typography component={'h1'} sx={{fontSize: '40px'}}>{t('Login')}</Typography>
-            {serverErrors.length > 0 && (<Box my={2}>
+            {serverErrors?.length > 0 && (<Box my={2}>
                 <Typography component={'span'} sx={{color: red, fontSize: '15px'}}>{serverErrors}</Typography>
             </Box>)}
             <Box component={'form'}

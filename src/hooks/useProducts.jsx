@@ -12,7 +12,7 @@ export default function useProducts({sortBy = '', ascending = '', minPrice , max
         if (typeof minPrice === 'number') params.minPrice = minPrice;
         if (typeof maxPrice === 'number') params.maxPrice = maxPrice;
         if (search) params.search = search;
-        const response = await axiosInstance.get(`/products`, {params});
+        const response = await axiosInstance.get(`/User/Products`); //, {params}
         return response.data;
     };
 

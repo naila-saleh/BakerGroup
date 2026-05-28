@@ -17,6 +17,7 @@ import useAddReview from "../../hooks/useAddReview.jsx";
 import {useForm} from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import {useState} from "react";
+import EastIcon from "@mui/icons-material/East";
 
 export default function ProductDetails() {
     const {id} = useParams();
@@ -27,6 +28,7 @@ export default function ProductDetails() {
     const {mutate: addReview, isPending: isReviewPending} = useAddReview();
     const [formReview, setFormReview] = useState(false);
     const [reviewError, setReviewError] = useState('');
+    const language = localStorage.getItem('i18nextLng');
     const handleShowFormReview = () => {
         setReviewError('');
         formReview === true? setFormReview(false) : setFormReview(true);
@@ -36,7 +38,7 @@ export default function ProductDetails() {
         setReviewError('');
         addReview(
             {
-                productId: product.id,
+                productId: data.id,
                 rating: Number(values.rating),
                 comment: values.comment
             }, {
@@ -77,56 +79,55 @@ export default function ProductDetails() {
     let twoStarsCount = 0;
     let oneStarCount = 0;
     function calculateRatingDistribution() {
-        data.response.reviews.map(review => {
-            if(review.rating === 5) fiveStarsCount++;
-            else if(review.rating === 4) fourStarsCount++;
-            else if(review.rating === 3) threeStarsCount++;
-            else if(review.rating === 2) twoStarsCount++;
-            else if(review.rating === 1) oneStarCount++;
+        data.reviews?.map(review => {
+            if(review.rate === 5) fiveStarsCount++;
+            else if(review.rate === 4) fourStarsCount++;
+            else if(review.rate === 3) threeStarsCount++;
+            else if(review.rate === 2) twoStarsCount++;
+            else if(review.rate === 1) oneStarCount++;
         })
     }
 
     if(isLoading) return <Loader />
     if(isError) return <div>{error.message}</div>
-    const product = data.response;
     calculateRatingDistribution();
-    const sizeOfSubImage = `calc((100% - ${(product.subImages.length)}%) / (${product.subImages.length} + 1))`;
+    const sizeOfSubImage = `calc((100% - ${(data.subImages?.length)}%) / (${data.subImages?.length} + 1))`;
     return (
         <Box className={'product-details'}>
             <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {md: 10, xs: 5}}}>
-                <Typography component={'h1'} sx={{color: 'info.light', fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center',pb: 3, px: 2}}>{t('Products')}/{product.name}/{t('Product Details')}</Typography>
+                <Typography component={'h1'} sx={{color: 'info.light', fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center',pb: 3, px: 2}}>{t('Products')}/{data.name}/{t('Product Details')}</Typography>
             </Box>
             <Container maxWidth={'xl'} sx={{px: {md: 10,sm: 5, xs: 2}, py: {md: 5,sm: 3, xs: 2}}}>
                 <Button onClick={()=>navigate('/products')} sx={{textTransform: 'none', color: 'secondary.main'}}>
-                    <WestIcon sx={{mr: 1}}/>
+                    {language==='en'?<WestIcon sx={{mr: 1}}/>:<EastIcon sx={{ml: 1}} />}
                     {t('Back to Products')}
                 </Button>
                 <Grid container spacing={{md: 8, sm: 5, xs: 3}} sx={{display: 'flex', marginTop: {sm: 2, xs: 1}}}>
                     <Grid size={{lg: 6, md: 12, sm: 12, xs: 12}} sx={{textAlign: 'center'}}>
-                        <Box component={'img'} src={product.image} alt="" sx={{width: '100%', borderRadius: '10px'}}/>
-                        <Box display={product.subImages.length?'flex':'none'} sx={{marginTop: 2, justifyContent: 'space-between'}}>
-                            <Box component={'img'} src={product.image} alt="" sx={{width: sizeOfSubImage, height: sizeOfSubImage, borderRadius: '10px', cursor: 'pointer', border: '2px solid secondary.main'}}/>
-                            {product.subImages.map(subImage=>(
+                        <Box component={'img'} src={data.mainImage} alt="" sx={{width: '100%', borderRadius: '10px'}}/>
+                        <Box display={data.subImages?.length?'flex':'none'} sx={{marginTop: 2, justifyContent: 'space-between'}}>
+                            <Box component={'img'} src={data.image} alt="" sx={{width: sizeOfSubImage, height: sizeOfSubImage, borderRadius: '10px', cursor: 'pointer', border: '2px solid secondary.main'}}/>
+                            {data.subImages?.map(subImage=>(
                                 <Box key={subImage} component={'img'} src={subImage} alt="" sx={{width: sizeOfSubImage, height: sizeOfSubImage, borderRadius: '10px', cursor: 'pointer'}}/>
                             ))}
                         </Box>
                     </Grid>
                     <Grid size={{lg: 6, md: 12, sm: 12, xs: 12}} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                         <Box>
-                            <Typography sx={{color: 'info.main', pb: 2}}>{product.name}</Typography>
-                            <Typography sx={{color: 'info.dark', pb: {md: 7, sm: 5, xs: 3}}}>{product.description}</Typography>
-                            <Typography sx={{fontSize: '30px', pb: {sm: 2, xs: 1}}}>${product.price}</Typography>
+                            <Typography sx={{color: 'info.main', pb: 2}}>{data.name}</Typography>
+                            <Typography sx={{color: 'info.dark', pb: {md: 7, sm: 5, xs: 3}}}>{data.description}</Typography>
+                            <Typography sx={{fontSize: '30px', pb: {sm: 2, xs: 1}}}>${data.price}</Typography>
                             <Box sx={{display: 'flex', gap: {md: 5, xs: 3}, alignItems: 'center', pb: {lg: 7, md: 5, xs: 3}}}>
                                 <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
-                                    <Rating readOnly value={product.rate}></Rating>
-                                    <Typography sx={{fontSize: '20px'}}>{product.rate}</Typography>
+                                    <Rating readOnly value={data.rate}></Rating>
+                                    <Typography sx={{fontSize: '20px'}}>{data.rate}</Typography>
                                 </Box>
-                                <Typography sx={{color: 'info.dark'}}>{product.reviews.length} {t('Reviews')}</Typography>
+                                <Typography sx={{color: 'info.dark'}}>{data.reviews?.length} {t('Reviews')}</Typography>
                             </Box>
-                            <Button variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: 'secondary.main', fontWeight: 300, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5, mr: 2}}>{t('Buy Now')}</Button>
+                            <Button variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: 'secondary.main', fontWeight: 300, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5, mx: {md: 2, xs: 1} }}>{t('Buy Now')}</Button>
                             <Button variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: '#2D5356', fontWeight: 300, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}
                                     onClick={()=>mutate({
-                                        ProductId: product.id,
+                                        ProductId: data.id,
                                         Count: 1,
                                     })}
                                     disabled={isPending}
@@ -144,8 +145,8 @@ export default function ProductDetails() {
                     <Box sx={{mb: {lg: 0, xs: 2}, px: {lg: 2, xs: 0} }}>
                         <Typography component={'h2'} sx={{color: 'inherit', fontSize: {md: '32px', sm: '30px', xs: '25px'}, textAlign: {lg: 'start', xs: 'center'}, mb: 2, fontWeight: '500'}}>{t('Customer Reviews')}</Typography>
                         <Box sx={{display: 'flex', gap: 1, alignItems: 'center', justifyContent: {lg: 'start', xs: 'center'}}}>
-                            <Rating readOnly value={product.rate}></Rating>
-                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{product.rate} {t('out of 5')}</Typography>
+                            <Rating readOnly value={data.rate}></Rating>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{data.rate} {t('out of 5')}</Typography>
                         </Box>
                     </Box>
                     <Box sx={{width: {lg: '70%', xs: '100%'} }} >
@@ -154,60 +155,60 @@ export default function ProductDetails() {
                             <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
                                 <BorderLinearProgress
                                     variant="determinate"
-                                    value={(fiveStarsCount/data.response.reviews.length)*100}
+                                    value={fiveStarsCount?Math.round((fiveStarsCount/data.reviews?.length)*100):0}
                                     aria-label="Export data"
                                 />
                             </Box>
-                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{Math.round((fiveStarsCount/data.response.reviews.length)*100)}%</Typography>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{fiveStarsCount?Math.round((fiveStarsCount/data.reviews?.length)*100):0}%</Typography>
                         </Box>
                         <Box sx={{display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center', mt: 2}}>
                             <Typography sx={{fontSize: '18px', color: 'primary.light' }}>4 {t('Stars')}</Typography>
                             <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
                                 <BorderLinearProgress
                                     variant="determinate"
-                                    value={(fourStarsCount/data.response.reviews.length)*100}
+                                    value={fourStarsCount?Math.round((fourStarsCount/data.reviews?.length)*100):0}
                                     aria-label="Export data"
                                 />
                             </Box>
-                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{Math.round((fourStarsCount/data.response.reviews.length)*100)}%</Typography>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{fourStarsCount?Math.round((fourStarsCount/data.reviews?.length)*100):0}%</Typography>
                         </Box>
                         <Box sx={{display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center', mt: 2}}>
                             <Typography sx={{fontSize: '18px', color: 'primary.light' }}>3 {t('Stars')}</Typography>
                             <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
                                 <BorderLinearProgress
                                     variant="determinate"
-                                    value={(threeStarsCount/data.response.reviews.length)*100}
+                                    value={threeStarsCount?Math.round((threeStarsCount/data.reviews?.length)*100):0}
                                     aria-label="Export data"
                                 />
                             </Box>
-                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{Math.round((threeStarsCount/data.response.reviews.length)*100)}%</Typography>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{threeStarsCount?Math.round((threeStarsCount/data.reviews?.length)*100):0}%</Typography>
                         </Box>
                         <Box sx={{display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center', mt: 2}}>
                             <Typography sx={{fontSize: '18px', color: 'primary.light' }}>2 {t('Stars')}</Typography>
                             <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
                                 <BorderLinearProgress
                                     variant="determinate"
-                                    value={(twoStarsCount/data.response.reviews.length)*100}
+                                    value={twoStarsCount?Math.round((twoStarsCount/data.reviews?.length)*100):0}
                                     aria-label="Export data"
                                 />
                             </Box>
-                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{Math.round((twoStarsCount/data.response.reviews.length)*100)}%</Typography>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{twoStarsCount?Math.round((twoStarsCount/data.reviews?.length)*100):0}%</Typography>
                         </Box>
                         <Box sx={{display: 'flex', flexDirection: 'row', gap: 3, alignItems: 'center', mt: 2}}>
                             <Typography sx={{fontSize: '18px', color: 'primary.light' }}>1 {t('Star')}</Typography>
                             <Box sx={{width: {md: '80%', sm: '70%', xs: '50%'}, flexGrow: 1 }}>
                                 <BorderLinearProgress
                                     variant="determinate"
-                                    value={(oneStarCount/data.response.reviews.length)*100}
+                                    value={oneStarCount?Math.round((oneStarCount/data.reviews?.length)*100):0}
                                     aria-label="Export data"
                                 />
                             </Box>
-                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{Math.round((oneStarCount/data.response.reviews.length)*100)}%</Typography>
+                            <Typography sx={{fontSize: '18px', color: 'primary.light' }}>{oneStarCount?Math.round((oneStarCount/data.reviews?.length)*100):0}%</Typography>
                         </Box>
                     </Box>
                 </Box>
                 <Box sx={{mt: 10, display: 'flex', flexDirection: 'column', gap: 5, borderTop: '1px solid rgba(0,0,0,0.1)', pt: 5}}>
-                    {data.response.reviews.map((review)=>
+                    {data.reviews?.map((review)=>
                         <Box key={review.userName} sx={{borderBottom: '1px solid rgba(0,0,0,0.1)', pb: 3}}>
                             <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                                 <Typography sx={{fontWeight: '500'}}>{t(review.userName)}</Typography>

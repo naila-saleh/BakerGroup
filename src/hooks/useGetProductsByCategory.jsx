@@ -4,7 +4,7 @@ import axiosInstance from "../api/axiosInstance.js";
 
 export default function UseGetProductsByCategory(id) {
     const getProducts = async () => {
-        const response = await axiosInstance.get(`/Products/category/${id}`);
+        const response = await axiosInstance.get(`/User/Categories/${id}`);
         return response.data;
     }
     return useQuery({

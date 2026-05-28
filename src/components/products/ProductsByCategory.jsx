@@ -14,7 +14,7 @@ export default function ProductsByCategory() {
     const {data, isLoading, isError, error} = useGetProductsByCategory(categoryId);
     const {data: categoriesData} = useCategories();
     const {t} = useTranslation();
-    const category = categoriesData?.response?.data?.find((item) => item.id.toString() === categoryId.toString()).name;
+    const category = categoriesData?.find((item) => item.id.toString() === categoryId.toString()).name;
     if(isLoading) return <Loader />
     if(isError) return <Box>{error.message}</Box>
     return (
@@ -24,15 +24,15 @@ export default function ProductsByCategory() {
             </Box>
             <Container maxWidth={'xl'} className={'products'} component={'section'} sx={{py: {md: 10, xs: 5}, px: {lg: 10, md: 5, sm: 5, xs: 2}}}>
                 <Grid container spacing={{lg: 3, xs: 2}}>
-                    {!data.response.length?(
+                    {!data.products.length?(
                         <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
                             <Typography component={'h3'}>{t('No Products Found')}</Typography>
                         </Box>
-                    ):(data.response.map(product=>
+                    ):(data.products.map(product=>
                         <Grid key={product.id} item size={{lg: 3, md: 4, sm: 6, xs: 12}}>
                             <Link to={`/products/${product.id}`} style={{textDecoration: 'none'}}>
                                 <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
-                                    <CardMedia component={'img'} image={product.image} sx={{width: {md: '100%', sm: '90%', xs: '70%'}, display: 'flex', alignSelf: 'center'}}></CardMedia>
+                                    <CardMedia component={'img'} image={product.mainImage} sx={{width: {md: '100%', sm: '90%', xs: '70%'}, display: 'flex', alignSelf: 'center'}}></CardMedia>
                                     <CardContent sx={{backgroundColor: '#2D5356', color: 'info.light', borderRadius: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 2, ":last-child": {paddingBottom: 2}}}>
                                         <Box>
                                             <Typography component={'h3'}>{product.name}</Typography>

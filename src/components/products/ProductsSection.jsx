@@ -18,7 +18,7 @@ export default function ProductsSection({filters = {}, priceRange, search}) {
     const {t} = useTranslation();
     const { pathname } = useLocation();
     const isHome = pathname === '/';
-    const products = Array.isArray(data?.response?.data) ? data.response.data : [];
+    const products = Array.isArray(data) ? data : [];
     const navigate = useNavigate();
     const language = localStorage.getItem('i18nextLng');
 

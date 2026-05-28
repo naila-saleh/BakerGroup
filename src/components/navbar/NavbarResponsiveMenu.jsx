@@ -59,9 +59,9 @@ export default function NavbarResponsiveMenu() {
             { id: 'mode', to: '#', icon: mode === 'light' ? <DarkModeIcon /> : <LightModeIcon /> },
             { id: 'language', to: '#', icon: <LanguageIcon /> },
             { id: 'search', to: '#', icon: <SearchIcon /> },
-            { id: 'profile', to: '/profile', icon: <PersonOutlineRoundedIcon /> },
+            { id: 'profile', to: '#', icon: <PersonOutlineRoundedIcon /> /* to: '/profile' */ },
             { id: 'favorites', to: '#', icon: <FavoriteBorderIcon /> },
-            { id: 'cart', to: '/cart', icon: <ShoppingBagOutlinedIcon />},
+            { id: 'cart', to: '#', icon: <ShoppingBagOutlinedIcon /> /* to: '/cart' */ },
             { id: 'logout', icon: <LogoutIcon /> }
         ] : [
             { id: 'mode', to: '#', icon: mode === 'light' ? <DarkModeIcon /> : <LightModeIcon /> },

@@ -5,7 +5,7 @@ import i18n from "i18next";
 
 export default function UseCategories(limit = 1000) {
     const getCategories = async () => {
-        const response = await axiosInstance.get(`/categories?limit=${limit}`);
+        const response = await axiosInstance.get(`/User/Categories`); //?limit=${limit}
         return response.data;
     }
     const query = useQuery({

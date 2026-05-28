@@ -24,7 +24,7 @@ authAxiosInstance.interceptors.response.use((response) => response, async (error
     if(error.response?.status === 401 && !originalRequest._retry && token) {
         originalRequest._retry = true;
         try{
-            const refreshResponse = await axiosInstance.post(`/auth/Account/RefreshToken`, {}, {withCredentials: true});
+            const refreshResponse = await axiosInstance.post(`/Identity/auth/refresh-token`, {}, {withCredentials: true});
             const newAccessToken = refreshResponse.data.accessToken;
             useAuthStore.getState().setToken(newAccessToken);
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;

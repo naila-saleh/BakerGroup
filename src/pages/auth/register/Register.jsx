@@ -23,7 +23,7 @@ export default function Register() {
     });
     const registerForm = async (values) => {
         try {
-            const response = await axiosInstance.post(`/auth/Account/Register`, values);
+            const response = await axiosInstance.post(`/Identity/auth/register`, values);
             if(response.status === 200) {
                 navigate('/auth/login');
             }
@@ -50,6 +50,8 @@ export default function Register() {
                 error={errors.email} helperText={errors.email?.message}/>
                 <TextField {...register('password')} label={t("Password")} variant="standard" fullWidth
                 type={'password'} error={errors.password} helperText={errors.password?.message}/>
+                <TextField {...register('confirmPassword')} label={t("Confirm Password")} variant="standard" fullWidth
+                type={'password'} error={errors.confirmPassword} helperText={errors.confirmPassword?.message}/>
                 <Button variant="contained" type={'submit'} sx={{mt: 4, backgroundColor: 'secondary.main', width: {sm: '50%',  xs: '60%'}}} disabled={isSubmitting}>{isSubmitting?<CircularProgress/>:t('Register')}</Button>
                 <Typography component={"span"} sx={{fontSize: '15px', color: '#2D5356', mt: 2}}>{t('already have an account?')}</Typography>
                 <Link component={RouterLink} variant={"button"} to={'/auth/login'} sx={{backgroundColor: '#2D5356', padding: '5px 0', width: {sm: '50%',  xs: '60%'}, mb: 3, color: 'white', borderRadius: '5px'}} boxShadow={'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)'} underline={"none"}>{t('Login')}</Link>

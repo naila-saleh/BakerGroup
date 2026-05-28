@@ -29,7 +29,7 @@ export default function CategoriesSection() {
     if (isLoading) return <Loader />
     if (isError) return <Box>{error.message}</Box>
 
-    const categories = data.response.data || [];
+    const categories = data || [];
 
     return (
         <Container maxWidth={'xl'} sx={{px: {lg: 15, md: 10, sm: 5, xs: 2}, py: {md: 5, sm: 3, xs: 2}}}>
