@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {useTranslation} from "react-i18next";
@@ -13,19 +13,36 @@ import {useSearchParams} from "react-router-dom";
 export default function ProductsPage() {
     const {t} = useTranslation();
     const [filters, setFilters] = useState({
-        sortBy: '',
-        ascending: '',
+        sortBy: 'price',
+        ascending: 'false',
     });
-    const {data, isError, error, isLoading} = useProducts({sortBy: 'price',ascending: 'false'});
-    const sliderMin = data?.response?.data[data?.response?.data?.length-1]?.price || 0;
-    const sliderMax = data?.response?.data[0]?.price || 1000;
+    const {data, isError, error, isLoading} = useProducts({pageSize: 10000});
+
+    // protect against data being undefined or an empty array
+    const hasProducts = Array.isArray(data) && data.length > 0;
+    // compute real min/max from the array instead of assuming sort order
+    let sliderMin = 0;
+    let sliderMax = 10000;
+    if (hasProducts) {
+        const prices = data.map(p => Number(p?.price ?? 0)).filter(n => !Number.isNaN(n));
+        if (prices.length) {
+            sliderMin = Math.min(...prices);
+            sliderMax = Math.max(...prices);
+        }
+    }
+
+    // initialize with safe defaults; update when products load
     const [priceRange, setPriceRange] = useState([sliderMin, sliderMax]);
+
+    useEffect(() => {
+        if (hasProducts) setPriceRange([sliderMin, sliderMax]);
+    }, [hasProducts, sliderMin, sliderMax]);
     const [searchParams] = useSearchParams()
     const search = searchParams.get('search') || '';
     const handleSortChange = ({sortBy, ascending}) => {
         setFilters(() => ({
             sortBy,
-            ascending,
+            ascending
         }));
     };
 
@@ -42,10 +59,10 @@ export default function ProductsPage() {
             </Box>
             <Box sx={{display: 'flex', flexDirection: {md: 'row', xs: 'column'}, justifyContent: 'center', alignItems: 'start', gap: 3, maxWidth: '1536px', mx: 'auto', px: {md: 3, sm: 2, xs: 1},}}>
                 <Box sx={{flex: {md: '0 0 250px'}, width: {xs: '100%', md: '250px'}}}>
-                    <ProductsFilter sortBy={filters.sortBy} ascending={filters.ascending} minPrice={sliderMin} sliderMin={sliderMin} maxPrice={sliderMax} sliderMax={sliderMax} onSortChange={handleSortChange} onPriceRangeChange={handlePriceRangeChange} />
+                    <ProductsFilter sortBy={filters.sortBy} ascending={filters.ascending} minPrice={priceRange[0]} sliderMin={sliderMin} maxPrice={priceRange[1]} sliderMax={sliderMax} onSortChange={handleSortChange} onPriceRangeChange={handlePriceRangeChange} />
                 </Box>
                 <Box sx={{flex: 1, minWidth: 0, mt: {md: 5, xs: 0} }}>
-                    <ProductsSection filters={filters} priceRange={priceRange} search={search} />
+                    <ProductsSection filters={filters} priceRange={priceRange} search={search} pageSize={1000} />
                 </Box>
             </Box>
             <Features />

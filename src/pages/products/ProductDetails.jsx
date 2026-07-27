@@ -116,7 +116,7 @@ export default function ProductDetails() {
                         <Box>
                             <Typography sx={{color: 'info.main', pb: 2}}>{data.name}</Typography>
                             <Typography sx={{color: 'info.dark', pb: {md: 7, sm: 5, xs: 3}}}>{data.description}</Typography>
-                            <Typography sx={{fontSize: '30px', pb: {sm: 2, xs: 1}}}>${data.price}</Typography>
+                            {data.price==0?<Typography>custom price</Typography>:<Typography sx={{fontSize: '30px', pb: {sm: 2, xs: 1}}}>₪{data.price}</Typography>}
                             <Box sx={{display: 'flex', gap: {md: 5, xs: 3}, alignItems: 'center', pb: {lg: 7, md: 5, xs: 3}}}>
                                 <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
                                     <Rating readOnly value={data.rate}></Rating>

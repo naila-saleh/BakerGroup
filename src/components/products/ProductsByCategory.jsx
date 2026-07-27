@@ -8,6 +8,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import useGetProductsByCategory from "../../hooks/useGetProductsByCategory.jsx";
 import bg from "../../assets/images/hero/bg-hero.png";
 import useCategories from "../../hooks/useCategories.jsx";
+import Product from "../../ui/product/Product.jsx";
+import React from "react";
 
 export default function ProductsByCategory() {
     const {id: categoryId} = useParams();
@@ -29,20 +31,7 @@ export default function ProductsByCategory() {
                             <Typography component={'h3'}>{t('No Products Found')}</Typography>
                         </Box>
                     ):(data.products.map(product=>
-                        <Grid key={product.id} item size={{lg: 3, md: 4, sm: 6, xs: 12}}>
-                            <Link to={`/products/${product.id}`} style={{textDecoration: 'none'}}>
-                                <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
-                                    <CardMedia component={'img'} image={product.mainImage} sx={{width: {md: '100%', sm: '90%', xs: '70%'}, display: 'flex', alignSelf: 'center'}}></CardMedia>
-                                    <CardContent sx={{backgroundColor: '#2D5356', color: 'info.light', borderRadius: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 2, ":last-child": {paddingBottom: 2}}}>
-                                        <Box>
-                                            <Typography component={'h3'}>{product.name}</Typography>
-                                            <Typography component={'span'} variant={'body1'}>${product.price}</Typography>
-                                        </Box>
-                                        <ShoppingCartIcon sx={{color: 'secondary.main', backgroundColor: 'info.light', fontSize: '45px', padding: '10px', borderRadius: '50%', cursor: 'pointer'}} />
-                                    </CardContent>
-                                </Card>
-                            </Link>
-                        </Grid>
+                        <Product key={product.id} {...product} />
                     ))}
                 </Grid>
             </Container>
