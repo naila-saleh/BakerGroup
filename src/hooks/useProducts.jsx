@@ -9,12 +9,12 @@ export default function useProducts({pageNumber = 1, pageSize = 4, sortBy = '', 
             PageSize : pageSize
         };
         if (sortBy && ascending !== '') {
-            params.SortBy = sortBy;
-            params.Ascending = ascending === 'true';
+            params.sortBy = sortBy;
+            params.ascending = ascending === 'true';
         }
-        if (typeof minPrice === 'number') params.MinPrice = minPrice;
-        if (typeof maxPrice === 'number') params.MaxPrice = maxPrice;
-        if (search) params.Search = search;
+        if (typeof minPrice === 'number') params.minPrice = minPrice;
+        if (typeof maxPrice === 'number') params.maxPrice = maxPrice;
+        if (search) params.search = search;
         const response = await axiosInstance.get(`/User/Products`, {params});
         return response.data.items;
     };

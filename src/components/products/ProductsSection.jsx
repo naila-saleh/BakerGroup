@@ -8,9 +8,8 @@ import {useTranslation} from "react-i18next";
 import Product from "../../ui/product/Product.jsx";
 import Button from "@mui/material/Button";
 import EastIcon from "@mui/icons-material/East";
-import {useMemo} from "react";
+import React from "react";
 import WestIcon from "@mui/icons-material/West";
-import PropTypes from "prop-types";
 
 export default function ProductsSection({filters = {}, priceRange, search, pageSize}) {
     const minPrice = Array.isArray(priceRange) ? priceRange[0] : undefined;
@@ -19,42 +18,7 @@ export default function ProductsSection({filters = {}, priceRange, search, pageS
     const {t} = useTranslation();
     const { pathname } = useLocation();
     const isHome = pathname === '/';
-    const products = useMemo(() => (Array.isArray(data) ? data : []), [data]);
-    const displayProducts = useMemo(() => {
-        let next = [...products];
-
-        if (typeof minPrice === 'number' && typeof maxPrice === 'number') {
-            next = next.filter((product) => {
-                const price = Number(product?.price ?? 0);
-                return price >= minPrice && price <= maxPrice;
-            });
-        }
-
-        const normalizedSearch = (search ?? '').trim().toLowerCase();
-        if (normalizedSearch) {
-            next = next.filter((product) => {
-                const haystack = `${product?.name ?? ''} ${product?.description ?? ''}`.toLowerCase();
-                return haystack.includes(normalizedSearch);
-            });
-        }
-
-        const {sortBy = '', ascending = ''} = filters;
-        if (sortBy) {
-            const direction = ascending === 'true' ? 1 : -1;
-            next.sort((a, b) => {
-                if (sortBy === 'name') {
-                    return direction * String(a?.name ?? '').localeCompare(String(b?.name ?? ''));
-                }
-
-                const aValue = Number(a?.[sortBy] ?? 0);
-                const bValue = Number(b?.[sortBy] ?? 0);
-                return direction * (aValue - bValue);
-            });
-        }
-
-        return next;
-    }, [products, minPrice, maxPrice, search, filters]);
-
+    const products = Array.isArray(data) ? data : [];
     const navigate = useNavigate();
     const language = localStorage.getItem('i18nextLng');
 
@@ -76,21 +40,10 @@ export default function ProductsSection({filters = {}, priceRange, search, pageS
                 </Box>
             ) : null}
             <Grid container spacing={{lg: 3, xs: 2}} sx={{mb: {md: 5, xs: 4}}}>
-                {displayProducts.map(product =>
+                {products.map(product =>
                     <Product key={product.id} {...product} />
                 )}
             </Grid>
         </Box>
     )
 }
-
-ProductsSection.propTypes = {
-    filters: PropTypes.shape({
-        sortBy: PropTypes.string,
-        ascending: PropTypes.string,
-    }),
-    priceRange: PropTypes.arrayOf(PropTypes.number),
-    search: PropTypes.string,
-    pageSize: PropTypes.number,
-};
-
