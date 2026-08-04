@@ -186,6 +186,7 @@ i18n
                     "Send us a message" : "Send us a message",
                     "Your email address will not be published." : "Your email address will not be published.",
                     "Required fields are marked" : "Required fields are marked",
+                    "On the client" : "On the client",
                 }
             },
             ar: {
@@ -368,6 +369,7 @@ i18n
                     "Send us a message" : "أرسل لنا رسالة",
                     "Your email address will not be published." : "عنوان بريدك الإلكتروني لن يتم نشره.",
                     "Required fields are marked" : "الحقول المطلوبة معلمة",
+                    "On the client" : "على العميل",
                 }
             }
         },

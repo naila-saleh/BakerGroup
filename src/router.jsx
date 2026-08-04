@@ -17,6 +17,7 @@ import ResetPassword from "./pages/auth/login/ResetPassword.jsx";
 import ProductsByCategory from "./components/products/ProductsByCategory.jsx";
 import ProductsPage from "./pages/products/ProductsPage.jsx";
 import ContactUs from "./pages/contactUs/ContactUs.jsx";
+import AdminLayout from "./layout/AdminLayout.jsx";
 
 const router = createBrowserRouter([
     {
@@ -86,6 +87,15 @@ const router = createBrowserRouter([
             },{
                 path: 'reset-password/:email',
                 element: <ResetPassword />
+            }
+        ]
+    },{
+        path: '/admin',
+        element: <ProtectedRouter><AdminLayout /></ProtectedRouter>,
+        children: [
+            {
+                index: true,
+                element: <div>Dashboard</div>
             }
         ]
     }

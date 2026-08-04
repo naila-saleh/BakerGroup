@@ -31,6 +31,30 @@ import LoginIcon from '@mui/icons-material/Login';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import useThemeStore from "../../store/useThemeStore.js";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+
+const ROLE_CLAIM = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
+
+const decodeJwtPayload = (token) => {
+    if (!token) return null;
+
+    try {
+        const payload = token.split('.')[1];
+        if (!payload) return null;
+
+        const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        const json = decodeURIComponent(
+            atob(base64)
+                .split('')
+                .map((char) => `%${char.charCodeAt(0).toString(16).padStart(2, '0')}`)
+                .join('')
+        );
+
+        return JSON.parse(json);
+    } catch {
+        return null;
+    }
+};
 
 const pages = [
     { id: 'home', to: '/', label: 'Home' },
@@ -45,10 +69,20 @@ export default function NavbarResponsiveMenu() {
     const token = useAuthStore((state) => state.token);
     const logout = useAuthStore((state) => state.logout);
     const {t} = useTranslation();
+    const decodedToken = React.useMemo(() => decodeJwtPayload(token), [token]);
+    const role = decodedToken?.[ROLE_CLAIM] ?? decodedToken?.role ?? decodedToken?.Role;
+    const isAdmin = typeof role === 'string' && role.toLowerCase().includes('admin');
     const changeLanguage = ()=>{
         const newLng = i18n.language === 'en' ? 'ar' : 'en';
         i18n.changeLanguage(newLng);
     }
+    const actionButtonSx = {
+        width: 40,
+        height: 40,
+        p: 0,
+        color: 'info.light',
+        flex: '0 0 40px',
+    };
     const {data} = useCart();
     const cartCount = data?.items?.length || 0;
     const navigate = useNavigate();
@@ -56,6 +90,7 @@ export default function NavbarResponsiveMenu() {
     const toggleMode = useThemeStore((state) => state.toggleMode);
     const icons = token
         ? [
+            ...(isAdmin ? [{ id: 'admin', to: '/admin', icon: <DashboardIcon /> }] : []),
             { id: 'mode', to: '#', icon: mode === 'light' ? <DarkModeIcon /> : <LightModeIcon /> },
             { id: 'language', to: '#', icon: <LanguageIcon /> },
             { id: 'search', to: '#', icon: <SearchIcon /> },
@@ -129,11 +164,159 @@ export default function NavbarResponsiveMenu() {
         }
     }
 
+    const renderMobileAction = (icon) => {
+        if (icon.id === 'mode') {
+            return (
+                <Button onClick={toggleMode} sx={{ minWidth: 8, p: 0, my: 1, color: 'secondary.main' }}>
+                    {icon.icon}
+                </Button>
+            );
+        }
+
+        if (icon.id === 'language') {
+            return (
+                <Button onClick={changeLanguage} sx={{ minWidth: 8, p: 0, my: 1, color: 'secondary.main' }}>
+                    {icon.icon}
+                </Button>
+            );
+        }
+
+        if (icon.id === 'logout') {
+            return (
+                <Button onClick={handleLogout} sx={{ minWidth: 8, p: 0, color: 'secondary.main' }}>
+                    {icon.icon}
+                </Button>
+            );
+        }
+
+        if (icon.id === 'search') {
+            return (
+                <Button
+                    sx={{ minWidth: 8, p: 0, color: 'secondary.main' }}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleSearchToggle(e);
+                    }}
+                >
+                    {icon.icon}
+                </Button>
+            );
+        }
+
+        if (icon.id === 'cart') {
+            return (
+                <Badge
+                    badgeContent={cartCount}
+                    sx={{
+                        color: 'secondary.main !important',
+                        '& .MuiBadge-badge': {
+                            bgcolor: '#2D5356',
+                            color: 'info.light',
+                            borderRadius: '50%',
+                            minWidth: '16px',
+                            height: '16px',
+                            padding: '0 4px',
+                            fontSize: '0.65rem'
+                        }
+                    }}
+                >
+                    <Link component={RouterLink} to={icon.to} underline="none" sx={{ color: 'secondary.main' }}>
+                        {icon.icon}
+                    </Link>
+                </Badge>
+            );
+        }
+
+        return (
+            <Link component={RouterLink} to={icon.to} underline="none" sx={{ color: 'secondary.main' }}>
+                {icon.icon}
+            </Link>
+        );
+    };
+
+    const renderDesktopAction = (icon) => {
+        if (icon.id === 'mode') {
+            return (
+                <IconButton key={icon.id} onClick={toggleMode} sx={actionButtonSx}>
+                    {icon.icon}
+                </IconButton>
+            );
+        }
+
+        if (icon.id === 'language') {
+            return (
+                <IconButton key={icon.id} onClick={changeLanguage} sx={actionButtonSx}>
+                    {icon.icon}
+                </IconButton>
+            );
+        }
+
+        if (icon.id === 'search') {
+            return (
+                <IconButton key={icon.id} onClick={handleSearchToggle} sx={actionButtonSx}>
+                    {icon.icon}
+                </IconButton>
+            );
+        }
+
+        if (icon.id === 'logout') {
+            return (
+                <IconButton
+                    key={icon.id}
+                    onClick={handleLogout}
+                    sx={actionButtonSx}
+                >
+                    {icon.icon}
+                </IconButton>
+            );
+        }
+
+        if (icon.id === 'cart') {
+            return (
+                <Box key={icon.id} sx={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 40px' }}>
+                    <Badge
+                        badgeContent={cartCount}
+                        sx={{
+                            '& .MuiBadge-badge': {
+                                bgcolor: 'secondary.main',
+                                color: 'info.light',
+                                borderRadius: '50%',
+                                minWidth: '16px',
+                                height: '16px',
+                                padding: '0 4px',
+                                fontSize: '0.65rem'
+                            }
+                        }}
+                    >
+                        <IconButton component={RouterLink} to={icon.to} sx={actionButtonSx}>
+                            {icon.icon}
+                        </IconButton>
+                    </Badge>
+                </Box>
+            );
+        }
+
+        return (
+            <IconButton key={icon.id} component={RouterLink} to={icon.to} sx={actionButtonSx}>
+                {icon.icon}
+            </IconButton>
+        );
+    };
+
     return (
-        <Box sx={{ flexGrow: 1, mb: {lg: 9, sm: 8, xs: 6}}}>
+        <Box sx={{ flexGrow: 1, mb: {sm: 8, xs: 6}}}>
             <AppBar position="fixed" sx={{backgroundColor: '#2D5356'}}>
                 <Container maxWidth="xl">
-                    <Toolbar disableGutters sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'info.light'}}>
+                    <Toolbar
+                        disableGutters
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            flexWrap: 'nowrap',
+                            color: 'info.light',
+                        }}
+                    >
                         <Link component={RouterLink} to={'/'} color="inherit" underline={"none"} sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
                             <img alt={''} src={logo} width={27}/>
                             <Typography
@@ -221,7 +404,7 @@ export default function NavbarResponsiveMenu() {
                                 </Button>
                             ))}
                         </Box>
-                        <Box sx={{display: { xs: 'flex', lg: 'none' } }}>
+                        <Box sx={{display: { xs: 'flex', lg: 'none' }, alignItems: 'center', flexWrap: 'nowrap' }}>
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -251,97 +434,15 @@ export default function NavbarResponsiveMenu() {
                                 {icons.map((icon) => (
                                     <MenuItem key={icon.id} onClick={icon.id === 'logout' ? handleLogout : handleCloseUserMenu}>
                                         <Typography sx={{ textAlign: 'center'}}>
-                                            { icon.id === 'mode'?(
-                                                <Button onClick={toggleMode} sx={{ minWidth: 8, p: 0, my: 1, color: 'secondary.main' }}>
-                                                    {icon.icon}
-                                                </Button>
-                                            ):(icon.id === 'language'?(
-                                                <Button key={icon.id} onClick={changeLanguage} sx={{ minWidth: 8, p: 0, my: 1, color: 'secondary.main'  }}>
-                                                    {icon.icon}
-                                                </Button>
-                                            ) : (icon.id === 'logout' ? (
-                                                <Button key={icon.id} onClick={handleLogout} sx={{ minWidth: 8, p: 0, color: 'secondary.main' }}>
-                                                    {icon.icon}
-                                                </Button>
-                                            ) : (icon.id === 'cart' ? (
-                                                    <Badge key={icon.id} badgeContent={cartCount}
-                                                        sx ={{
-                                                            color: "secondary.main !important",
-                                                            '& .MuiBadge-badge': {
-                                                                bgcolor: '#2D5356',
-                                                                color: 'info.light',
-                                                                borderRadius: '50%',
-                                                                minWidth: '16px',
-                                                                height: '16px',
-                                                                padding: '0 4px',
-                                                                fontSize: '0.65rem'
-                                                            }
-                                                    }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'secondary.main' }}>{icon.icon}</Link></Badge>
-                                                ):(
-                                                    (icon.id === 'search') ? (
-                                                        <Button key={icon.id} sx={{ minWidth: 8, p: 0, color: 'secondary.main' }}
-                                                                onClick={(e) =>{
-                                                                    e.stopPropagation();
-                                                                    handleSearchToggle(e);
-                                                                }}
-                                                        >
-                                                            {icon.icon}
-                                                        </Button>
-                                                    ) : (
-                                                        <Link key={icon.id} component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'secondary.main' }}>{icon.icon}</Link>
-                                                    )
-                                                ))
-                                                )
-                                            )}
+                                            {renderMobileAction(icon)}
                                         </Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
                         </Box>
-                        <Box sx={{display: { xs: 'none', lg: 'flex' } }}>
+                        <Box sx={{display: { xs: 'none', lg: 'flex' }, alignItems: 'center', flexWrap: 'nowrap', gap: 0.75 }}>
                             {icons.map((icon) => (
-                                icon.id === 'mode'? (
-                                    <Button key={icon.id} onClick={toggleMode} sx={{ minWidth: 8, p: 0, color: 'info.light', display: 'block', my: 2, mx: 1 }}>
-                                        {icon.icon}
-                                    </Button>
-                                ):(
-                                    icon.id === 'language' ? (
-                                        <Button key={icon.id} onClick={changeLanguage} sx={{ minWidth: 8, p: 0, color: 'info.light', display: 'block', my: 2, mx: 1 }}>
-                                            {icon.icon}
-                                        </Button>
-                                    ):(
-                                        (icon.id === 'search') ? (
-                                            <Button key={icon.id} onClick={handleSearchToggle} sx={{ minWidth: 8, p: 0, color: 'info.light', display: 'block', my: 2, mx: 1 }}>
-                                                {icon.icon}
-                                            </Button>
-                                        ) : (
-                                            <Button
-                                                key={icon.id}
-                                                onClick={icon.id === 'logout' ? handleLogout : handleCloseNavMenu}
-                                                sx={{ my: 2, color: 'white', display: 'block', minWidth: 8 }}
-                                            >{ icon.id === 'logout' ? (
-                                                icon.icon
-                                            ) : (
-                                                icon.id === 'cart' ? (
-                                                    <Badge key={icon.id} badgeContent={cartCount} sx={{
-                                                        '& .MuiBadge-badge': {
-                                                            bgcolor: 'secondary.main',
-                                                            color: 'info.light',
-                                                            borderRadius: '50%',
-                                                            minWidth: '16px',
-                                                            height: '16px',
-                                                            padding: '0 4px',
-                                                            fontSize: '0.65rem'
-                                                        }
-                                                    }}><Link component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'info.light'}}>{icon.icon}</Link></Badge>
-                                                ):(
-                                                    <Link key={icon.id} component={RouterLink} to={icon.to} underline={"none"} sx={{color: 'info.light'}}>{icon.icon}</Link>
-                                                )
-                                            )}
-                                            </Button>
-                                        )
-                                    )
-                                )
+                                renderDesktopAction(icon)
                             ))}
                         </Box>
                     </Toolbar>

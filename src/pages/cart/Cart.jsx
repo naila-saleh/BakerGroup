@@ -94,7 +94,7 @@ export default function Cart() {
                             </TableRow>
                             <TableRow>
                                 <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>{t('Shipping')}</TableCell>
-                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>{t('Free')}</TableCell>
+                                <TableCell sx={{fontSize: {md: '16px', xs: '14px'}, color: 'primary.dark', textAlign: 'start'}}>{t('On the client')}</TableCell>
                             </TableRow>
                             <TableRow sx={{backgroundColor: 'info.light'}}>
                                 <TableCell sx={{fontSize: {md: '17px', xs: '15px'}, fontWeight: 'bold', textAlign: 'start'}}>{t('Total')}</TableCell>
