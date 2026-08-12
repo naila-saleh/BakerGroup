@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter, Navigate} from "react-router-dom";
 import MainLayout from "./layout/MainLayout.jsx";
 import Home from "./pages/home/Home.jsx";
 import Cart from "./pages/cart/Cart.jsx";
@@ -18,8 +18,17 @@ import ProductsByCategory from "./components/products/ProductsByCategory.jsx";
 import ProductsPage from "./pages/products/ProductsPage.jsx";
 import ContactUs from "./pages/contactUs/ContactUs.jsx";
 import AdminLayout from "./layout/AdminLayout.jsx";
+import Hero from "./components/adminHero/Hero.jsx";
+import Products from "./pages/adminProducts/Products.jsx";
+import AddProduct from "./pages/adminProducts/AddProduct.jsx";
+import AdminProductDetails from "./pages/adminProducts/ProductDetails.jsx";
 
 const router = createBrowserRouter([
+    // legacy /login redirect -> new /auth/login
+    {
+        path: '/login',
+        element: <Navigate to={'/auth/login'} replace />
+    },
     {
         path: '/',
         element: <MainLayout />,
@@ -95,7 +104,25 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <div>Dashboard</div>
+                element: <Hero />
+            },{
+                path: 'products',
+                element: <Products />
+            },{
+                path: 'products/new',
+                element: <AddProduct />
+            },{
+                path: 'products/:id',
+                element: <AdminProductDetails />
+            },{
+                path: 'categories',
+                element: <div>Categories</div>
+            },{
+                path: 'users',
+                element: <div>Users</div>
+            },{
+                path: 'reviews',
+                element: <div>Reviews</div>
             }
         ]
     }

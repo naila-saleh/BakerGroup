@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import useProduct from "../../hooks/useProduct";
+import useAdminProduct from "../../hooks/admin/useAdminProduct.jsx";
 import Loader from "../../ui/loader/Loader.jsx";
 import bg from '../../assets/images/hero/bg-hero.png'
 import Box from "@mui/material/Box";
@@ -7,54 +7,29 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import WestIcon from '@mui/icons-material/West';
 import {CircularProgress, Container, Grid, Rating} from "@mui/material";
-import coupon from '../../assets/images/coupon.png'
-import useAddToCart from "../../hooks/useAddToCart.jsx";
 import {useTranslation} from "react-i18next";
 import { styled } from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
-import Features from "../../components/features/Features.jsx";
-import useAddReview from "../../hooks/useAddReview.jsx";
-import {useForm} from "react-hook-form";
-import TextField from "@mui/material/TextField";
 import {useState} from "react";
 import EastIcon from "@mui/icons-material/East";
+import coupon from "../../assets/images/coupon.png";
 import Avatar from "@mui/material/Avatar";
+import Link from "@mui/material/Link";
+import {Link as RouterLink} from "react-router-dom";
+import useAdminCategories from "../../hooks/admin/useAdminCategories.jsx";
 
 export default function ProductDetails() {
     const {id} = useParams();
-    const {data, isLoading, isError, error} = useProduct(id);
-    const {mutate, isPending} = useAddToCart();
+    const {data, isLoading, isError, error} = useAdminProduct(id);
+    const {data: categories, isLoading: isLoadingCategory, isError: isErrorCategory, error: errorCategory} = useAdminCategories();
     const {t} = useTranslation();
     const navigate = useNavigate();
-    const {mutate: addReview, isPending: isReviewPending} = useAddReview();
-    const [formReview, setFormReview] = useState(false);
-    const [reviewError, setReviewError] = useState('');
     const language = localStorage.getItem('i18nextLng');
-    const handleShowFormReview = () => {
-        setReviewError('');
-        formReview === true? setFormReview(false) : setFormReview(true);
-    }
-    const {register, handleSubmit, formState: {errors}} = useForm();
-    const onSubmit = (values) => {
-        setReviewError('');
-        addReview(
-            {
-                productId: data.id,
-                rating: Number(values.rating),
-                comment: values.comment
-            }, {
-                onSuccess: () => {
-                    setFormReview(false);
-                },
-                onError: (error) => {
-                    if (error?.response?.status === 400) {
-                        setReviewError('You should buy & receive the order to make a review.');
-                        return;
-                    }
-                    setReviewError(error?.response?.data?.message || t('Something went wrong. Please try again.'));
-                }
-            }
-        )
+    const [showImage, setShowImage] = useState(data?.mainImage);
+    const categoryId = data?.categoryId;
+    let category = '';
+    for(let i=0; i<categories?.length; i++){
+        if(categories[i].id === categoryId) category=categories[i].name;
     }
 
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -88,8 +63,6 @@ export default function ProductDetails() {
             else if(review.rate === 1) oneStarCount++;
         })
     }
-
-    const [showImage, setShowImage] = useState(data?.mainImage);
     const changeImage = (image) => {
         setShowImage(image);
     }
@@ -104,7 +77,7 @@ export default function ProductDetails() {
                 <Typography component={'h1'} sx={{color: 'info.light', fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center',pb: 3, px: 2}}>{t('Products')}/{data.name}/{t('Product Details')}</Typography>
             </Box>
             <Container maxWidth={'xl'} sx={{px: {md: 10,sm: 5, xs: 2}, py: {md: 5,sm: 3, xs: 2}}}>
-                <Button onClick={()=>navigate('/products')} sx={{textTransform: 'none', color: 'secondary.main'}}>
+                <Button onClick={()=>navigate('/admin/products')} sx={{textTransform: 'none', color: 'secondary.main'}}>
                     {language==='en'?<WestIcon sx={{mr: 1}}/>:<EastIcon sx={{ml: 1}} />}
                     {t('Back to Products')}
                 </Button>
@@ -118,30 +91,29 @@ export default function ProductDetails() {
                             ))}
                         </Box>
                     </Grid>
-                    <Grid size={{lg: 6, md: 12, sm: 12, xs: 12}} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                    <Grid size={{lg: 6, md: 12, sm: 12, xs: 12}} sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
                         <Box>
-                            <Typography sx={{color: 'info.main', pb: 2}}>{data.name}</Typography>
-                            <Typography sx={{color: 'info.dark', pb: {md: 7, sm: 5, xs: 3}}}>{data.description}</Typography>
+                            <Typography sx={{color: 'info.main', pb: 4}}>{data.name}</Typography>
+                            <Typography sx={{color: 'info.dark', pb: 2}}>{data.description}</Typography>
+                            {data.quantity?<Typography sx={{color: 'info.main', pb: {md: 7, sm: 5, xs: 3}}}>{data.quantity} {t('items remains')}</Typography>: <Typography sx={{color: 'error.main', pb: {md: 7, sm: 5, xs: 3}}}>{t('Out of stock')}</Typography>}
                             {data.price==0?<Typography sx={{color: 'primary.dark', fontSize: '18px', pb: {sm: 2, xs: 1}}}>custom price</Typography>:<Typography sx={{fontSize: '30px', pb: {sm: 2, xs: 1}}}>₪{data.price}</Typography>}
-                            <Box sx={{display: 'flex', gap: {md: 5, xs: 3}, alignItems: 'center', pb: {lg: 7, md: 5, xs: 3}}}>
+                            <Box sx={{display: 'flex', gap: {md: 5, xs: 3}, alignItems: 'center'}}>
                                 <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
                                     <Rating readOnly value={data.rate}></Rating>
                                     <Typography sx={{fontSize: '20px'}}>{data.rate}</Typography>
                                 </Box>
                                 <Typography sx={{color: 'info.dark'}}>{data.reviews?.length} {t('Reviews')}</Typography>
                             </Box>
-                            <Button variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: 'secondary.main', fontWeight: 300, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5, mx: {md: 2, xs: 1} }}>{t('Buy Now')}</Button>
-                            <Button variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: '#2D5356', fontWeight: 300, px: {sm: 5, xs: 4}, py: 1.1, borderRadius: 5}}
-                                    onClick={()=>mutate({
-                                        ProductId: data.id,
-                                        Count: 1,
-                                    })}
-                                    disabled={isPending}
-                            >{t('Add To Cart')}</Button>
                         </Box>
-                        <Box sx={{display: 'flex', flexDirection: 'row' , gap: 1, alignItems: 'flex-start'}}>
+                        <Box sx={{display: 'flex', flexDirection: 'row' , gap: 1, alignItems: 'flex-start', pt: 4}}>
                             <Typography sx={{color: 'info.dark', fontSize: '18px'}}>{t('Coupon & Discount')}:</Typography>
                             <Typography component={'span'} sx={{color: 'info.main', fontSize: '18px'}}>{data.discount}%</Typography>
+                        </Box>
+                        <Typography sx={{color: 'secondary.main', pt: 3, pb: 2}}>{t('Product Category:')} {category}</Typography>
+                        <Typography sx={{color: 'secondary.main'}}>{t('Product Status:')} {data?.status?t('Inactive'):t('Active')}</Typography>
+                        <Box sx={{display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', pt: 4}}>
+                            <Button variant={'contained'} color={'error'} component={RouterLink}>Delete</Button>
+                            <Button variant={'contained'} component={RouterLink} sx={{ml: 2, backgroundColor: '#2D5356'}}>Update</Button>
                         </Box>
                     </Grid>
                 </Grid>
@@ -229,23 +201,7 @@ export default function ProductDetails() {
                         </Box>
                     )}
                 </Box>
-                <Box sx={{mt: 5, display: 'flex', flexDirection: 'column', alignItems: {sm: 'start', xs: 'center'}, textAlign: {sm: 'start', xs: 'center'} }}>
-                    <Typography component={'h2'} sx={{color: 'inherit', fontSize: {md: '32px', sm: '30px', xs: '25px'}, textAlign: {lg: 'start', xs: 'center'}, mb: 2, fontWeight: '500'}}>{t('Review this Product')}</Typography>
-                    <Typography sx={{color: 'info.dark', fontSize: '16px', my: 1}}>{t('Share your thoughts with other customers')}</Typography>
-                    <Button onClick={handleShowFormReview} variant="contained" sx={{textTransform: 'none', color: 'info.light', backgroundColor: 'secondary.main', fontWeight: 400, px: 4, py: 1.1, borderRadius: 5, fontSize: '15px', mt: 1 }}>{t('Write a customer review')}</Button>
-                    <Box component={'form'}
-                         onSubmit={handleSubmit(onSubmit)}
-                         sx={{border: '2px solid rgba(45,83,86,0.4)', borderRadius: 3, my: 5, width: {md: '80%', xs: '100%'}, px: {sm: 4, xs: 2}, py: 5, display: formReview?'flex':'none', flexDirection: 'column', gap: 2, alignItems: {sm: 'start',xs: 'center'}, justifyContent: 'center'}}>
-                        <Rating {...register('rating', {required: t('Rating is required')})} size="large" />
-                        {errors.rating && <span style={{color: 'red'}}>{errors.rating.message}</span>}
-                        <TextField {...register('comment', {required: t('Comment is required')})} label={t('Comment')} variant="standard" fullWidth multiline rows={4}
-                                   error={!!errors.comment} helperText={errors.comment?.message}/>
-                        {reviewError && <span style={{color: 'red', width: '100%', fontSize: '14px'}}>{reviewError}</span>}
-                        <Button variant="contained" type={'submit'} sx={{textTransform: 'none', color: 'info.light', backgroundColor: '#2D5356', fontWeight: 400, px: 4, py: 1.1, borderRadius: 5, fontSize: '15px', mt: 1 }} disabled={isReviewPending}>{isReviewPending ? <CircularProgress/> : t('Submit Review')}</Button>
-                    </Box>
-                </Box>
             </Container>
-            <Features />
         </Box>
     )
 }

@@ -20,6 +20,7 @@ import ReviewsIcon from '@mui/icons-material/Reviews';
 import logo from '../../assets/images/logo/BakerGroup-yelloLogo.svg'
 import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router";
+import {useNavigate} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -27,6 +28,7 @@ export default function Sidebar({ children }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [isClosing, setIsClosing] = React.useState(false);
     const [selectedText, setSelectedText] = React.useState('Welcome to Admin Panel');
+    const navigate = useNavigate();
 
     const handleDrawerClose = () => {
         setIsClosing(true);
@@ -44,20 +46,21 @@ export default function Sidebar({ children }) {
     };
 
     const list = [
-        { text: 'Users', icon: <SupervisedUserCircleIcon sx={{ color: 'secondary.main' }} /> },
-        { text: 'Products', icon: <InventoryIcon sx={{ color: 'secondary.main' }} /> },
-        { text: 'Categories', icon: <ClassIcon sx={{ color: 'secondary.main' }} /> },
-        { text: 'Reviews', icon: <ReviewsIcon sx={{ color: 'secondary.main' }} /> },
+        { text: 'Users', to: '/admin', icon: <SupervisedUserCircleIcon sx={{ color: 'secondary.main' }} /> },
+        { text: 'Products', to: '/admin/products', icon: <InventoryIcon sx={{ color: 'secondary.main' }} /> },
+        { text: 'Categories', to: '/admin', icon: <ClassIcon sx={{ color: 'secondary.main' }} /> },
+        { text: 'Reviews', to: '/admin', icon: <ReviewsIcon sx={{ color: 'secondary.main' }} /> },
     ];
 
     const handleItemClick = (text) => {
+        navigate(text.toLowerCase());
         setSelectedText(text);
     };
 
     const drawer = (
         <Box sx={{ backgroundColor: '#2D5356', height: '100%', color: 'info.light'}}>
             <Toolbar sx={{ borderBottom: '1px solid', borderColor: 'info.light' }} >
-                <Link component={RouterLink} to={'/'} color="inherit" underline={"none"} sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+                <Link component={RouterLink} to={'/'} color="inherit" underline={"none"} sx={{ display: 'flex', alignItems: 'center' }}>
                     <img alt={''} src={logo} width={27}/>
                     <Typography
                         variant="h6"
@@ -66,7 +69,7 @@ export default function Sidebar({ children }) {
                         sx={{
                             ml: 1,
                             mr: 2,
-                            display: { xs: 'none', md: 'flex' },
+                            display: 'flex',
                             fontFamily: 'monospace',
                             fontWeight: 600,
                             letterSpacing: '0.5px',
@@ -100,8 +103,8 @@ export default function Sidebar({ children }) {
             <AppBar
                 position="fixed"
                 sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
+                    width: { md: `calc(100% - ${drawerWidth}px)` },
+                    ml: { md: `${drawerWidth}px` },
                 }}
             >
                 <Toolbar sx={{ backgroundColor: 'secondary.main'}}>
@@ -109,7 +112,7 @@ export default function Sidebar({ children }) {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
+                        sx={{ mr: 2, display: { md: 'none' } }}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -120,7 +123,7 @@ export default function Sidebar({ children }) {
             </AppBar>
             <Box
                 component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
                 aria-label="mailbox folders"
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -130,7 +133,7 @@ export default function Sidebar({ children }) {
                     onTransitionEnd={handleDrawerTransitionEnd}
                     onClose={handleDrawerClose}
                     sx={{
-                        display: { xs: 'block', sm: 'none' },
+                        display: { xs: 'block', md: 'none' },
                         '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                     slotProps={{
@@ -144,7 +147,7 @@ export default function Sidebar({ children }) {
                 <Drawer
                     variant="permanent"
                     sx={{
-                        display: { xs: 'none', sm: 'block' },
+                        display: { xs: 'none', md: 'block' },
                         '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                     open
@@ -154,7 +157,7 @@ export default function Sidebar({ children }) {
             </Box>
             <Box
                 component="main"
-                sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                sx={{ flexGrow: 1, p: 3, width: { md: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
                 {children}

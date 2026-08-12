@@ -32,6 +32,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import useThemeStore from "../../store/useThemeStore.js";
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import axiosInstance from "../../api/axiosInstance.js";
 
 const ROLE_CLAIM = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
 
@@ -125,11 +126,17 @@ export default function NavbarResponsiveMenu() {
         setAnchorElUser(null);
     };
 
-    const handleLogout = () => {
-        logout();
-        handleCloseUserMenu();
-        handleCloseNavMenu();
-        navigate('/auth/login');
+    const handleLogout = async () => {
+        try {
+            await axiosInstance.post('/Identity/auth/logout', {}, { withCredentials: true });
+        } catch (error) {
+            if (import.meta.env.DEV) console.error('Logout API call failed:', error);
+        } finally {
+            logout();
+            handleCloseUserMenu();
+            handleCloseNavMenu();
+            navigate('/auth/login');
+        }
     };
 
     const handleSearchToggle = (event) => {

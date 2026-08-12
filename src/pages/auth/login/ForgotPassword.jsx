@@ -15,7 +15,7 @@ export default function ForgotPassword() {
     const {register, handleSubmit, formState: {errors}} = useForm();
 
     const handleForgotPassword = (values) => {
-        forgotPassword(values.email, { onSuccess: ()=> navigate(`/Identity/auth/reset-password/${values.email}`)});
+        forgotPassword(values.email, { onSuccess: ()=> navigate(`/auth/reset-password/${values.email}`)});
     };
 
     return (

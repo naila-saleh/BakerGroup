@@ -18,6 +18,7 @@ import useCart from "../../hooks/useCart.jsx";
 import {Badge} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import LanguageIcon from '@mui/icons-material/Language';
+import axiosInstance from "../../api/axiosInstance.js";
 
 export default function Navbar() {
     const token = useAuthStore((state) => state.token);
@@ -26,9 +27,15 @@ export default function Navbar() {
     const {data} = useCart();
     const cartCount = data?.items?.length || 0;
     const navigate = useNavigate();
-    const handleLogout = () => {
-        logout();
-        navigate('/auth/login');
+    const handleLogout = async () => {
+        try {
+            await axiosInstance.post('/Identity/auth/logout', {}, { withCredentials: true });
+        } catch (error) {
+            if (import.meta.env.DEV) console.error('Logout API call failed:', error);
+        } finally {
+            logout();
+            navigate('/auth/login');
+        }
     }
     return (
         <Box sx={{ flexGrow: 1, mb: {sm: 8, xs: 6}}}>

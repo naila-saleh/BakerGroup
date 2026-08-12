@@ -187,6 +187,12 @@ i18n
                     "Your email address will not be published." : "Your email address will not be published.",
                     "Required fields are marked" : "Required fields are marked",
                     "On the client" : "On the client",
+                    "items remains": "items remains",
+                    "Out of stock": "Out of stock",
+                    "Product Status:": "Product Status:",
+                    "Inactive": "Inactive",
+                    "Active": "Active",
+                    "Custom Price": "Custom Price",
                 }
             },
             ar: {
@@ -370,6 +376,12 @@ i18n
                     "Your email address will not be published." : "عنوان بريدك الإلكتروني لن يتم نشره.",
                     "Required fields are marked" : "الحقول المطلوبة معلمة",
                     "On the client" : "على العميل",
+                    "items remains": "العناصر المتبقية",
+                    "Out of stock": "غير متوفر في المخزون",
+                    "Product Status:" : "حالة المنتج:",
+                    "Inactive" : "غير نشط",
+                    "Active" : "نشط",
+                    "Custom Price" : "سعر مخصص",
                 }
             }
         },

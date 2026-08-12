@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useForm} from "react-hook-form";
-import axios from "axios";
 import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router-dom";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -17,10 +16,10 @@ import {useTranslation} from "react-i18next";
 import {red} from "@mui/material/colors";
 
 export default function Login() {
-    const setToken = useAuthStore((state) => state.setToken);
+    const setTokens = useAuthStore((state) => state.setTokens);
     const navigate = useNavigate()
     const handleForgotPassword = () => {
-        navigate('/Identity/auth/forgot-password');
+        navigate('/auth/forgot-password');
     }
     const {t} = useTranslation();
     const [serverErrors, setServerErrors] = useState([]);
@@ -30,9 +29,11 @@ export default function Login() {
     const loginForm = async (values) => {
         try {
             const response = await axiosInstance.post(`/Identity/auth/login`, values);
-            console.log(response);
             if(response.status === 204 || response.status === 200) {
-                setToken(response.data.token);
+                // Read only the access token from response body
+                // Refresh token is stored as an HttpOnly cookie by the browser
+                const accessToken = response.data.accessToken || response.data.token;
+                setTokens(accessToken);
                 navigate('/');
             }
         }catch (e){
