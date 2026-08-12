@@ -6,26 +6,28 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import WestIcon from '@mui/icons-material/West';
-import {CircularProgress, Container, Grid, Rating} from "@mui/material";
+import {Container, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Rating} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import { styled } from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import {useState} from "react";
 import EastIcon from "@mui/icons-material/East";
-import coupon from "../../assets/images/coupon.png";
 import Avatar from "@mui/material/Avatar";
-import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router-dom";
 import useAdminCategories from "../../hooks/admin/useAdminCategories.jsx";
+import useAdminDeleteProduct from "../../hooks/admin/useAdminDeleteProduct.jsx";
+import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
 
 export default function ProductDetails() {
     const {id} = useParams();
     const {data, isLoading, isError, error} = useAdminProduct(id);
-    const {data: categories, isLoading: isLoadingCategory, isError: isErrorCategory, error: errorCategory} = useAdminCategories();
+    const {data: categories} = useAdminCategories();
     const {t} = useTranslation();
     const navigate = useNavigate();
+    const { mutate: deleteProduct, isPending: isDeleting } = useAdminDeleteProduct();
     const language = localStorage.getItem('i18nextLng');
     const [showImage, setShowImage] = useState(data?.mainImage);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const categoryId = data?.categoryId;
     let category = '';
     for(let i=0; i<categories?.length; i++){
@@ -66,6 +68,16 @@ export default function ProductDetails() {
     const changeImage = (image) => {
         setShowImage(image);
     }
+
+    const handleDelete = () => {
+        setIsDeleteDialogOpen(true);
+    };
+
+    const confirmDelete = () => {
+        deleteProduct(id, {
+            onSuccess: () => navigate('/admin/products'),
+        });
+    };
 
     if(isLoading) return <Loader />
     if(isError) return <div>{error.message}</div>
@@ -112,7 +124,9 @@ export default function ProductDetails() {
                         <Typography sx={{color: 'secondary.main', pt: 3, pb: 2}}>{t('Product Category:')} {category}</Typography>
                         <Typography sx={{color: 'secondary.main'}}>{t('Product Status:')} {data?.status?t('Inactive'):t('Active')}</Typography>
                         <Box sx={{display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center', pt: 4}}>
-                            <Button variant={'contained'} color={'error'} component={RouterLink}>Delete</Button>
+                            <Button variant={'contained'} color={'error'} onClick={handleDelete} disabled={isDeleting}>
+                                {isDeleting ? 'Deleting...' : 'Delete'}
+                            </Button>
                             <Button variant={'contained'} component={RouterLink} sx={{ml: 2, backgroundColor: '#2D5356'}}>Update</Button>
                         </Box>
                     </Grid>
@@ -202,6 +216,61 @@ export default function ProductDetails() {
                     )}
                 </Box>
             </Container>
+            <Dialog
+                open={isDeleteDialogOpen}
+                onClose={() => !isDeleting && setIsDeleteDialogOpen(false)}
+                aria-labelledby="delete-product-dialog-title"
+                PaperProps={{
+                    sx: {
+                        width: '100%',
+                        maxWidth: 460,
+                        borderRadius: 3,
+                        overflow: 'hidden',
+                    },
+                }}
+            >
+                <Box sx={{ display: 'flex', justifyContent: 'center', pt: 3 }}>
+                    <Box sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: 58,
+                        height: 58,
+                        borderRadius: '50%',
+                        color: 'error.main',
+                        backgroundColor: 'rgba(211, 47, 47, 0.12)',
+                    }}>
+                        <WarningAmberRoundedIcon sx={{ fontSize: 34 }} />
+                    </Box>
+                </Box>
+                <DialogTitle id="delete-product-dialog-title" sx={{ textAlign: 'center', pt: 2, pb: 1, fontWeight: 700 }}>
+                    Delete product?
+                </DialogTitle>
+                <DialogContent sx={{ textAlign: 'center', px: { xs: 3, sm: 6 }, pb: 2 }}>
+                    <Typography color="text.secondary">
+                        Are you sure you want to delete <strong>{data.name}</strong>? This action cannot be undone.
+                    </Typography>
+                </DialogContent>
+                <DialogActions sx={{ justifyContent: 'center', gap: 1.5, px: 3, pb: 3 }}>
+                    <Button
+                        variant="outlined"
+                        onClick={() => setIsDeleteDialogOpen(false)}
+                        disabled={isDeleting}
+                        sx={{ minWidth: 110, borderRadius: 2, textTransform: 'none' }}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="error"
+                        onClick={confirmDelete}
+                        disabled={isDeleting}
+                        sx={{ minWidth: 130, borderRadius: 2, textTransform: 'none' }}
+                    >
+                        {isDeleting ? 'Deleting...' : 'Delete product'}
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Box>
     )
 }
