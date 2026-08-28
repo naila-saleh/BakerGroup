@@ -127,7 +127,7 @@ export default function ProductDetails() {
                             <Button variant={'contained'} color={'error'} onClick={handleDelete} disabled={isDeleting}>
                                 {isDeleting ? 'Deleting...' : 'Delete'}
                             </Button>
-                            <Button variant={'contained'} component={RouterLink} sx={{ml: 2, backgroundColor: '#2D5356'}}>Update</Button>
+                            <Button variant={'contained'} component={RouterLink} to={`/admin/products/${id}/edit`} sx={{ml: 2, backgroundColor: '#2D5356'}}>Update</Button>
                         </Box>
                     </Grid>
                 </Grid>

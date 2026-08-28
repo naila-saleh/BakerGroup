@@ -15,7 +15,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
-import logo from '../../assets/images/logo/BakerGroup-yelloLogo.svg'
+import logo from '../../assets/images/logo/woodLine.png'
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router-dom";
@@ -325,7 +325,7 @@ export default function NavbarResponsiveMenu() {
                         }}
                     >
                         <Link component={RouterLink} to={'/'} color="inherit" underline={"none"} sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-                            <img alt={''} src={logo} width={27}/>
+                            <img alt={''} src={logo} width={30}/>
                             <Typography
                                 variant="h6"
                                 noWrap
@@ -341,7 +341,7 @@ export default function NavbarResponsiveMenu() {
                                     textDecoration: 'none',
                                 }}
                             >
-                                BakerGroup
+                                WoodLine
                             </Typography>
                         </Link>
                         <Box sx={{display: { xs: 'flex', md: 'none' } }}>
@@ -381,7 +381,7 @@ export default function NavbarResponsiveMenu() {
                             </Menu>
                         </Box>
                         <Link component={RouterLink} to={'/'} color="inherit" underline={"none"} sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
-                            <img alt={''} src={logo} width={27}/>
+                            <img alt={''} src={logo} width={30}/>
                             <Typography
                                 variant="h5"
                                 noWrap
@@ -397,7 +397,7 @@ export default function NavbarResponsiveMenu() {
                                     textDecoration: 'none',
                                 }}
                             >
-                                BakerGroup
+                                WoodLine
                             </Typography>
                         </Link>
                         <Box sx={{display: { xs: 'none', md: 'flex' } }}>

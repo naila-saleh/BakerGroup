@@ -17,7 +17,7 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import ClassIcon from '@mui/icons-material/Class';
 import ReviewsIcon from '@mui/icons-material/Reviews';
-import logo from '../../assets/images/logo/BakerGroup-yelloLogo.svg'
+import logo from '../../assets/images/logo/woodLine.png'
 import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router";
 import {useNavigate} from "react-router-dom";
@@ -77,7 +77,7 @@ export default function Sidebar({ children }) {
                             textDecoration: 'none',
                         }}
                     >
-                        BakerGroup
+                        WoodLine
                     </Typography>
                 </Link>
             </Toolbar>

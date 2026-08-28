@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import logo from "../../assets/images/logo/BakerGroup-yelloLogo.svg"
+import logo from "../../assets/images/logo/woodLine.png"
 import Typography from "@mui/material/Typography";
 import {Container} from "@mui/material";
 import {useTranslation} from "react-i18next";
@@ -12,8 +12,8 @@ export default function Footer() {
     return (
         <Box component={'footer'}>
             <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: {md: 4, sm: 3, xs: 2}, border: '2px solid rgba(0,0,0,0.1)', py: 1 }}>
-                <Box component={'img'} src={logo} width={{lg: 60, md: 50, sm: 40, xs: 40}} />
-                <Typography component={'h2'} sx={{fontSize: {lg: '50px', md: '40px', sm: '30px', xs: '30px'}, fontWeight: '700'}}>BakerGroup</Typography>
+                <Box component={'img'} src={logo} width={{lg: 60, md: 55, sm: 50, xs: 50}} />
+                <Typography component={'h2'} sx={{fontSize: {lg: '50px', md: '40px', sm: '30px', xs: '30px'}, fontWeight: '700'}}>WoodLine</Typography>
             </Box>
             <Container maxWidth={"xl"} sx={{display: 'flex', flexDirection: {sm: 'row', xs: 'column'}, gap: {sm: 0, xs: 5}, justifyContent: 'space-around', alignItems: {sm: 'start', xs: 'center'}, py: 5, textAlign: {sm: 'start', xs: 'center'}}}>
                 <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
@@ -38,10 +38,10 @@ export default function Footer() {
                 </Box>
             </Container>
             <Container maxWidth={"xl"} sx={{display: 'flex', flexDirection: {sm: 'row', xs: 'column'}, gap: {sm: 0, xs: 2}, justifyContent: 'space-between', alignItems: {sm: 'start', xs: 'center'}, py: 3, textAlign: {sm: 'start', xs: 'center'}, backgroundColor: '#2D5356'}}>
-                <Typography component={'p'} sx={{fontSize: {md: '17px', xs: '15px'}, fontWeight: '400', color: '#fff'}}>© {t('2024 BakerGroup. All rights reserved.')}</Typography>
+                <Typography component={'p'} sx={{fontSize: {md: '17px', xs: '15px'}, fontWeight: '400', color: '#fff'}}>© {t('2024 WoodLine. All rights reserved.')}</Typography>
                 <Box>
-                    <Link component={RouterLink} to={'https://www.instagram.com/sohyb.bakergroup/'} underline={'none'} sx={{color: '#fff', mx: 1, '&:hover': {color: 'secondary.main', transition: 'color 0.3s'}, cursor: 'pointer'}} target={'_blank'}><InstagramIcon /></Link>
-                    <Link component={RouterLink} to={'https://www.facebook.com/sohyb.bakergroup'} underline={'none'} sx={{color: '#fff', mx: 1, '&:hover': {color: 'secondary.main', transition: 'color 0.3s'}, cursor: 'pointer'}} target={'_blank'}><FacebookOutlinedIcon /></Link>
+                    <Link component={RouterLink} to={'https://www.instagram.com/liferesponse_200/'} underline={'none'} sx={{color: '#fff', mx: 1, '&:hover': {color: 'secondary.main', transition: 'color 0.3s'}, cursor: 'pointer'}} target={'_blank'}><InstagramIcon /></Link>
+                    <Link component={RouterLink} to={'https://www.facebook.com/naila.saleh.2025'} underline={'none'} sx={{color: '#fff', mx: 1, '&:hover': {color: 'secondary.main', transition: 'color 0.3s'}, cursor: 'pointer'}} target={'_blank'}><FacebookOutlinedIcon /></Link>
                 </Box>
             </Container>
         </Box>

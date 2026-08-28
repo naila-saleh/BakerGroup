@@ -26,7 +26,7 @@ const processQueue = (error, token = null) => {
 
 authAxiosInstance.interceptors.request.use((config) => {
     const {token} = useAuthStore.getState();
-    config.headers['Accept-Language'] = i18n.language;
+    config.headers['Accept-Language'] = config.headers['Accept-Language'] || i18n.language;
     if(token){
         config.headers.Authorization = `Bearer ${token}`;
     } else {

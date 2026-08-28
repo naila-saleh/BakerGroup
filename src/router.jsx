@@ -22,6 +22,7 @@ import Hero from "./components/adminHero/Hero.jsx";
 import Products from "./pages/adminProducts/Products.jsx";
 import AddProduct from "./pages/adminProducts/AddProduct.jsx";
 import AdminProductDetails from "./pages/adminProducts/ProductDetails.jsx";
+import UpdateProduct from "./pages/adminProducts/UpdateProduct.jsx";
 
 const router = createBrowserRouter([
     // legacy /login redirect -> new /auth/login
@@ -114,6 +115,9 @@ const router = createBrowserRouter([
             },{
                 path: 'products/:id',
                 element: <AdminProductDetails />
+            },{
+                path: 'products/:id/edit',
+                element: <UpdateProduct />
             },{
                 path: 'categories',
                 element: <div>Categories</div>

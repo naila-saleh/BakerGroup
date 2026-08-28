@@ -32,35 +32,35 @@ export default function ContactUs() {
                             <MarkEmailUnreadOutlinedIcon sx={{ color: 'secondary.main', backgroundColor: 'rgba(255, 185, 52, 0.15)', fontSize: '45px', padding: '10px', borderRadius: 2 }} />
                             <Box>
                                 <Typography sx={{ color: 'info.dark', fontSize: 14 }}>{t('Mail')}</Typography>
-                                <Typography>sohyb@bakergroupco.com</Typography>
+                                <Typography>nailasaleh2004@gmail.com</Typography>
                             </Box>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2}} >
                             <PhoneInTalkOutlinedIcon sx={{ color: '#5067D6', backgroundColor: 'rgba(80, 103, 214, 0.15)', fontSize: '45px', padding: '10px', borderRadius: 2 }} />
                             <Box>
                                 <Typography sx={{ color: 'info.dark', fontSize: 14 }}>{t('Phone')}</Typography>
-                                <Typography>+972 598524052</Typography>
+                                <Typography>+972 *********</Typography>
                             </Box>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2}} >
                             <PrintOutlinedIcon sx={{ color: '#7F51B1', backgroundColor: 'rgba(127, 81, 177, 0.15)', fontSize: '45px', padding: '10px', borderRadius: 2 }} />
                             <Box>
                                 <Typography sx={{ color: 'info.dark', fontSize: 14 }}>{t('Fax')}</Typography>
-                                <Typography>(410) 279-9587</Typography>
+                                <Typography>(410) ***-****</Typography>
                             </Box>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2}} >
                             <PlaceOutlinedIcon sx={{ color: '#22A45B', backgroundColor: 'rgba(34, 164, 91, 0.15)', fontSize: '45px', padding: '10px', borderRadius: 2 }} />
                             <Box>
                                 <Typography sx={{ color: 'info.dark', fontSize: 14 }}>{t('Office')}</Typography>
-                                <Typography>{t('5678 Seltice Way Coeur D Alene')}</Typography>
+                                <Typography>{t('Qalqilia - Palestine')}</Typography>
                             </Box>
                         </Box>
                     </Box>
                     <Typography component={'h3'} sx={{fontSize: {lg: '25px', md: '22px', sm: '18px', xs: '15px'}, fontWeight: 500, marginBottom: 2}}>{t('Stay Connected')}</Typography>
                     <Box sx={{ display: 'flex', gap: 2, justifyContent: {lg: 'start', xs: 'center'} }}>
-                        <Link component={RouterLink} to={'https://www.instagram.com/sohyb.bakergroup/'} underline={'none'} sx={{cursor: 'pointer'}} target={'_blank'}><InstagramIcon sx={{color: 'secondary.main', backgroundColor: 'rgba(255, 185, 52, 0.15)', fontSize: '45px', padding: '12px', borderRadius: '50%'}} /></Link>
-                        <Link component={RouterLink} to={'https://www.facebook.com/sohyb.bakergroup'} underline={'none'} sx={{cursor: 'pointer'}} target={'_blank'}><FacebookOutlinedIcon sx={{color: 'secondary.main', backgroundColor: 'rgba(255, 185, 52, 0.15)', fontSize: '45px', padding: '12px', borderRadius: '50%'}} /></Link>
+                        <Link component={RouterLink} to={'https://www.instagram.com/liferesponse_200/'} underline={'none'} sx={{cursor: 'pointer'}} target={'_blank'}><InstagramIcon sx={{color: 'secondary.main', backgroundColor: 'rgba(255, 185, 52, 0.15)', fontSize: '45px', padding: '12px', borderRadius: '50%'}} /></Link>
+                        <Link component={RouterLink} to={'https://www.facebook.com/naila.saleh.2025'} underline={'none'} sx={{cursor: 'pointer'}} target={'_blank'}><FacebookOutlinedIcon sx={{color: 'secondary.main', backgroundColor: 'rgba(255, 185, 52, 0.15)', fontSize: '45px', padding: '12px', borderRadius: '50%'}} /></Link>
                     </Box>
                 </Grid>
                 <Grid size={{lg: 5, md: 7, sm: 9, xs: 11}} >
