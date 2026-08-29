@@ -1,28 +1,28 @@
-import * as React from 'react';
-import useAdminProducts from "../../hooks/admin/useAdminProducts.jsx";
-import {useTranslation} from "react-i18next";
-import {useLocation, useNavigate, Link as RouterLink} from "react-router-dom";
-import Loader from "../../ui/loader/Loader.jsx";
+import React from 'react'
+import {useTheme} from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import Avatar from '@mui/material/Avatar';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
+import LastPageIcon from "@mui/icons-material/LastPage";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import PropTypes from "prop-types";
+import useAdminCategories from "../../hooks/admin/useAdminCategories.jsx";
+import {useTranslation} from "react-i18next";
+import Loader from "../../ui/loader/Loader.jsx";
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import {Link as RouterLink} from "react-router";
+import TableContainer from "@mui/material/TableContainer";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import Avatar from "@mui/material/Avatar";
+import TableFooter from "@mui/material/TableFooter";
+import TablePagination from "@mui/material/TablePagination";
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -85,21 +85,10 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-const formatPrice = (price) => {
-    if (typeof price !== 'number' || price <= 0) {
-        return '-';
-    }
-
-    return `$${price.toFixed(2)}`;
-};
-
-export default function Products() {
+export default function Categories() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    const { data, isLoading, isError, error } = useAdminProducts({
-        pageNumber: 1,
-        pageSize: 1000,
-    });
+    const {data, isLoading, isError, error} = useAdminCategories();
     const {t} = useTranslation();
 
     const rows = React.useMemo(() => (Array.isArray(data) ? data : []), [data]);
@@ -129,7 +118,7 @@ export default function Products() {
     if (isError) {
         return (
             <Box sx={{ p: 3 }}>
-                <Typography color="error">{error?.message || 'Failed to load products.'}</Typography>
+                <Typography color="error">{error?.message || 'Failed to load categories.'}</Typography>
             </Box>
         );
     }
@@ -137,8 +126,8 @@ export default function Products() {
     return (
         <>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-                <Button variant="contained" component={RouterLink} to="/admin/products/new" sx={{ backgroundColor: '#2D5356', '&:hover': { backgroundColor: '#1f3a3c' } }}>
-                    {t('Add Product')}
+                <Button variant="contained" component={RouterLink} to="/admin/" sx={{ backgroundColor: '#2D5356', '&:hover': { backgroundColor: '#1f3a3c' } }}>
+                    {t('Add Category')}
                 </Button>
             </Box>
             <TableContainer component={Paper} sx={{ borderRadius: 2 }}>
@@ -147,7 +136,7 @@ export default function Products() {
                         <TableRow sx={{ '& .MuiTableCell-root': { backgroundColor: '#2D5356', color: '#fff' } }}>
                             <TableCell sx={{textAlign: 'start'}}>{t('Image')}</TableCell>
                             <TableCell sx={{textAlign: 'start'}}>{t('Name')}</TableCell>
-                            <TableCell sx={{textAlign: 'start'}}>{t('Price')}</TableCell>
+                            <TableCell sx={{textAlign: 'start'}}>{t('Number of Products')}</TableCell>
                             <TableCell sx={{textAlign: 'start'}}>{t('Status')}</TableCell>
                         </TableRow>
                     </TableHead>
@@ -165,9 +154,9 @@ export default function Products() {
                                 <TableCell sx={{textAlign: 'start'}}>
                                     {row.name || '-'}
                                 </TableCell>
-                                {row.price==0? <TableCell sx={{textAlign: 'start'}}>{t('Custom Price')}</TableCell>: <TableCell sx={{textAlign: 'start'}}>₪{row.price}</TableCell>}
+                                <TableCell sx={{textAlign: 'start'}}>{row.products.length}</TableCell>
                                 <TableCell sx={{textAlign: 'start'}}>
-                                    {row.status !== undefined ? (row.status? t('Inactive') : t('Active')) : '-'}
+                                    {row.status !== undefined ? (row.status? 'Inactive' : 'Active') : '-'}
                                 </TableCell>
                             </TableRow>
                         ))}

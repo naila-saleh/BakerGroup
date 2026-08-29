@@ -11,15 +11,15 @@ import useThemeStore from "./store/useThemeStore.js";
 
 export default function App() {
     const {i18n} = useTranslation();
+    const direction = i18n.dir();
     useEffect(() => {
-        const dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
-        document.documentElement.setAttribute('dir', dir);
-    }, [i18n.language]);
+        document.documentElement.setAttribute('dir', direction);
+    }, [direction]);
     const mode = useThemeStore((state) => state.mode);
     const queryClient = new QueryClient();
     return (
         <QueryClientProvider client={queryClient}>
-            <ThemeProvider theme={getTheme(mode)}>
+            <ThemeProvider theme={getTheme(mode, direction)}>
                 <CssBaseline />
                 <RouterProvider router={router}/>
             </ThemeProvider>

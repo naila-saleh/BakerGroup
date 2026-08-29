@@ -1,7 +1,8 @@
 import {createTheme} from "@mui/material/styles";
 
-const getTheme = (mode) => {
+const getTheme = (mode, direction = 'ltr') => {
     return createTheme({
+        direction,
         palette: {
             mode: mode,
             primary: {

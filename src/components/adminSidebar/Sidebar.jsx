@@ -21,14 +21,17 @@ import logo from '../../assets/images/logo/woodLine.png'
 import Link from "@mui/material/Link";
 import {Link as RouterLink} from "react-router";
 import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const drawerWidth = 240;
 
 export default function Sidebar({ children }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [isClosing, setIsClosing] = React.useState(false);
-    const [selectedText, setSelectedText] = React.useState('Welcome to Admin Panel');
+    const {t, i18n} = useTranslation();
+    const [selectedText, setSelectedText] = React.useState(t('Welcome to Admin Panel'));
     const navigate = useNavigate();
+    const isRtl = i18n.dir() === 'rtl';
 
     const handleDrawerClose = () => {
         setIsClosing(true);
@@ -48,7 +51,7 @@ export default function Sidebar({ children }) {
     const list = [
         { text: 'Users', to: '/admin', icon: <SupervisedUserCircleIcon sx={{ color: 'secondary.main' }} /> },
         { text: 'Products', to: '/admin/products', icon: <InventoryIcon sx={{ color: 'secondary.main' }} /> },
-        { text: 'Categories', to: '/admin', icon: <ClassIcon sx={{ color: 'secondary.main' }} /> },
+        { text: 'Categories', to: '/admin/categories', icon: <ClassIcon sx={{ color: 'secondary.main' }} /> },
         { text: 'Reviews', to: '/admin', icon: <ReviewsIcon sx={{ color: 'secondary.main' }} /> },
     ];
 
@@ -67,8 +70,8 @@ export default function Sidebar({ children }) {
                         noWrap
                         component="span"
                         sx={{
-                            ml: 1,
-                            mr: 2,
+                            ml: isRtl ? 2 : 1,
+                            mr: isRtl ? 1 : 2,
                             display: 'flex',
                             fontFamily: 'monospace',
                             fontWeight: 600,
@@ -84,12 +87,23 @@ export default function Sidebar({ children }) {
             <Divider />
             <List>
                 {list.map(({ text, icon }) => (
-                    <ListItem key={text} disablePadding >
-                        <ListItemButton onClick={() => handleItemClick(text)}>
-                            <ListItemIcon>
+                    <ListItem key={text} disablePadding>
+                        <ListItemButton
+                            onClick={() => handleItemClick(text)}
+                            dir={isRtl ? 'rtl' : 'ltr'}
+                            sx={{ justifyContent: 'flex-start', gap: 1 }}
+                        >
+                            <ListItemIcon sx={{ minWidth: 32, justifyContent: 'center' }}>
                                 {icon}
                             </ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemText
+                                primary={t(text)}
+                                sx={{
+                                    flex: '0 0 auto',
+                                    m: 0,
+                                    textAlign: isRtl ? 'right' : 'left',
+                                }}
+                            />
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -104,7 +118,8 @@ export default function Sidebar({ children }) {
                 position="fixed"
                 sx={{
                     width: { md: `calc(100% - ${drawerWidth}px)` },
-                    ml: { md: `${drawerWidth}px` },
+                    left: { md: isRtl ? 0 : 'auto' },
+                    right: { md: isRtl ? 'auto' : 0 },
                 }}
             >
                 <Toolbar sx={{ backgroundColor: 'secondary.main'}}>
@@ -117,7 +132,7 @@ export default function Sidebar({ children }) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        {selectedText}
+                        {t(selectedText)}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -128,6 +143,7 @@ export default function Sidebar({ children }) {
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
+                    anchor={isRtl ? 'right' : 'left'}
                     variant="temporary"
                     open={mobileOpen}
                     onTransitionEnd={handleDrawerTransitionEnd}
@@ -145,6 +161,7 @@ export default function Sidebar({ children }) {
                     {drawer}
                 </Drawer>
                 <Drawer
+                    anchor={isRtl ? 'right' : 'left'}
                     variant="permanent"
                     sx={{
                         display: { xs: 'none', md: 'block' },

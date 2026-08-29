@@ -193,6 +193,16 @@ i18n
                     "Inactive": "Inactive",
                     "Active": "Active",
                     "Custom Price": "Custom Price",
+                    "Image": "Image",
+                    "Number of Products": "Number of Products",
+                    "Add Category": "Add Category",
+                    "Add Product": "Add Product",
+                    "Users": "Users",
+                    "Welcome to Admin Panel": "Welcome to Admin Panel",
+                    "All": "All",
+                    "of": "of",
+                    "more than": "more than",
+                    "rows per page": "rows per page",
                 }
             },
             ar: {
@@ -382,6 +392,16 @@ i18n
                     "Inactive" : "غير نشط",
                     "Active" : "نشط",
                     "Custom Price" : "سعر مخصص",
+                    "Image" : "الصورة",
+                    "Number of Products" : "عدد المنتجات",
+                    "Add Category" : "إضافة قسم",
+                    "Add Product" : "إضافة منتج",
+                    "Users" : "المستخدمون",
+                    "Welcome to Admin Panel" : "مرحبًا بك في لوحة الإدارة",
+                    "All" : "الكل",
+                    "of" : "من",
+                    "more than" : "أكثر من",
+                    "rows per page" : "صفوف لكل صفحة",
                 }
             }
         },
