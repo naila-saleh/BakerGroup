@@ -128,7 +128,7 @@ export default function AddProduct() {
         <Container maxWidth="lg" sx={{ py: 4 }}>
             <Paper sx={{ p: 4 }}>
                 <Typography variant="h4" component="h1" sx={{ mb: 4, color: '#2D5356' }}>
-                    {t('Add New Product') || 'Add New Product'}
+                    {t('Add New Product')}
                 </Typography>
 
                 {isError && (
@@ -150,7 +150,7 @@ export default function AddProduct() {
                             <TextField
                                 fullWidth
                                 label={t('Product Name')}
-                                placeholder="Product name in English"
+                                placeholder={t("Product name in English")}
                                 {...register('name')}
                                 error={!!errors.name}
                                 helperText={errors.name?.message}
@@ -162,7 +162,7 @@ export default function AddProduct() {
                             <TextField
                                 fullWidth
                                 label={t('Product Name (Arabic)')}
-                                placeholder="اسم المنتج"
+                                placeholder={t('Product Name')}
                                 {...register('nameAr')}
                                 error={!!errors.nameAr}
                                 helperText={errors.nameAr?.message}

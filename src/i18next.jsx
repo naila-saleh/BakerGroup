@@ -203,6 +203,16 @@ i18n
                     "of": "of",
                     "more than": "more than",
                     "rows per page": "rows per page",
+                    "Add New Product": "Add New Product",
+                    "Product name in English": "Product name in English",
+                    "Product Name (Arabic)": "Product Name (Arabic)",
+                    "Category": "Category",
+                    "Discount (%)": "Discount (%)",
+                    "Description": "Description",
+                    "Description (Arabic)": "Description (Arabic)",
+                    "Main Image": "Main Image",
+                    "Sub Images": "Sub Images",
+                    "You can select multiple images": "You can select multiple images",
                 }
             },
             ar: {
@@ -402,6 +412,16 @@ i18n
                     "of" : "من",
                     "more than" : "أكثر من",
                     "rows per page" : "صفوف لكل صفحة",
+                    "Add New Product" : "إضافة منتج جديد",
+                    "Product name in English" : "اسم المنتج باللغة الإنجليزية",
+                    "Product Name (Arabic)" : "اسم المنتج (بالعربية)",
+                    "Category" : "القسم",
+                    "Discount (%)" : "الخصم (%)",
+                    "Description" : "الوصف",
+                    "Description (Arabic)" : "الوصف (بالعربية)",
+                    "Main Image" : "الصورة الرئيسية",
+                    "Sub Images" : "الصور الفرعية",
+                    "You can select multiple images" : "يمكنك تحديد صور متعددة",
                 }
             }
         },

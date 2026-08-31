@@ -156,7 +156,7 @@ export default function Categories() {
                                 </TableCell>
                                 <TableCell sx={{textAlign: 'start'}}>{row.products.length}</TableCell>
                                 <TableCell sx={{textAlign: 'start'}}>
-                                    {row.status !== undefined ? (row.status? 'Inactive' : 'Active') : '-'}
+                                    {row.status !== undefined ? (row.status? t('Inactive') : (t('Active'))) : '-'}
                                 </TableCell>
                             </TableRow>
                         ))}
