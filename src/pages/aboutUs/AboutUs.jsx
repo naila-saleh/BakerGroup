@@ -67,9 +67,9 @@ export default function AboutUs() {
             <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {lg: 15,md: 12, sm: 10, xs: 8}}}>
                 <Typography component={'h1'} sx={{color: 'info.light',fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, textAlign: 'center'}}>{t('About Us')}</Typography>
             </Box>
-            <Box sx={{py: {lg: 15,md: 12, sm: 10, xs: 8}, px: {lg: 10, md: 5, sm: 2, xs: 1}, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 3, alignItems: 'center'}}>
+            <Box sx={{pt: 4, pb: {lg: 15,md: 12, sm: 10, xs: 8}, px: {lg: 10, md: 5, sm: 2, xs: 1}, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 3, alignItems: 'center'}}>
                 <Typography component={'h2'} sx={{fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, fontWeight: 400 }}>{t('Discover WoodLine')} -<br/>{t('Where Innovation Meets Design')}</Typography>
-                <Box component={'img'} src={aboutUs} alt="About Us" sx={{width: '100%', borderRadius: 5, objectFit: 'cover'}}></Box>
+                <Box component={'img'} src={aboutUs} alt="About Us" sx={{width: '100%', height: {lg: 500, md: 400, xs: 300}, borderRadius: 5, objectFit: 'cover'}}></Box>
             </Box>
             <Box sx={{pb: {lg: 15,md: 12, sm: 10, xs: 8}, px: {lg: 10, md: 3, xs: 0}, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 3, alignItems: 'center'}}>
                 <Box sx={{display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'center'}}>
