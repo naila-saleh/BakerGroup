@@ -61,7 +61,7 @@ const pages = [
     { id: 'home', to: '/', label: 'Home' },
     { id: 'products', to: '/products', label: 'Products' },
     { id: 'categories', to: '/categories', label: 'Categories' },
-    { id: 'about', to: '#', label: 'About Us' },
+    { id: 'about', to: '/aboutUs', label: 'About Us' },
     { id: 'contact', to: '/contactUs', label: 'Contact Us' },
     { id: 'blog', to: '#', label: 'Blog' }
 ];
