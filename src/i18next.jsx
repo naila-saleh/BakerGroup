@@ -228,6 +228,9 @@ i18n
                     "Today, WoodLine serves customers around the world. With distribution centers in key locations, we ensure that our high-quality furniture reaches your home efficiently and safely. Our global presence is a testament to the love and support of our customers, who inspire us to continue our journey." : "Today, WoodLine serves customers around the world. With distribution centers in key locations, we ensure that our high-quality furniture reaches your home efficiently and safely. Our global presence is a testament to the love and support of our customers, who inspire us to continue our journey.",
                     "Looking Ahead" : "Looking Ahead",
                     "As we look to the future, our goal remains the same: to create furniture that combines style, comfort, and sustainability. We're excited about the new designs and innovations we have in store, and we're committed to making your home a beautiful, comfortable, and happy place." : "As we look to the future, our goal remains the same: to create furniture that combines style, comfort, and sustainability. We're excited about the new designs and innovations we have in store, and we're committed to making your home a beautiful, comfortable, and happy place.",
+                    "Our Awesome Team" : "Our Awesome Team",
+                    "Naila Saleh" : "Naila Saleh",
+                    "CEO & Owner" : "CEO & Owner",
                 }
             },
             ar: {
@@ -452,7 +455,9 @@ i18n
                     "Today, WoodLine serves customers around the world. With distribution centers in key locations, we ensure that our high-quality furniture reaches your home efficiently and safely. Our global presence is a testament to the love and support of our customers, who inspire us to continue our journey." : "اليوم، تخدم WoodLine العملاء حول العالم. مع مراكز توزيع في مواقع رئيسية، نضمن أن يصل أثاثنا عالي الجودة إلى منزلك بكفاءة وأمان. وجودنا العالمي هو شهادة على حب ودعم عملائنا، الذين يلهموننا لمواصلة رحلتنا.",
                     "Looking Ahead" : "رؤيتنا المستقبلية",
                     "As we look to the future, our goal remains the same: to create furniture that combines style, comfort, and sustainability. We're excited about the new designs and innovations we have in store, and we're committed to making your home a beautiful, comfortable, and happy place." : "بينما ننظر إلى المستقبل، يظل هدفنا كما هو: إنشاء أثاث يجمع بين الأناقة والراحة والاستدامة. نحن متحمسون للتصميمات والابتكارات الجديدة التي لدينا في المتجر، ونحن ملتزمون بجعل منزلك مكانًا جميلًا ومريحًا وسعيدًا.",
-
+                    "Our Awesome Team" : "فريقنا الرائع",
+                    "Naila Saleh" : "نائلة صالح",
+                    "CEO & Owner" : "المديرة التنفيذية والمالكة",
                 }
             }
         },

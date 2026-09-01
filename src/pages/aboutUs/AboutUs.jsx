@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import bg from "../../assets/images/hero/bg-hero.png";
 import Typography from "@mui/material/Typography";
 import aboutUs from "../../assets/images/aboutUs/aboutUs.jpeg";
-import {Grid} from "@mui/material";
+import {Card, CardContent, CardMedia, Grid} from "@mui/material";
 import humbleBeginnings from "../../assets/images/aboutUs/humbleBeggining.jpg";
 import milestonesAndAchievements from "../../assets/images/aboutUs/milestonesAndAchievements.jpg";
 import innovationAndGrowth from "../../assets/images/aboutUs/innovationAndGrowth.jpg";
@@ -15,7 +15,11 @@ import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOu
 import SignalCellularAltOutlinedIcon from '@mui/icons-material/SignalCellularAltOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import ArrowCircleUpOutlinedIcon from '@mui/icons-material/ArrowCircleUpOutlined';
-
+import manager from "../../assets/images/aboutUs/manager.jpg";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import Link from "@mui/material/Link";
+import {Link as RouterLink} from "react-router-dom";
 const firstFrameConnector = (side) => ({
     position: 'relative',
     '&::before': {
@@ -129,6 +133,68 @@ export default function AboutUs() {
                         </Grid>
                     </Grid>
                 </Box>
+            </Box>
+            <Box sx={{pb: {lg: 15,md: 12, sm: 10, xs: 8}, px: {lg: 10, md: 5, sm: 2, xs: 1}, textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 3, alignItems: 'center'}}>
+                <Typography component={'h2'} sx={{fontSize: {lg: '45px', md: '40px', sm: '35px', xs: '30px'}, fontWeight: 400 }}>{t('Our Awesome Team')}</Typography>
+                <Grid container spacing={2} sx={{width: '100%'}}>
+                    <Grid size={{lg: 4, sm: 6, xs: 12}}>
+                        <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
+                            <CardMedia component={'img'} image={manager} sx={{width: '100%', height: {lg: '460px',md:'260px'}, objectFit: 'cover', display: 'flex', alignSelf: 'center', borderRadius: 4}}></CardMedia>
+                            <CardContent sx={{backgroundColor: '#2D5356', color: 'info.light', borderRadius: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: {xl: 2, lg: 1.3, xs: 2}, ":last-child": {paddingBottom: 2}}}>
+                                <Box sx={{display: 'flex', flexDirection: 'column', gap: 1, textAlign: 'start'}}>
+                                    <Typography component={'h3'} sx={{fontSize: {lg: '24px', md: '20px', sm: '18px', xs: '16px'}, fontWeight: 400}}>{t('Naila Saleh')}</Typography>
+                                    <Typography component={'p'} variant={'body1'}>{t('CEO & Owner')}</Typography>
+                                </Box>
+                                <Box sx={{display: 'flex', gap: 1}}>
+                                    <Link component={RouterLink} to={'https://www.instagram.com/liferesponse_200/'} target={'_blank'}>
+                                        <InstagramIcon sx={{ color: 'info.light', backgroundColor: 'rgba(255, 255, 255, 0.15)', border: 0.5, borderColor: 'rgba(255, 255, 255, 0.2)', fontSize: '45px', padding: '10px', borderRadius: '50%' }} />
+                                    </Link>
+                                    <Link component={RouterLink} to={'https://www.facebook.com/naila.saleh.2025'} target={'_blank'}>
+                                        <FacebookOutlinedIcon sx={{ color: 'info.light', backgroundColor: 'rgba(255, 255, 255, 0.15)', border: 0.5, borderColor: 'rgba(255, 255, 255, 0.2)', fontSize: '45px', padding: '10px', borderRadius: '50%' }} />
+                                    </Link>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid size={{lg: 4, sm: 6, xs: 12}}>
+                        <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
+                            <CardMedia component={'img'} image={manager} sx={{width: '100%', height: {lg: '460px',md:'260px'}, objectFit: 'cover', display: 'flex', alignSelf: 'center', borderRadius: 4}}></CardMedia>
+                            <CardContent sx={{backgroundColor: '#2D5356', color: 'info.light', borderRadius: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: {xl: 2, lg: 1.3, xs: 2}, ":last-child": {paddingBottom: 2}}}>
+                                <Box sx={{display: 'flex', flexDirection: 'column', gap: 1, textAlign: 'start'}}>
+                                    <Typography component={'h3'} sx={{fontSize: {lg: '24px', md: '20px', sm: '18px', xs: '16px'}, fontWeight: 400}}>{t('Naila Saleh')}</Typography>
+                                    <Typography component={'p'} variant={'body1'}>{t('CEO & Owner')}</Typography>
+                                </Box>
+                                <Box sx={{display: 'flex', gap: 1}}>
+                                    <Link component={RouterLink} to={'https://www.instagram.com/liferesponse_200/'} target={'_blank'}>
+                                        <InstagramIcon sx={{ color: 'info.light', backgroundColor: 'rgba(255, 255, 255, 0.15)', border: 0.5, borderColor: 'rgba(255, 255, 255, 0.2)', fontSize: '45px', padding: '10px', borderRadius: '50%' }} />
+                                    </Link>
+                                    <Link component={RouterLink} to={'https://www.facebook.com/naila.saleh.2025'} target={'_blank'}>
+                                        <FacebookOutlinedIcon sx={{ color: 'info.light', backgroundColor: 'rgba(255, 255, 255, 0.15)', border: 0.5, borderColor: 'rgba(255, 255, 255, 0.2)', fontSize: '45px', padding: '10px', borderRadius: '50%' }} />
+                                    </Link>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid size={{lg: 4, sm: 6, xs: 12}}>
+                        <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
+                            <CardMedia component={'img'} image={manager} sx={{width: '100%', height: {lg: '460px',md:'260px'}, objectFit: 'cover', display: 'flex', alignSelf: 'center', borderRadius: 4}}></CardMedia>
+                            <CardContent sx={{backgroundColor: '#2D5356', color: 'info.light', borderRadius: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: {xl: 2, lg: 1.3, xs: 2}, ":last-child": {paddingBottom: 2}}}>
+                                <Box sx={{display: 'flex', flexDirection: 'column', gap: 1, textAlign: 'start'}}>
+                                    <Typography component={'h3'} sx={{fontSize: {lg: '24px', md: '20px', sm: '18px', xs: '16px'}, fontWeight: 400}}>{t('Naila Saleh')}</Typography>
+                                    <Typography component={'p'} variant={'body1'}>{t('CEO & Owner')}</Typography>
+                                </Box>
+                                <Box sx={{display: 'flex', gap: 1}}>
+                                    <Link component={RouterLink} to={'https://www.instagram.com/liferesponse_200/'} target={'_blank'}>
+                                        <InstagramIcon sx={{ color: 'info.light', backgroundColor: 'rgba(255, 255, 255, 0.15)', border: 0.5, borderColor: 'rgba(255, 255, 255, 0.2)', fontSize: '45px', padding: '10px', borderRadius: '50%' }} />
+                                    </Link>
+                                    <Link component={RouterLink} to={'https://www.facebook.com/naila.saleh.2025'} target={'_blank'}>
+                                        <FacebookOutlinedIcon sx={{ color: 'info.light', backgroundColor: 'rgba(255, 255, 255, 0.15)', border: 0.5, borderColor: 'rgba(255, 255, 255, 0.2)', fontSize: '45px', padding: '10px', borderRadius: '50%' }} />
+                                    </Link>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
             </Box>
         </Box>
     )
