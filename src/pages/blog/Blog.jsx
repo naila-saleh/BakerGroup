@@ -5,9 +5,14 @@ import bg from "../../assets/images/hero/bg-hero.png";
 import Typography from "@mui/material/Typography";
 import {Grid} from "@mui/material";
 import blog1 from "../../assets/images/blog/blog1.jpg"
+import InstagramIcon from '@mui/icons-material/Instagram';
+import XIcon from '@mui/icons-material/X';
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import PinterestIcon from '@mui/icons-material/Pinterest';
 
 export default function Blog() {
     const {t} = useTranslation();
+    const language = localStorage.getItem('i18nextLng');
     return (
         <Box className={'blog'} component={'section'}>
             <Box sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: '100%', paddingY: {lg: 15,md: 12, sm: 10, xs: 8}}}>
@@ -89,6 +94,29 @@ export default function Blog() {
                                 <Typography component={'span'} sx={{color: 'primary.main', fontSize: {md: 16, xs: 14} }}>{t('on')}</Typography>
                                 <Typography component={'span'} sx={{color: 'secondary.main', fontSize: {md: 17, xs: 15} }}>{t('Apr 19, 24')}</Typography>
                             </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Box>
+            <Box sx={{pb: {lg: 15,md: 12, sm: 10, xs: 8}, px: {lg: 10, md: 5, sm: 2, xs: 1}, textAlign: 'start', display: 'flex', flexDirection: 'column', gap: 3, alignItems: 'flex-start'}}>
+                <Grid container spacing={2} sx={{width: '100%', height: {lg: 500, sm: 800, xs: 700} }}>
+                    <Grid size={{lg: 6, xs: 12}} sx={{backgroundImage: `url(${bg})`, backgroundSize: 'cover', height: {lg: '100%', xs: '50%'}, padding: {lg: 8,md: 6, sm: 4, xs: 2}, color: 'info.light', borderRadius: 4, display: 'flex', flexDirection: 'column', gap: {md: 3, xs: 2}, alignItems: 'flex-start' }}>
+                        <Typography component={'h3'} sx={{fontSize: {lg: '40px', md: '35px', sm: '30px', xs: '25px'}, fontWeight: 400 }}>{t('Join Our Community')}</Typography>
+                        <Typography sx={{fontSize: {md: 16, xs: 14}, textAlign: 'justify' }}>{t("We invite you to join our growing community of design enthusiasts, DIY lovers, and home improvement aficionados. Subscribe to our newsletter to get the latest blog posts delivered straight to your inbox, and follow us on social media for daily inspiration and updates.")}</Typography>
+                        <Box sx={{display: 'flex', gap: 1, alignItems: 'center', mt: 'auto' }}>
+                            <InstagramIcon sx={{ color: 'info.light', backgroundColor: 'rgba(255, 255, 255, 0.15)', border: 0.5, borderColor: 'rgba(255, 255, 255, 0.2)', fontSize: '45px', padding: '10px', borderRadius: '50%' }} />
+                            <XIcon sx={{ color: 'info.light', backgroundColor: 'rgba(255, 255, 255, 0.15)', border: 0.5, borderColor: 'rgba(255, 255, 255, 0.2)', fontSize: '45px', padding: '10px', borderRadius: '50%' }} />
+                            <FacebookOutlinedIcon sx={{ color: 'info.light', backgroundColor: 'rgba(255, 255, 255, 0.15)', border: 0.5, borderColor: 'rgba(255, 255, 255, 0.2)', fontSize: '45px', padding: '10px', borderRadius: '50%' }} />
+                            <PinterestIcon sx={{ color: 'info.light', backgroundColor: 'rgba(255, 255, 255, 0.15)', border: 0.5, borderColor: 'rgba(255, 255, 255, 0.2)', fontSize: '45px', padding: '10px', borderRadius: '50%' }} />
+                        </Box>
+                    </Grid>
+                    <Grid size={{lg: 6, xs: 12}} sx={{backgroundColor: 'rgba(0,0,0,0.05)', height: {lg: '100%', xs: '50%'}, padding: {lg: 8,md: 6, sm: 4, xs: 2}, borderRadius: 4, display: 'flex', flexDirection: 'column', gap: {md: 3, xs: 2}, alignItems: 'flex-start' }}>
+                        <Typography component={'h3'} sx={{fontSize: {lg: '40px', md: '35px', sm: '30px', xs: '25px'}, fontWeight: 400 }}>{t('Share Your Story')}</Typography>
+                        <Typography sx={{fontSize: {md: 16, xs: 14}, textAlign: 'justify', color: 'primary.main' }}>{t("Have a furniture transformation or a home decore success story to share? We'd love to feature you on our blog! Submit your story and photos to")}</Typography>
+                        <Typography sx={{fontSize: {md: 16, xs: 14}, textAlign: 'justify', color: 'secondary.main' }}>{t('Email')}: nailasaleh2004@gmail.com</Typography>
+                        <Box sx={{mt: 'auto'}}>
+                            <Typography component={'span'} sx={{fontSize: {md: 20, xs: 18}, textAlign: 'justify', color: '#2D5356', fontWeight: 500, ml: language === 'ar' ? 1 : 0, mr: language === 'en' ? 1 : 0, }}>{t("Thank you")}</Typography>
+                            <Typography component={'span'} sx={{fontSize: {md: 16, xs: 14}, textAlign: 'justify', color: 'primary.main' }}>{t("for visiting the Furniture Emporium Blog. We're excited to be part of your journey in creating a beautiful, comfortable, and stylish home.")}</Typography>
                         </Box>
                     </Grid>
                 </Grid>

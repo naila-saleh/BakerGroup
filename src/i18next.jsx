@@ -239,6 +239,12 @@ i18n
                     "Lina Odeh" : "Lina Odeh",
                     "on" : "on",
                     "Apr 19, 24" : "Apr 19, 24",
+                    "Join Our Community" : "Join Our Community",
+                    "We invite you to join our growing community of design enthusiasts, DIY lovers, and home improvement aficionados. Subscribe to our newsletter to get the latest blog posts delivered straight to your inbox, and follow us on social media for daily inspiration and updates." : "We invite you to join our growing community of design enthusiasts, DIY lovers, and home improvement aficionados. Subscribe to our newsletter to get the latest blog posts delivered straight to your inbox, and follow us on social media for daily inspiration and updates.",
+                    "Share Your Story" : "Share Your Story",
+                    "Have a furniture transformation or a home decore success story to share? We'd love to feature you on our blog! Submit your story and photos to" : "Have a furniture transformation or a home decore success story to share? We'd love to feature you on our blog! Submit your story and photos to",
+                    "Thank you" : "Thank you",
+                    "for visiting the Furniture Emporium Blog. We're excited to be part of your journey in creating a beautiful, comfortable, and stylish home." : "for visiting the Furniture Emporium Blog. We're excited to be part of your journey in creating a beautiful, comfortable, and stylish home.",
                 }
             },
             ar: {
@@ -474,6 +480,13 @@ i18n
                     "Lina Odeh" : "لينا عودة",
                     "on" : "بتاريخ",
                     "Apr 19, 24" : "19 أبريل 2024",
+                    "Join Our Community" : "انضم إلى مجتمعنا",
+                    "We invite you to join our growing community of design enthusiasts, DIY lovers, and home improvement aficionados. Subscribe to our newsletter to get the latest blog posts delivered straight to your inbox, and follow us on social media for daily inspiration and updates." : "ندعوك للانضمام إلى مجتمعنا المتنامي من عشاق التصميم، ومحبي الأعمال اليدوية، وعشاق تحسين المنزل. اشترك في نشرتنا الإخبارية للحصول على أحدث منشورات المدونة مباشرة إلى بريدك الوارد، وتابعنا على وسائل التواصل الاجتماعي للحصول على الإلهام والتحديثات اليومية.",
+                    "Share Your Story" : "شارك قصتك",
+                    "Have a furniture transformation or a home decore success story to share? We'd love to feature you on our blog! Submit your story and photos to" : "هل لديك قصة تحول أثاث أو نجاح في ديكور المنزل لمشاركتها؟ نود أن نعرضك في مدونتنا! قدم قصتك وصورك إلى",
+                    "Thank you" : "شكراً لك",
+                    "for visiting the Furniture Emporium Blog. We're excited to be part of your journey in creating a beautiful, comfortable, and stylish home." : "لزيارة مدونة متجر الأثاث. نحن متحمسون لأن نكون جزءًا من رحلتك في إنشاء منزل جميل ومريح وأنيق.",
+
                 }
             }
         },
