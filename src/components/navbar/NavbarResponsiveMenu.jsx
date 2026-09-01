@@ -63,7 +63,7 @@ const pages = [
     { id: 'categories', to: '/categories', label: 'Categories' },
     { id: 'about', to: '/aboutUs', label: 'About Us' },
     { id: 'contact', to: '/contactUs', label: 'Contact Us' },
-    { id: 'blog', to: '#', label: 'Blog' }
+    { id: 'blog', to: '/blog', label: 'Blog' }
 ];
 
 export default function NavbarResponsiveMenu() {

@@ -231,6 +231,14 @@ i18n
                     "Our Awesome Team" : "Our Awesome Team",
                     "Naila Saleh" : "Naila Saleh",
                     "CEO & Owner" : "CEO & Owner",
+                    "Our Blog" : "Our Blog",
+                    "About Our Blog" : "About Our Blog",
+                    "At Furniture WoodLine, we're passionate about more than just furniture; we're dedicated to helping you create a home that reflects your unique style and personality. Our blog in your go-to resource for the latest trends, design tips, and practical advice on all things related to home decor and furnishings." : "At Furniture WoodLine, we're passionate about more than just furniture; we're dedicated to helping you create a home that reflects your unique style and personality. Our blog in your go-to resource for the latest trends, design tips, and practical advice on all things related to home decor and furnishings.",
+                    "First Time Home Owner Ideas" : "First Time Home Owner Ideas",
+                    "by" : "by",
+                    "Lina Odeh" : "Lina Odeh",
+                    "on" : "on",
+                    "Apr 19, 24" : "Apr 19, 24",
                 }
             },
             ar: {
@@ -458,6 +466,14 @@ i18n
                     "Our Awesome Team" : "فريقنا الرائع",
                     "Naila Saleh" : "نائلة صالح",
                     "CEO & Owner" : "المديرة التنفيذية والمالكة",
+                    "Our Blog" : "مدونتنا",
+                    "About Our Blog" : "حول مدونتنا",
+                    "At Furniture WoodLine, we're passionate about more than just furniture; we're dedicated to helping you create a home that reflects your unique style and personality. Our blog in your go-to resource for the latest trends, design tips, and practical advice on all things related to home decor and furnishings." : "في متجر أثاث WoodLine، نحن شغوفون بأكثر من مجرد الأثاث؛ نحن ملتزمون بمساعدتك في إنشاء منزل يعكس أسلوبك وشخصيتك الفريدة. مدونتنا هي مصدر موثوق لك لأحدث الاتجاهات ونصائح التصميم والنصائح العملية حول كل ما يتعلق بديكور المنزل والأثاث.",
+                    "First Time Home Owner Ideas" : "أفكار لأول مرة لمالك المنزل",
+                    "by" : "بواسطة",
+                    "Lina Odeh" : "لينا عودة",
+                    "on" : "بتاريخ",
+                    "Apr 19, 24" : "19 أبريل 2024",
                 }
             }
         },

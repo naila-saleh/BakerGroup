@@ -139,10 +139,10 @@ export default function AboutUs() {
                 <Grid container spacing={2} sx={{width: '100%'}}>
                     <Grid size={{lg: 4, sm: 6, xs: 12}}>
                         <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
-                            <CardMedia component={'img'} image={manager} sx={{width: '100%', height: {lg: '460px',md:'260px'}, objectFit: 'cover', display: 'flex', alignSelf: 'center', borderRadius: 4}}></CardMedia>
+                            <CardMedia component={'img'} image={manager} sx={{width: '100%', height: {md: '460px',xs:'260px'}, objectFit: 'cover', display: 'flex', alignSelf: 'center', borderRadius: 4}}></CardMedia>
                             <CardContent sx={{backgroundColor: '#2D5356', color: 'info.light', borderRadius: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: {xl: 2, lg: 1.3, xs: 2}, ":last-child": {paddingBottom: 2}}}>
                                 <Box sx={{display: 'flex', flexDirection: 'column', gap: 1, textAlign: 'start'}}>
-                                    <Typography component={'h3'} sx={{fontSize: {lg: '24px', md: '20px', sm: '18px', xs: '16px'}, fontWeight: 400}}>{t('Naila Saleh')}</Typography>
+                                    <Typography component={'h3'} sx={{fontSize: {lg: '24px', md: '20px', xs: '18px'}, fontWeight: 450}}>{t('Naila Saleh')}</Typography>
                                     <Typography component={'p'} variant={'body1'}>{t('CEO & Owner')}</Typography>
                                 </Box>
                                 <Box sx={{display: 'flex', gap: 1}}>
@@ -158,10 +158,10 @@ export default function AboutUs() {
                     </Grid>
                     <Grid size={{lg: 4, sm: 6, xs: 12}}>
                         <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
-                            <CardMedia component={'img'} image={manager} sx={{width: '100%', height: {lg: '460px',md:'260px'}, objectFit: 'cover', display: 'flex', alignSelf: 'center', borderRadius: 4}}></CardMedia>
+                            <CardMedia component={'img'} image={manager} sx={{width: '100%', height: {md: '460px',xs:'260px'}, objectFit: 'cover', display: 'flex', alignSelf: 'center', borderRadius: 4}}></CardMedia>
                             <CardContent sx={{backgroundColor: '#2D5356', color: 'info.light', borderRadius: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: {xl: 2, lg: 1.3, xs: 2}, ":last-child": {paddingBottom: 2}}}>
                                 <Box sx={{display: 'flex', flexDirection: 'column', gap: 1, textAlign: 'start'}}>
-                                    <Typography component={'h3'} sx={{fontSize: {lg: '24px', md: '20px', sm: '18px', xs: '16px'}, fontWeight: 400}}>{t('Naila Saleh')}</Typography>
+                                    <Typography component={'h3'} sx={{fontSize: {lg: '24px', md: '20px', xs: '18px'}, fontWeight: 450}}>{t('Naila Saleh')}</Typography>
                                     <Typography component={'p'} variant={'body1'}>{t('CEO & Owner')}</Typography>
                                 </Box>
                                 <Box sx={{display: 'flex', gap: 1}}>
@@ -177,10 +177,10 @@ export default function AboutUs() {
                     </Grid>
                     <Grid size={{lg: 4, sm: 6, xs: 12}}>
                         <Card sx={{boxShadow: 3, borderRadius: 4, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, cursor: 'pointer'}}>
-                            <CardMedia component={'img'} image={manager} sx={{width: '100%', height: {lg: '460px',md:'260px'}, objectFit: 'cover', display: 'flex', alignSelf: 'center', borderRadius: 4}}></CardMedia>
+                            <CardMedia component={'img'} image={manager} sx={{width: '100%', height: {md: '460px',xs:'260px'}, objectFit: 'cover', display: 'flex', alignSelf: 'center', borderRadius: 4}}></CardMedia>
                             <CardContent sx={{backgroundColor: '#2D5356', color: 'info.light', borderRadius: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: {xl: 2, lg: 1.3, xs: 2}, ":last-child": {paddingBottom: 2}}}>
                                 <Box sx={{display: 'flex', flexDirection: 'column', gap: 1, textAlign: 'start'}}>
-                                    <Typography component={'h3'} sx={{fontSize: {lg: '24px', md: '20px', sm: '18px', xs: '16px'}, fontWeight: 400}}>{t('Naila Saleh')}</Typography>
+                                    <Typography component={'h3'} sx={{fontSize: {lg: '24px', md: '20px', xs: '18px'}, fontWeight: 450}}>{t('Naila Saleh')}</Typography>
                                     <Typography component={'p'} variant={'body1'}>{t('CEO & Owner')}</Typography>
                                 </Box>
                                 <Box sx={{display: 'flex', gap: 1}}>

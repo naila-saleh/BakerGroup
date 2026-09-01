@@ -25,6 +25,7 @@ import AdminProductDetails from "./pages/adminProducts/ProductDetails.jsx";
 import UpdateProduct from "./pages/adminProducts/UpdateProduct.jsx";
 import Categories from "./pages/adminCategories/Categories.jsx";
 import AboutUs from "./pages/aboutUs/AboutUs.jsx";
+import Blog from "./pages/blog/Blog.jsx";
 
 const router = createBrowserRouter([
     // legacy /login redirect -> new /auth/login
@@ -84,6 +85,9 @@ const router = createBrowserRouter([
             },{
                 path: 'aboutUs',
                 element: <AboutUs />
+            },{
+                path: 'blog',
+                element: <Blog />
             }
         ]
     },{
